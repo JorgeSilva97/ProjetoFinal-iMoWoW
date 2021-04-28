@@ -1,9 +1,10 @@
 package pt.ufp.info.esof.lectures.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,8 +18,10 @@ public class Imovel
     private Utilizador utilizador;
     private float precoTotal;
     private float metrosQuadrados;
-    private Date dataAnuncio;
-    private Date anoConstrucao;
+    @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
+    private LocalDateTime dataAnuncio;
+    @JsonFormat(pattern = "yyyy-MM",shape = JsonFormat.Shape.STRING)
+    private LocalDateTime anoConstrução;
     private Topologia topologia;
     private boolean piscina;
     private boolean jardim;
