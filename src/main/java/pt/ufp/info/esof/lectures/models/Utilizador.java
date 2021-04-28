@@ -41,7 +41,7 @@ public class Utilizador
         return null;
     }
 
-    public Imovel adicionaImovel (Imovel imovel)
+    public Imovel adicionaImovel(Imovel imovel)
     {
         if (!this.imoveis.contains(imovel))
         {

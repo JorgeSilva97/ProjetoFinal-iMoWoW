@@ -19,8 +19,9 @@ public class Concelho
     private float precoMedio;
     @ManyToOne
     private Distrito distrito;
-    @ManyToMany(mappedBy = "concelho", cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Utilizador> utilizadores = new ArrayList<>();
+
 
     public Utilizador adicionaUtilizador(Utilizador utilizador)
     {

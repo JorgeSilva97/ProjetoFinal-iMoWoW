@@ -24,6 +24,8 @@ class UtilizadorTest {
         u.adicionaConcelho(maia);
         assertEquals(2,u.getConcelhos().size());
 
+        assertNotNull(gaia.getUtilizadores());
+        assertNotNull(maia.getUtilizadores());
     }
 
     @Test
@@ -42,6 +44,9 @@ class UtilizadorTest {
         assertEquals(1, u.getImoveis().size());
         u.adicionaImovel(casaDasCravos);
         assertEquals(2, u.getImoveis().size());
+
+        assertNotNull(casaDasRosas.getUtilizador());
+        assertNotNull(casaDasCravos.getUtilizador());
     }
 
 

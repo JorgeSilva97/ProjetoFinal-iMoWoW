@@ -44,11 +44,10 @@ public class Inicializacao implements ApplicationListener<ContextRefreshedEvent>
         porto.adicionaConcelho(matosinhos);
         porto.adicionaConcelho(maia);
 
-        Imovel casaDasAmoras = new Imovel();
-
         Utilizador jorge = new Utilizador();
         jorge.setUserName("jfps97");
         jorge.adicionaConcelho(gaia);
+        Imovel casaDasAmoras = new Imovel();
         jorge.adicionaImovel(casaDasAmoras);
 
         this.distritoRepository.save(porto);
