@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -19,9 +20,9 @@ public class Imovel
     private float precoTotal;
     private float metrosQuadrados;
     @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
-    private LocalDateTime dataAnuncio;
-    @JsonFormat(pattern = "yyyy-MM",shape = JsonFormat.Shape.STRING)
-    private LocalDateTime anoConstrução;
+    private Date dataAnuncio;
+    @JsonFormat(pattern = "yyyy",shape = JsonFormat.Shape.STRING)
+    private Date anoConstrução;
     private Topologia topologia;
     private boolean piscina;
     private boolean jardim;

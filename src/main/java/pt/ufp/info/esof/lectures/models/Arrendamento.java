@@ -16,11 +16,9 @@ public class Arrendamento
     @OneToOne
     private Imovel imovel;
 
-    public float calculaPrecoMetroQuadrado()
+    public float precoMetroQuadrado()
     {
-        float preco = this.imovel.getPrecoTotal();
-        float metros = this.imovel.getMetrosQuadrados();
-        return preco/metros;
+        return this.imovel.getPrecoTotal()/this.imovel.getMetrosQuadrados();
     }
 
 }

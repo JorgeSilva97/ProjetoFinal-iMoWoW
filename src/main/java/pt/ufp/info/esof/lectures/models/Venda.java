@@ -16,4 +16,9 @@ public class Venda
     @OneToOne
     private Imovel imovel;
 
+    public float precoMetroQuadrado()
+    {
+        return this.imovel.getPrecoTotal()/this.imovel.getMetrosQuadrados();
+    }
+
 }
