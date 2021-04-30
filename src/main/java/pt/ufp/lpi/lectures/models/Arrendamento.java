@@ -1,0 +1,24 @@
+package pt.ufp.lpi.lectures.models;
+
+import lombok.Getter;
+import lombok.Setter;
+import javax.persistence.*;
+
+@Getter
+@Setter
+@Entity
+public class Arrendamento
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private float precoArrendamento;
+    @OneToOne
+    private Imovel imovel;
+
+    public float precoMetroQuadrado()
+    {
+        return this.precoArrendamento/this.imovel.getMetrosQuadrados();
+    }
+
+}
