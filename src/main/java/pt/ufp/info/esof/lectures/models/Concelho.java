@@ -19,7 +19,7 @@ public class Concelho
     private float precoMedio;
     @ManyToOne
     private Distrito distrito;
-    @ManyToMany
+    @OneToMany
     private List<Utilizador> utilizadores = new ArrayList<>();
 
 

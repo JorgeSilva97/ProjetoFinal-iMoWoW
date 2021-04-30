@@ -21,7 +21,7 @@ public class Utilizador
     private String password;
     private float orcamentoLimite;
     @JsonIgnore
-    @OneToMany (mappedBy = "utilizador", cascade = CascadeType.ALL)
+    @ManyToMany (mappedBy = "utilizadores", cascade = CascadeType.ALL)
     private List<Concelho> concelhos = new ArrayList<>();
     @JsonIgnore
     @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)

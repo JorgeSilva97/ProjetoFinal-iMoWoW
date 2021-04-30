@@ -1,0 +1,8 @@
+
+1) classe Imovel:
+    a) Qual relação com o utilizador? @OneToOne ou @OneToMany?
+
+
+2) classe Utilizador:
+    a) Não percebi a relação entre um utilizador e um concelho. Um utilizador tem um ou mais concelhos e
+    concelho tem mais que um utilizador?

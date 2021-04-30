@@ -10,10 +10,10 @@ class VendaTest {
     void precoMetroQuadrado()
     {
         Imovel casaDaRocha = new Imovel();
-        casaDaRocha.setPrecoTotal(230000);
         casaDaRocha.setMetrosQuadrados(230);
         Venda venda = new Venda();
         venda.setImovel(casaDaRocha);
+        venda.setPrecoTotal(230000);
 
         assertNotEquals(900, venda.precoMetroQuadrado());
         assertEquals(1000, venda.precoMetroQuadrado());

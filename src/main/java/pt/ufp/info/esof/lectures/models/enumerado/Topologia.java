@@ -1,4 +1,4 @@
-package pt.ufp.info.esof.lectures.models;
+package pt.ufp.info.esof.lectures.models.enumerado;
 
 public enum Topologia
 {

@@ -18,7 +18,7 @@ public class Arrendamento
 
     public float precoMetroQuadrado()
     {
-        return this.imovel.getPrecoTotal()/this.imovel.getMetrosQuadrados();
+        return this.precoArrendamento/this.imovel.getMetrosQuadrados();
     }
 
 }

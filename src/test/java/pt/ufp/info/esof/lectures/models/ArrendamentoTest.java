@@ -10,13 +10,13 @@ class ArrendamentoTest {
     void precoMetroQuadrado()
     {
         Imovel casaDaRocha = new Imovel();
-        casaDaRocha.setPrecoTotal(230000);
-        casaDaRocha.setMetrosQuadrados(230);
+        casaDaRocha.setMetrosQuadrados(200);
         Arrendamento arrendamento = new Arrendamento();
         arrendamento.setImovel(casaDaRocha);
+        arrendamento.setPrecoArrendamento(800);
 
-        assertNotEquals(900, arrendamento.precoMetroQuadrado());
-        assertEquals(1000, arrendamento.precoMetroQuadrado());
-        assertNotEquals(1300, arrendamento.precoMetroQuadrado());
+        assertNotEquals(9, arrendamento.precoMetroQuadrado());
+        assertEquals(4, arrendamento.precoMetroQuadrado());
+        assertNotEquals(3, arrendamento.precoMetroQuadrado());
     }
 }

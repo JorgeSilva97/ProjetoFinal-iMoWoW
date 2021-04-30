@@ -15,7 +15,7 @@ public class Distrito
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @OneToMany(mappedBy = "distrito")
+    @OneToMany(mappedBy = "distrito", cascade = CascadeType.ALL)
     private List<Concelho> concelhos = new ArrayList<>();
 
 

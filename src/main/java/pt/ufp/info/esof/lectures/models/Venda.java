@@ -15,10 +15,11 @@ public class Venda
     private Long id;
     @OneToOne
     private Imovel imovel;
+    private float precoTotal;
 
     public float precoMetroQuadrado()
     {
-        return this.imovel.getPrecoTotal()/this.imovel.getMetrosQuadrados();
+        return this.getPrecoTotal()/this.imovel.getMetrosQuadrados();
     }
 
 }

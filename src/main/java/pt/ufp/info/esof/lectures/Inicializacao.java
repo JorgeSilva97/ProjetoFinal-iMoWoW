@@ -22,9 +22,9 @@ public class Inicializacao implements ApplicationListener<ContextRefreshedEvent>
     @Autowired
     private DistritoRepository distritoRepository;
     @Autowired
-    private ImovelRepository imovelRepository;
-    @Autowired
     private UtilizadorRepository utilizadorRepository;
+    @Autowired
+    private ImovelRepository imovelRepository;
 
     @SneakyThrows
     @Override
@@ -50,8 +50,12 @@ public class Inicializacao implements ApplicationListener<ContextRefreshedEvent>
         Imovel casaDasAmoras = new Imovel();
         jorge.adicionaImovel(casaDasAmoras);
 
+
+        this.concelhoRepository.save(gaia);
+        this.concelhoRepository.save(matosinhos);
+        this.concelhoRepository.save(maia);
         this.distritoRepository.save(porto);
-        this.imovelRepository.save(casaDasAmoras);
+        //this.imovelRepository.save(casaDasAmoras);
         this.utilizadorRepository.save(jorge);
 
 
