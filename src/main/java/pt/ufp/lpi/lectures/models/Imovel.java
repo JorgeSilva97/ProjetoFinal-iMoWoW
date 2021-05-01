@@ -18,7 +18,7 @@ public class Imovel
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
+    @ManyToOne
     private Utilizador utilizador;
     @OneToOne
     private Concelho concelho;

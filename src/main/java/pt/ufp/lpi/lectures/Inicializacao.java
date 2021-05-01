@@ -14,6 +14,8 @@ import pt.ufp.lpi.lectures.repositories.DistritoRepository;
 import pt.ufp.lpi.lectures.repositories.ImovelRepository;
 import pt.ufp.lpi.lectures.repositories.UtilizadorRepository;
 
+import java.util.Date;
+
 @Component
 public class Inicializacao implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -44,19 +46,27 @@ public class Inicializacao implements ApplicationListener<ContextRefreshedEvent>
         porto.adicionaConcelho(matosinhos);
         porto.adicionaConcelho(maia);
 
+        this.distritoRepository.save(porto);
+
         Utilizador jorge = new Utilizador();
         jorge.setUserName("jfps97");
+
+        this.utilizadorRepository.save(jorge);
+
+
         jorge.adicionaConcelho(gaia);
         Imovel casaDasAmoras = new Imovel();
+        casaDasAmoras.setDataAnuncio(new Date());
         jorge.adicionaImovel(casaDasAmoras);
 
 
         this.concelhoRepository.save(gaia);
-        this.concelhoRepository.save(matosinhos);
-        this.concelhoRepository.save(maia);
-        this.distritoRepository.save(porto);
-        //this.imovelRepository.save(casaDasAmoras);
-        this.utilizadorRepository.save(jorge);
+//        this.concelhoRepository.save(matosinhos);
+//        this.concelhoRepository.save(maia);
+
+
+        this.imovelRepository.save(casaDasAmoras);
+
 
 
     }
