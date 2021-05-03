@@ -7,4 +7,4 @@
     a) Não percebi a relação entre um utilizador e um concelho. Um utilizador tem um ou mais concelhos e
     concelho tem mais que um utilizador?
 
-3) Quer que use Facade ou não é necessário?
+3) Services precisam de ter construtor?
