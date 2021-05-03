@@ -1,8 +1,10 @@
 package pt.ufp.lpi.lectures.services;
 
 import org.springframework.stereotype.Service;
+import pt.ufp.lpi.lectures.models.Arrendamento;
 import pt.ufp.lpi.lectures.models.Concelho;
 import pt.ufp.lpi.lectures.models.Imovel;
+import pt.ufp.lpi.lectures.models.Venda;
 import pt.ufp.lpi.lectures.repositories.ConcelhoRepository;
 import pt.ufp.lpi.lectures.repositories.ImovelRepository;
 
@@ -49,5 +51,33 @@ public class UtilizadorServiceImpl implements UtilizadorService
             return Optional.of(imovelRepository.save(imovel));
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Imovel> adicionaVendaAoImovel(Long imovelId, Venda venda)
+    {
+        Optional<Imovel> optionalImovel = imovelRepository.findById(imovelId);
+        if (optionalImovel.isPresent())
+        {
+            Imovel imovel = optionalImovel.get();
+            venda.setImovel(imovel);
+            return Optional.of(imovel);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Imovel> adicionaArrendamentoAoImovel(Long imovelId, Arrendamento arrendamento)
+    {
+        Optional<Imovel> optionalImovel = imovelRepository.findById(imovelId);
+        if (optionalImovel.isPresent())
+        {
+            Imovel imovel = optionalImovel.get();
+            arrendamento.setImovel(imovel);
+            return Optional.of(imovel);
+
+        }
+        return Optional.empty();
+    }
+
 
 }
