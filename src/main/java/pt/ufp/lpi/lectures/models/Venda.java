@@ -29,20 +29,22 @@ public class Venda
         float valorConcelhoMetroQuadrado = this.getImovel().getConcelho().getPrecoMedio();
         float metrosQuadrados = this.getImovel().getMetrosQuadrados();
         float valor = valorConcelhoMetroQuadrado * metrosQuadrados;
-        if (this.getImovel().isJardim())
-            valor = (float)(valor * 1.13);
-        if (this.getImovel().isPiscina())
+        if (this.getImovel().isGaragem()) //se tiver garagem 5%
+            valor = (float)(valor * 1.05);
+        if (this.getImovel().isPiscina()) //se tiver piscina 7%
             valor = (float)(valor * 1.07);
-        if (this.getImovel().isGaragem())
+        if (this.getImovel().isJardim()) //se tiver jardim 13%
+            valor = (float)(valor * 1.13);
+        if (this.getImovel().isElevador()) //se tiver elevador 5%
             valor = (float)(valor * 1.05);
-        if (this.getImovel().isElevador())
-            valor = (float)(valor * 1.05);
-        if (this.getImovel().getEstado() == EstadoImovel.renovado)
-            valor = (float)(valor * 1.10);  //mais 10%
-        else if (this.getImovel().getEstado() == EstadoImovel.porRecuperar)
-            valor = (float)(valor * 0.40); //menos 60%
-        else if (this.getImovel().getEstado() == EstadoImovel.usado)
-            valor = valor + 1;
+        if (this.getImovel().getEstado() == EstadoImovel.renovado) //mais 13%
+            valor = (float)(valor * 1.13);
+        else if (this.getImovel().getEstado() == EstadoImovel.novo) //mais 25%
+            valor = (float)(valor * 1.25);
+        else if (this.getImovel().getEstado() == EstadoImovel.porRecuperar) //menos 60%
+            valor = (float)(valor * 0.40);
+        else if (this.getImovel().getEstado() == EstadoImovel.usado) //menos 10%
+            valor = (float)(valor * 0.90);
             //if (this.getImovel().getAnoConstrução() < 2010)
              //   valor = (float)(valor * 1.05); //menos
         //se tiver piscina 7%

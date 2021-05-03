@@ -1,0 +1,64 @@
+
+@startuml projeto
+
+package ProjetoLPI{
+
+
+class Utilizador
+{
+    - email:String
+    - user_name:String
+    - password:String
+    - orcamento_limite: float
+}
+
+class Imovel{
+    - preco_total:float
+    - metros_quadrados:float
+    - topologia:Topologia
+    - ano_construcao: int
+    - data_anuncio: Date
+    - piscina:boolean
+    - jardim: boolean
+    - garagem:boolean
+}
+
+class Venda{
+    # calculaPrecoMetroQuadrado(preco:float, metros_quadrados:float):float
+}
+
+class Arrendamento{
+    - precoArrendamento: float
+    # calculaPrecoMetroQuadrado(preco:float, metros_quadrados:float):float
+}
+
+class Concelho{
+    - nome_concelho:String
+}
+
+class Distrito{
+    - nome_distrito:String
+}
+
+enum Topologia{
+    T1,
+    T1+1,
+    T2,
+    T2+1,
+    T3,
+    T4,
+}
+
+
+
+Imovel "1" --- "0..1" Venda
+Imovel "1" --- "0..1" Arrendamento
+Utilizador "1" --- "1..*" Imovel
+Utilizador "1" --- "1..*" Concelho
+Distrito "1" --- "*" Concelho
+Imovel "1" --- "1" Concelho
+
+}
+
+@enduml
+
