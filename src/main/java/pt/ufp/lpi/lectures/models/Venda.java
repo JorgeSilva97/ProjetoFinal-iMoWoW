@@ -42,6 +42,7 @@ public class Venda
         else if (this.getImovel().getEstado() == EstadoImovel.porRecuperar)
             valor = (float)(valor * 0.40); //menos 60%
         else if (this.getImovel().getEstado() == EstadoImovel.usado)
+            valor = valor + 1;
             //if (this.getImovel().getAnoConstrução() < 2010)
              //   valor = (float)(valor * 1.05); //menos
         //se tiver piscina 7%
