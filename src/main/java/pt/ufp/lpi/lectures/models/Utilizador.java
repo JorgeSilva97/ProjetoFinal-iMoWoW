@@ -22,7 +22,7 @@ public class Utilizador
     private float orcamentoLimite;
     @JsonIgnore
     @ManyToMany (mappedBy = "utilizadores", cascade = CascadeType.ALL)
-    private List<Concelho> concelhos = new ArrayList<>();
+    private List<Concelho> concelhosPreferenciais = new ArrayList<>();
     @JsonIgnore
     @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)
     private List<Imovel> imoveis = new ArrayList<>();
@@ -31,9 +31,9 @@ public class Utilizador
 
     public Concelho adicionaConcelho(Concelho concelho)
     {
-        if (!this.concelhos.contains(concelho))
+        if (!this.concelhosPreferenciais.contains(concelho))
         {
-            this.concelhos.add(concelho);
+            this.concelhosPreferenciais.add(concelho);
             concelho.adicionaUtilizador(this);
             System.out.println("Adicionou "+concelho.getNome()+" ao Utilizador "+this.getUserName());
             return concelho;

@@ -16,13 +16,13 @@ class UtilizadorTest {
         Concelho maia = new Concelho();
         maia.setNome("Maia");
 
-        assertEquals(0,u.getConcelhos().size());
+        assertEquals(0,u.getConcelhosPreferenciais().size());
         u.adicionaConcelho(gaia);
-        assertEquals(1,u.getConcelhos().size());
+        assertEquals(1,u.getConcelhosPreferenciais().size());
         u.adicionaConcelho(gaia);
-        assertEquals(1,u.getConcelhos().size());
+        assertEquals(1,u.getConcelhosPreferenciais().size());
         u.adicionaConcelho(maia);
-        assertEquals(2,u.getConcelhos().size());
+        assertEquals(2,u.getConcelhosPreferenciais().size());
 
         assertNotNull(gaia.getUtilizadores());
         assertNotNull(maia.getUtilizadores());

@@ -74,10 +74,11 @@ public class UtilizadorServiceImpl implements UtilizadorService
             Imovel imovel = optionalImovel.get();
             arrendamento.setImovel(imovel);
             return Optional.of(imovel);
-
         }
         return Optional.empty();
     }
+
+    //consulta informação m^2 de cada concelho
 
 
 }
