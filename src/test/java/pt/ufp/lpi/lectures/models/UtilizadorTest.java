@@ -24,8 +24,8 @@ class UtilizadorTest {
         u.adicionaConcelho(maia);
         assertEquals(2,u.getConcelhosPreferenciais().size());
 
-        assertNotNull(gaia.getUtilizadores());
-        assertNotNull(maia.getUtilizadores());
+      //  assertNotNull(gaia.getUtilizadores());
+      //  assertNotNull(maia.getUtilizadores());
     }
 
     @Test
