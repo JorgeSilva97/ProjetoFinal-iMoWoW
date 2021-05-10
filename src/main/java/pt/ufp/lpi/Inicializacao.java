@@ -14,6 +14,7 @@ import pt.ufp.lpi.repositories.DistritoRepository;
 import pt.ufp.lpi.repositories.ImovelRepository;
 import pt.ufp.lpi.repositories.UtilizadorRepository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Component
@@ -56,7 +57,7 @@ public class Inicializacao implements ApplicationListener<ContextRefreshedEvent>
 
         jorge.adicionaConcelho(gaia);
         Imovel casaDasAmoras = new Imovel();
-        casaDasAmoras.setDataAnuncio(new Date());
+        casaDasAmoras.setDataAnuncio(LocalDateTime.now());
         jorge.adicionaImovel(casaDasAmoras);
 
 

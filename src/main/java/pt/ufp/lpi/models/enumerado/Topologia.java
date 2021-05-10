@@ -9,5 +9,4 @@ public enum Topologia
     T3,
     T3_1,
     T4,
-    T5
 }

@@ -85,6 +85,19 @@ public class UtilizadorServiceImpl implements UtilizadorService
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Float> consultaPrecoMetroQuadrado(Long idConcelho)
+    {
+        Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
+        if (optionalConcelho.isPresent())
+        {
+            Concelho concelho = optionalConcelho.get();
+            return Optional.of(concelho.getPrecoMedio());
+        }
+
+        return Optional.empty();
+    }
     /*
     @Override
     public Optional<Imovel> adicionaVendaAoImovel(Long imovelId, Venda venda)

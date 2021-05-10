@@ -18,6 +18,9 @@ public interface UtilizadorService
     Optional<Imovel> criaVenda(Imovel imovel, float precoTotal);
     Optional<Imovel> criaArrendamento(Imovel imovel, float precoArrendamento);
 
+    Optional<Float> consultaPrecoMetroQuadrado(Long idConcelho);
+
+
     //Optional<Imovel> adicionaVendaAoImovel(Long imovelId, Venda venda);
     //Optional<Imovel> adicionaArrendamentoAoImovel(Long imovelId, Arrendamento arrendamento);
 }
