@@ -98,6 +98,30 @@ public class UtilizadorServiceImpl implements UtilizadorService
 
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Float> getValorDeVenda(Long idVenda)
+    {
+        Optional<Venda> optionalVenda = vendaRepository.findById(idVenda);
+        if (optionalVenda.isPresent())
+        {
+            Venda venda = optionalVenda.get();
+            return Optional.of(venda.calcularVenda());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Float> getValorDeArrendamento(Long idArrendamento)
+    {
+        Optional<Arrendamento> optionalArrendamento = arrendamentoRepository.findById(idArrendamento);
+        if (optionalArrendamento.isPresent())
+        {
+            Arrendamento arrendamento = optionalArrendamento.get();
+            return Optional.of(arrendamento.calculaArrendamento());
+        }
+        return Optional.empty();
+    }
     /*
     @Override
     public Optional<Imovel> adicionaVendaAoImovel(Long imovelId, Venda venda)

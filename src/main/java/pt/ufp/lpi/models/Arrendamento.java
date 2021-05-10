@@ -21,4 +21,10 @@ public class Arrendamento
         return this.precoArrendamento/this.imovel.getMetrosQuadrados();
     }
 
+    //não testado
+    public float calculaArrendamento()
+    {
+        return 0;
+    }
+
 }
