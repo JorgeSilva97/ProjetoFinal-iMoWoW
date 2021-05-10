@@ -31,9 +31,6 @@ public class UtilizadorServiceImpl implements UtilizadorService
     }
 
     @Override
-    public Optional<Concelho> findConcelhoByNome(String nomeConcelho){return concelhoRepository.findByNome(nomeConcelho);}
-
-    @Override
     public Optional<Concelho> findConcelhoById(Long id) { return concelhoRepository.findById(id); }
 
     @Override
@@ -98,58 +95,6 @@ public class UtilizadorServiceImpl implements UtilizadorService
 
         return Optional.empty();
     }
-
-    @Override
-    public Optional<Float> getValorDeVenda(Long idVenda)
-    {
-        Optional<Venda> optionalVenda = vendaRepository.findById(idVenda);
-        if (optionalVenda.isPresent())
-        {
-            Venda venda = optionalVenda.get();
-            return Optional.of(venda.calcularVenda());
-        }
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Float> getValorDeArrendamento(Long idArrendamento)
-    {
-        Optional<Arrendamento> optionalArrendamento = arrendamentoRepository.findById(idArrendamento);
-        if (optionalArrendamento.isPresent())
-        {
-            Arrendamento arrendamento = optionalArrendamento.get();
-            return Optional.of(arrendamento.calculaArrendamento());
-        }
-        return Optional.empty();
-    }
-    /*
-    @Override
-    public Optional<Imovel> adicionaVendaAoImovel(Long imovelId, Venda venda)
-    {
-        Optional<Imovel> optionalImovel = imovelRepository.findById(imovelId);
-        if (optionalImovel.isPresent())
-        {
-            Imovel imovel = optionalImovel.get();
-            venda.setImovel(imovel);
-            return Optional.of(imovel);
-        }
-        return Optional.empty();
-    }*/
-
-   /* @Override
-    public Optional<Imovel> adicionaArrendamentoAoImovel(Long imovelId, Arrendamento arrendamento)
-    {
-        Optional<Imovel> optionalImovel = imovelRepository.findById(imovelId);
-        if (optionalImovel.isPresent())
-        {
-            Imovel imovel = optionalImovel.get();
-            arrendamento.setImovel(imovel);
-            return Optional.of(imovel);
-        }
-        return Optional.empty();
-    }*/
-
-    //consulta informação m^2 de cada concelho
 
 
 }

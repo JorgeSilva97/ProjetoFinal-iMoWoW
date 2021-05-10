@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface UtilizadorService
 {
     List<Concelho> findAllConcelhos();
-    Optional<Concelho> findConcelhoByNome (String nomeConcelho);
     Optional<Concelho> findConcelhoById (Long id);
     //------------------------------------------------------------
     List<Imovel> findAllImoveis();
@@ -20,10 +19,6 @@ public interface UtilizadorService
     //------------------------------------------------------------
     Optional<Float> consultaPrecoMetroQuadrado(Long idConcelho);
     //------------------------------------------------------------
-    Optional<Float> getValorDeVenda(Long idVenda);
-    Optional<Float> getValorDeArrendamento(Long idArrendamento);
 
 
-    //Optional<Imovel> adicionaVendaAoImovel(Long imovelId, Venda venda);
-    //Optional<Imovel> adicionaArrendamentoAoImovel(Long imovelId, Arrendamento arrendamento);
 }
