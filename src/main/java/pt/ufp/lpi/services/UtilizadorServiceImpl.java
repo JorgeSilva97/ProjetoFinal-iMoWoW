@@ -53,18 +53,10 @@ public class UtilizadorServiceImpl implements UtilizadorService
     }
 
     @Override
-    public Optional<Imovel> criaVenda(Imovel imovel, float precoTotal)
+    public Optional<Venda> criaVenda(Imovel imovel, float precoTotal)
     {
-        Optional<Imovel> optionalImovel = imovelRepository.findById(imovel.getId());
-        if (optionalImovel.isPresent())
-        {
-            Venda venda = new Venda();
-            venda.setPrecoTotal(precoTotal);
-            venda.setImovel(imovel);
-            vendaRepository.save(venda);
-            return Optional.of(imovelRepository.save(imovel));
-        }
-        return Optional.empty();
+        Venda venda = new Venda(imovel, precoTotal);
+        return Optional.of(vendaRepository.save(venda));
     }
 
     @Override

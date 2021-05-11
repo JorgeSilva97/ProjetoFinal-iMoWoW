@@ -25,4 +25,17 @@ public class VendaServiceImpl implements VendaService
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Integer> getAvalicaoNegocio (Long idVenda)
+    {
+        Optional<Venda> optionalVenda = vendaRepository.findById(idVenda);
+        if (optionalVenda.isPresent())
+        {
+            Venda venda = optionalVenda.get();
+            return Optional.of(venda.avaliacaoNegocioVenda());
+        }
+        return Optional.empty();
+    }
+
 }

@@ -2,6 +2,7 @@ package pt.ufp.lpi.services;
 
 import pt.ufp.lpi.models.Concelho;
 import pt.ufp.lpi.models.Imovel;
+import pt.ufp.lpi.models.Venda;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ public interface UtilizadorService
     List<Imovel> findAllImoveis();
     Optional<Imovel> findImoveloById (Long id);
     Optional<Imovel> criaImovel(Imovel imovel);
-    Optional<Imovel> criaVenda(Imovel imovel, float precoTotal);
+    Optional<Venda> criaVenda(Imovel imovel, float precoTotal);
     Optional<Imovel> criaArrendamento(Imovel imovel, float precoArrendamento);
     //------------------------------------------------------------
     Optional<Float> consultaPrecoMetroQuadrado(Long idConcelho);
