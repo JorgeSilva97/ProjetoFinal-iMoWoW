@@ -13,7 +13,9 @@ class VendaTest {
     {
         Imovel casaDaRocha = new Imovel();
         casaDaRocha.setMetrosQuadrados(230);
-        Venda venda = new Venda(casaDaRocha, 230000);
+        Venda venda = new Venda();
+        venda.setImovel(casaDaRocha);
+        venda.setPrecoTotal(230000);
 
         assertNotEquals(900, venda.precoMetroQuadrado());
         assertEquals(1000, venda.precoMetroQuadrado());
@@ -33,7 +35,9 @@ class VendaTest {
         casaDaRocha.setJardim(true);
         casaDaRocha.setEstado(EstadoImovel.novo);
         casaDaRocha.setConcelho(gaia);
-        Venda venda1 = new Venda(casaDaRocha, 160000);
+        Venda venda1 = new Venda();
+        venda1.setImovel(casaDaRocha);
+        venda1.setPrecoTotal(160000);
 
         Imovel casaDaPedra = new Imovel();
         casaDaPedra.setMetrosQuadrados(500);
@@ -41,7 +45,9 @@ class VendaTest {
         casaDaPedra.setJardim(true);
         casaDaPedra.setEstado(EstadoImovel.porRecuperar);
         casaDaPedra.setConcelho(gaia);
-        Venda venda2 = new Venda(casaDaPedra, 100000);
+        Venda venda2 = new Venda();
+        venda2.setImovel(casaDaPedra);
+        venda2.setPrecoTotal(100000);
         casaDaPedra.setTopologia(Topologia.T1);
         casaDaRocha.setTopologia(Topologia.T2_1);
 

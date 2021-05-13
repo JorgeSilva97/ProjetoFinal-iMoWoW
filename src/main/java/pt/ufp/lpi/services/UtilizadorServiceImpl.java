@@ -5,11 +5,14 @@ import pt.ufp.lpi.models.Arrendamento;
 import pt.ufp.lpi.models.Concelho;
 import pt.ufp.lpi.models.Imovel;
 import pt.ufp.lpi.models.Venda;
+import pt.ufp.lpi.models.enumerado.EstadoImovel;
+import pt.ufp.lpi.models.enumerado.Topologia;
 import pt.ufp.lpi.repositories.ArrendamentoRepository;
 import pt.ufp.lpi.repositories.ConcelhoRepository;
 import pt.ufp.lpi.repositories.ImovelRepository;
 import pt.ufp.lpi.repositories.VendaRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,33 +46,64 @@ public class UtilizadorServiceImpl implements UtilizadorService
     @Override
     public Optional<Imovel> findImoveloById(Long id) { return imovelRepository.findById(id); }
 
+    /*@Override
+    public Optional<Imovel> criaImovel(Long idImovel, Concelho concelho, Topologia top, EstadoImovel estado,
+                                       LocalDateTime ano, float metros, boolean piscina, boolean jardim,
+                                       boolean garagem, boolean elevador)
+    {
+        Optional<Imovel> optionalImovel = imovelRepository.findById(idImovel);
+        if (optionalImovel.isEmpty())
+        {
+            Imovel imovel = optionalImovel.get();
+            imovel.setConcelho(concelho);
+            imovel.setTopologia(top);
+            imovel.setEstado(estado);
+            imovel.setAnoConstrução(ano);
+            imovel.setMetrosQuadrados(metros);
+            imovel.setPiscina(piscina);
+            imovel.setJardim(jardim);
+            imovel.setGaragem(garagem);
+            imovel.setElevador(elevador);
+            imovel.setDataAnuncio(LocalDateTime.now());
+            return Optional.of(imovelRepository.save(imovel));
+        }
+        return Optional.empty();
+    }*/
+
     @Override
     public Optional<Imovel> criaImovel(Imovel imovel)
     {
         Optional<Imovel> optionalImovel = imovelRepository.findById(imovel.getId());
-        if (optionalImovel.isEmpty())
+        if (optionalImovel.isPresent())
             return Optional.of(imovelRepository.save(imovel));
         return Optional.empty();
     }
 
+
+
     @Override
-    public Optional<Venda> criaVenda(Imovel imovel, float precoTotal)
+    public Optional<Venda> criaVenda(Long idImovel, Venda venda)
     {
-        Venda venda = new Venda(imovel, precoTotal);
-        return Optional.of(vendaRepository.save(venda));
+        Optional<Imovel> optionalImovel = imovelRepository.findById(idImovel);
+        if (optionalImovel.isPresent())
+        {
+            Imovel imovel = optionalImovel.get();
+            venda.setImovel(imovel);
+            return Optional.of(vendaRepository.save(venda));
+        }
+        return Optional.empty();
+
     }
 
     @Override
-    public Optional<Imovel> criaArrendamento(Imovel imovel, float precoArrendamento)
+    public Optional<Arrendamento> criaArrendamento(Long idImovel, Arrendamento arrendamento)
     {
-        Optional<Imovel> optionalImovel = imovelRepository.findById(imovel.getId());
+        Optional<Imovel> optionalImovel = imovelRepository.findById(idImovel);
         if (optionalImovel.isPresent())
         {
-            Arrendamento arrendamento = new Arrendamento();
+            Imovel imovel = optionalImovel.get();
             arrendamento.setImovel(imovel);
-            arrendamento.setPrecoArrendamento(precoArrendamento);
-            arrendamentoRepository.save(arrendamento);
-            return Optional.of(imovelRepository.save(imovel));
+            return Optional.of(arrendamentoRepository.save(arrendamento));
 
         }
         return Optional.empty();

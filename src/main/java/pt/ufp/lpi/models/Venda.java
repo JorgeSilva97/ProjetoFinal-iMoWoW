@@ -34,10 +34,7 @@ public class Venda
     private float PercentagemT3Mais1 = 1.28F;
     private float PercentagemT4 = 1.36F;
 
-    public Venda(Imovel imovel, float precoTotal) {
-        this.imovel = imovel;
-        this.precoTotal = precoTotal;
-    }
+
 
     /**
      * funcao que calcula preco por metro quadrado da venda
