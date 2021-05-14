@@ -33,10 +33,6 @@ class UtilizadorServiceImplTest
     private VendaRepository vendaRepository;
     @MockBean
     private ArrendamentoRepository arrendamentoRepository;
-    @MockBean
-    private TopologiaRepository topologiaRepository;
-    @MockBean
-    private EstadoRepository estadoRepository;
 
     @Test
     void findAllConcelhos()
@@ -92,13 +88,13 @@ class UtilizadorServiceImplTest
                 .estado(estadoImovel)
                 .build();
         //jorge.getImoveis().add(imovel);
-        when(utilizadorService.criaImovel(1L, 1L, 1L, 1L,
+        when(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
                 imovel.getAnoConstrução(), imovel.getMetrosQuadrados(), imovel.isPiscina(), imovel.isJardim(),
                 imovel.isGaragem(), imovel.isElevador())).thenReturn(Optional.of(new Imovel()));
-        assertTrue(utilizadorService.criaImovel(1L, 1L, 1L, 1L,
+        assertTrue(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
                 imovel.getAnoConstrução(), imovel.getMetrosQuadrados(), imovel.isPiscina(), imovel.isJardim(),
                 imovel.isGaragem(), imovel.isElevador()).isPresent());
-        assertTrue(utilizadorService.criaImovel(2L, 2L, 2L, 2L,
+        assertTrue(utilizadorService.criaImovel(2L, 2L, Topologia.T1_1, EstadoImovel.renovado,
                 imovel.getAnoConstrução(), imovel.getMetrosQuadrados(), imovel.isPiscina(), imovel.isJardim(),
                 imovel.isGaragem(), imovel.isElevador()).isEmpty());
 

@@ -18,8 +18,8 @@ public interface UtilizadorService
     //------------------------------------------------------------
     List<Imovel> findAllImoveis();
     Optional<Imovel> findImoveloById (Long id);
-    Optional<Imovel> criaImovel(Long idUtilizador,Long idConcelho, Long idTopologia,
-                                Long idEstado, int ano, float metros,
+    Optional<Imovel> criaImovel(Long idUtilizador,Long idConcelho, Topologia topologia,
+                                EstadoImovel estadoImovel, int ano, float metros,
                                 boolean piscina, boolean jardim, boolean garagem,
                                 boolean elevador);
     Optional<Venda> criaVenda(Long idImovel, float precoTotal);

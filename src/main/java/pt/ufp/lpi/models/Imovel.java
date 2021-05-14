@@ -24,7 +24,9 @@ public class Imovel
     private Utilizador utilizador;
     @OneToOne
     private Concelho concelho;
+    @Enumerated(EnumType.ORDINAL)
     private Topologia topologia;
+    @Enumerated(EnumType.ORDINAL)
     private EstadoImovel estado;
     @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
     private LocalDateTime dataAnuncio;

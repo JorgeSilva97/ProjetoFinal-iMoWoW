@@ -22,8 +22,8 @@ public class UtilizadorServiceImpl implements UtilizadorService
     private final ImovelRepository imovelRepository;
     private final VendaRepository vendaRepository;
     private final ArrendamentoRepository arrendamentoRepository;
-    private final TopologiaRepository topologiaRepository;
-    private final EstadoRepository estadoRepository;
+
+
 
     @Override
     public List<Concelho> findAllConcelhos() {
@@ -46,22 +46,20 @@ public class UtilizadorServiceImpl implements UtilizadorService
     public Optional<Imovel> findImoveloById(Long id) { return imovelRepository.findById(id); }
 
     @Override
-    public Optional<Imovel> criaImovel(Long idUtilizador,Long idConcelho, Long idTopologia,
-                                       Long idEstado, int ano, float metros,
+    public Optional<Imovel> criaImovel(Long idUtilizador,Long idConcelho, Topologia topologia,
+                                       EstadoImovel estadoImovel, int ano, float metros,
                                        boolean piscina, boolean jardim, boolean garagem,
                                        boolean elevador)
     {
         Optional<Utilizador> optionalUtilizador = utilizadorRepository.findById(idUtilizador);
         Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
-        Optional<Topologia> optionalTopologia = topologiaRepository.findById(idTopologia);
-        Optional<EstadoImovel> optionalEstadoImovel = estadoRepository.findById(idEstado);
-        if (optionalUtilizador.isPresent() && optionalConcelho.isPresent() &&
-                optionalTopologia.isPresent() && optionalEstadoImovel.isPresent())
+
+
+        if (optionalUtilizador.isPresent() && optionalConcelho.isPresent() )
         {
             Utilizador utilizador = optionalUtilizador.get();
             Concelho concelho = optionalConcelho.get();
-            EstadoImovel estadoImovel = optionalEstadoImovel.get();
-            Topologia topologia = optionalTopologia.get();
+
             Imovel imovel=Imovel.builder()
                     .utilizador(utilizador)
                     .anoConstrução(ano)
