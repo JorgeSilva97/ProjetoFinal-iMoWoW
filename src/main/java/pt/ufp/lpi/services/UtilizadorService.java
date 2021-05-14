@@ -18,13 +18,12 @@ public interface UtilizadorService
     //------------------------------------------------------------
     List<Imovel> findAllImoveis();
     Optional<Imovel> findImoveloById (Long id);
-    Optional<Imovel> criaImovel(Imovel imovel);
-    /*Optional<Imovel> criaImovel(Long idImovel, Concelho concelho, Topologia top,
-                                EstadoImovel estado, LocalDateTime ano, float metros,
+    Optional<Imovel> criaImovel(Long idUtilizador,Long idConcelho, Long idTopologia,
+                                Long idEstado, int ano, float metros,
                                 boolean piscina, boolean jardim, boolean garagem,
-                                boolean elevador);*/
-    Optional<Venda> criaVenda(Long idImovel, Venda venda);
-    Optional<Arrendamento> criaArrendamento(Long idImovel, Arrendamento precoArrendamento);
+                                boolean elevador);
+    Optional<Venda> criaVenda(Long idImovel, float precoTotal);
+    Optional<Arrendamento> criaArrendamento(Long idImovel, float precoArrendamento);
     //------------------------------------------------------------
     Optional<Float> consultaPrecoMetroQuadrado(Long idConcelho);
     //------------------------------------------------------------

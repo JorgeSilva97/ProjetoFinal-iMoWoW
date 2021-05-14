@@ -1,17 +1,17 @@
 package pt.ufp.lpi.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
-import pt.ufp.lpi.models.enumerado.TipoVendaArrendamento;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @Entity
-public class Historico
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class HistoricoVenda
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,6 @@ public class Historico
     @JsonFormat(pattern = "yyyy-MM",shape = JsonFormat.Shape.STRING)
     private LocalDateTime data;
     private float precoAntigo;
-    private TipoVendaArrendamento tipo;
     @ManyToOne
     private Concelho concelho;
 }

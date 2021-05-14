@@ -1,15 +1,17 @@
 package pt.ufp.lpi.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Concelho
 {
     @Id
@@ -20,6 +22,8 @@ public class Concelho
     @ManyToOne
     private Distrito distrito;
     @OneToMany(mappedBy = "concelho", cascade = CascadeType.ALL)
-    private List<Historico> historicos = new ArrayList<>();
+    private List<HistoricoVenda> historicoVendas = new ArrayList<>();
+    @OneToMany(mappedBy = "concelho", cascade = CascadeType.ALL)
+    private List<HistoricoArrendamento> historicoArrendamentos = new ArrayList<>();
 
 }

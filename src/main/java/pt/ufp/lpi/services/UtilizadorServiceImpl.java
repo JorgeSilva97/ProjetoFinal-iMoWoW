@@ -1,16 +1,11 @@
 package pt.ufp.lpi.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pt.ufp.lpi.models.Arrendamento;
-import pt.ufp.lpi.models.Concelho;
-import pt.ufp.lpi.models.Imovel;
-import pt.ufp.lpi.models.Venda;
+import pt.ufp.lpi.models.*;
 import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
-import pt.ufp.lpi.repositories.ArrendamentoRepository;
-import pt.ufp.lpi.repositories.ConcelhoRepository;
-import pt.ufp.lpi.repositories.ImovelRepository;
-import pt.ufp.lpi.repositories.VendaRepository;
+import pt.ufp.lpi.repositories.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,13 +13,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UtilizadorServiceImpl implements UtilizadorService
 {
 
-    private ConcelhoRepository concelhoRepository;
-    private ImovelRepository imovelRepository;
-    private VendaRepository vendaRepository;
-    private ArrendamentoRepository arrendamentoRepository;
+    private final UtilizadorRepository utilizadorRepository;
+    private final ConcelhoRepository concelhoRepository;
+    private final ImovelRepository imovelRepository;
+    private final VendaRepository vendaRepository;
+    private final ArrendamentoRepository arrendamentoRepository;
+    private final TopologiaRepository topologiaRepository;
+    private final EstadoRepository estadoRepository;
 
     @Override
     public List<Concelho> findAllConcelhos() {
@@ -46,65 +45,69 @@ public class UtilizadorServiceImpl implements UtilizadorService
     @Override
     public Optional<Imovel> findImoveloById(Long id) { return imovelRepository.findById(id); }
 
-    /*@Override
-    public Optional<Imovel> criaImovel(Long idImovel, Concelho concelho, Topologia top, EstadoImovel estado,
-                                       LocalDateTime ano, float metros, boolean piscina, boolean jardim,
-                                       boolean garagem, boolean elevador)
+    @Override
+    public Optional<Imovel> criaImovel(Long idUtilizador,Long idConcelho, Long idTopologia,
+                                       Long idEstado, int ano, float metros,
+                                       boolean piscina, boolean jardim, boolean garagem,
+                                       boolean elevador)
     {
-        Optional<Imovel> optionalImovel = imovelRepository.findById(idImovel);
-        if (optionalImovel.isEmpty())
+        Optional<Utilizador> optionalUtilizador = utilizadorRepository.findById(idUtilizador);
+        Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
+        Optional<Topologia> optionalTopologia = topologiaRepository.findById(idTopologia);
+        Optional<EstadoImovel> optionalEstadoImovel = estadoRepository.findById(idEstado);
+        if (optionalUtilizador.isPresent() && optionalConcelho.isPresent() &&
+                optionalTopologia.isPresent() && optionalEstadoImovel.isPresent())
         {
-            Imovel imovel = optionalImovel.get();
-            imovel.setConcelho(concelho);
-            imovel.setTopologia(top);
-            imovel.setEstado(estado);
-            imovel.setAnoConstrução(ano);
-            imovel.setMetrosQuadrados(metros);
-            imovel.setPiscina(piscina);
-            imovel.setJardim(jardim);
-            imovel.setGaragem(garagem);
-            imovel.setElevador(elevador);
-            imovel.setDataAnuncio(LocalDateTime.now());
+            Utilizador utilizador = optionalUtilizador.get();
+            Concelho concelho = optionalConcelho.get();
+            EstadoImovel estadoImovel = optionalEstadoImovel.get();
+            Topologia topologia = optionalTopologia.get();
+            Imovel imovel=Imovel.builder()
+                    .utilizador(utilizador)
+                    .anoConstrução(ano)
+                    .concelho(concelho)
+                    .dataAnuncio(LocalDateTime.now())
+                    .elevador(elevador)
+                    .estado(estadoImovel)
+                    .garagem(garagem)
+                    .jardim(jardim)
+                    .piscina(piscina)
+                    .metrosQuadrados(metros)
+                    .topologia(topologia)
+                    .build();
             return Optional.of(imovelRepository.save(imovel));
         }
         return Optional.empty();
-    }*/
-
-    @Override
-    public Optional<Imovel> criaImovel(Imovel imovel)
-    {
-        Optional<Imovel> optionalImovel = imovelRepository.findById(imovel.getId());
-        if (optionalImovel.isPresent())
-            return Optional.of(imovelRepository.save(imovel));
-        return Optional.empty();
     }
 
-
-
     @Override
-    public Optional<Venda> criaVenda(Long idImovel, Venda venda)
+    public Optional<Venda> criaVenda(Long idImovel, float precoTotal)
     {
         Optional<Imovel> optionalImovel = imovelRepository.findById(idImovel);
         if (optionalImovel.isPresent())
         {
             Imovel imovel = optionalImovel.get();
-            venda.setImovel(imovel);
+            Venda venda = Venda.builder()
+                    .imovel(imovel)
+                    .precoTotal(precoTotal)
+                    .build();
             return Optional.of(vendaRepository.save(venda));
         }
         return Optional.empty();
-
     }
 
     @Override
-    public Optional<Arrendamento> criaArrendamento(Long idImovel, Arrendamento arrendamento)
+    public Optional<Arrendamento> criaArrendamento(Long idImovel, float precoArrendamento)
     {
         Optional<Imovel> optionalImovel = imovelRepository.findById(idImovel);
         if (optionalImovel.isPresent())
         {
             Imovel imovel = optionalImovel.get();
-            arrendamento.setImovel(imovel);
+            Arrendamento arrendamento = Arrendamento.builder()
+                    .precoArrendamento(precoArrendamento)
+                    .imovel(imovel)
+                    .build();
             return Optional.of(arrendamentoRepository.save(arrendamento));
-
         }
         return Optional.empty();
     }

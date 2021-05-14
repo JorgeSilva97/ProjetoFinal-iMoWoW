@@ -1,15 +1,16 @@
 package pt.ufp.lpi.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Venda
 {
     @Id
@@ -126,5 +127,6 @@ public class Venda
                 return 2;
         }
     }
+
 
 }
