@@ -68,7 +68,7 @@ class UtilizadorServiceImplTest
     @Test
     void criaImovel() {
         Concelho gaia = Concelho.builder()
-                .nome("porto")
+                .nome("gaia")
                 .build();
         Utilizador jorge = Utilizador.builder()
                 .userName("jorge")

@@ -53,14 +53,11 @@ public class UtilizadorServiceImpl implements UtilizadorService
     {
         Optional<Utilizador> optionalUtilizador = utilizadorRepository.findById(idUtilizador);
         Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
-
-
         if (optionalUtilizador.isPresent() && optionalConcelho.isPresent() )
         {
             Utilizador utilizador = optionalUtilizador.get();
             Concelho concelho = optionalConcelho.get();
-
-            Imovel imovel=Imovel.builder()
+            Imovel imovel = Imovel.builder()
                     .utilizador(utilizador)
                     .anoConstrução(ano)
                     .concelho(concelho)
