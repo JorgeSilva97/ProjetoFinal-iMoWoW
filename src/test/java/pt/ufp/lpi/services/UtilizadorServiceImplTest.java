@@ -23,6 +23,8 @@ class UtilizadorServiceImplTest
     @Autowired
     private UtilizadorService utilizadorService;
     @MockBean
+    private UtilizadorRepository utilizadorRepository;
+    @MockBean
     private ConcelhoRepository concelhoRepository;
     @MockBean
     private ImovelRepository imovelRepository;
@@ -89,9 +91,17 @@ class UtilizadorServiceImplTest
                 .estado(EstadoImovel.novo)
                 .build();
         //jorge.getImoveis().add(imovel);
-        when(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
+        /*when(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
                 imovel.getAnoConstrução(), imovel.getMetrosQuadrados(), imovel.isPiscina(), imovel.isJardim(),
-                imovel.isGaragem(), imovel.isElevador())).thenReturn(Optional.of(new Imovel()));
+                imovel.isGaragem(), imovel.isElevador())).thenReturn(Optional.of(new Imovel()));*/
+
+        //linha 54 UtilizadorServiceImpl
+        when(utilizadorRepository.findById(1L)).thenReturn(Optional.of(jorge));
+        //linha 55 UtilizadorServiceImpl
+        when(concelhoRepository.findById(1L)).thenReturn(Optional.of(gaia));
+        //linha 73 UtilizadorServiceImpl
+        when(imovelRepository.save(imovel)).thenReturn(imovel);
+
         assertTrue(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
                 imovel.getAnoConstrução(), imovel.getMetrosQuadrados(), imovel.isPiscina(), imovel.isJardim(),
                 imovel.isGaragem(), imovel.isElevador()).isPresent());

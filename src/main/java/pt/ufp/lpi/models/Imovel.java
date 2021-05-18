@@ -29,6 +29,7 @@ public class Imovel
     @Enumerated(EnumType.ORDINAL)
     private EstadoImovel estado;
     @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
+    @EqualsAndHashCode.Exclude //linha 64 UtilizadorServiceImpl
     private LocalDateTime dataAnuncio;
     private int anoConstrução;
     private float metrosQuadrados;
