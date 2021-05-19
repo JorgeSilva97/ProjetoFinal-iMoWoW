@@ -70,6 +70,7 @@ public class UtilizadorServiceImpl implements UtilizadorService
                     .metrosQuadrados(metros)
                     .topologia(topologia)
                     .build();
+            utilizador.adicionaImovel(imovel);
             return Optional.of(imovelRepository.save(imovel));
         }
         return Optional.empty();
@@ -114,9 +115,8 @@ public class UtilizadorServiceImpl implements UtilizadorService
         if (optionalConcelho.isPresent())
         {
             Concelho concelho = optionalConcelho.get();
-            return Optional.of(concelho.getPrecoMedio());
+            return Optional.of(concelho.getPrecoMedioVenda());
         }
-
         return Optional.empty();
     }
 

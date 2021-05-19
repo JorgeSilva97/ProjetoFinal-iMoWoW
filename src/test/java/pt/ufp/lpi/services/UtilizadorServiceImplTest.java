@@ -9,7 +9,6 @@ import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 import pt.ufp.lpi.repositories.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -22,6 +21,10 @@ class UtilizadorServiceImplTest
 
     @Autowired
     private UtilizadorService utilizadorService;
+    @MockBean
+    private UtilizadorRepository utilizadorRepository;
+    @MockBean
+    private DistritoRepository distritoRepository;
     @MockBean
     private ConcelhoRepository concelhoRepository;
     @MockBean
@@ -89,9 +92,12 @@ class UtilizadorServiceImplTest
                 .estado(EstadoImovel.novo)
                 .build();
         //jorge.getImoveis().add(imovel);
-        when(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
+        /*when(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
                 imovel.getAnoConstrução(), imovel.getMetrosQuadrados(), imovel.isPiscina(), imovel.isJardim(),
-                imovel.isGaragem(), imovel.isElevador())).thenReturn(Optional.of(new Imovel()));
+                imovel.isGaragem(), imovel.isElevador())).thenReturn(Optional.of(new Imovel()));*/
+        when(utilizadorRepository.findById(1L)).thenReturn(Optional.of(jorge));
+       // when(concelhoRepository.findById(1L)).thenReturn(Optional.of(gaia));
+        when(imovelRepository.save(imovel)).thenReturn(imovel);
         assertTrue(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
                 imovel.getAnoConstrução(), imovel.getMetrosQuadrados(), imovel.isPiscina(), imovel.isJardim(),
                 imovel.isGaragem(), imovel.isElevador()).isPresent());
@@ -130,7 +136,9 @@ class UtilizadorServiceImplTest
                 .precoTotal(200000)
                 .imovel(imovel)
                 .build();
-        when(utilizadorService.criaVenda(1L, venda.getPrecoTotal())).thenReturn(Optional.of(new Venda()));
+       // when(utilizadorService.criaVenda(1L, venda.getPrecoTotal())).thenReturn(Optional.of(new Venda()));
+        when(utilizadorRepository.findById(1L)).thenReturn(Optional.of(jorge));
+        when(imovelRepository.save(imovel)).thenReturn(imovel);
         assertTrue(utilizadorService.criaVenda(1L, venda.getPrecoTotal()).isPresent());
         assertTrue(utilizadorService.criaVenda(2L, venda.getPrecoTotal()).isEmpty());
     }
@@ -181,9 +189,9 @@ class UtilizadorServiceImplTest
                 .id(1L)
                 .nome("gaia")
                 .distrito(porto)
-                .precoMedio(200)
+                .precoMedioVenda(200)
                 .build();
-        when(utilizadorService.consultaPrecoMetroQuadrado(1L)).thenReturn(Optional.of(gaia.getPrecoMedio()));
+        when(utilizadorService.consultaPrecoMetroQuadrado(1L)).thenReturn(Optional.of(gaia.getPrecoMedioVenda()));
         assertEquals(200, utilizadorService.consultaPrecoMetroQuadrado(1L));
         assertNotEquals(400, utilizadorService.consultaPrecoMetroQuadrado(1L));
 

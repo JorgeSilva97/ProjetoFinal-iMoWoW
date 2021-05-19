@@ -20,7 +20,6 @@ public class Distrito
     @OneToMany(mappedBy = "distrito", cascade = CascadeType.ALL)
     private List<Concelho> concelhos = new ArrayList<>();
 
-
     public Concelho adicionaConcelho(Concelho concelho)
     {
         if (!this.concelhos.contains(concelho))

@@ -36,7 +36,6 @@ public class Utilizador
         if (!this.concelhosPreferenciais.contains(concelho))
         {
             this.concelhosPreferenciais.add(concelho);
-           // concelho.adicionaUtilizador(this);
             System.out.println("Adicionou "+concelho.getNome()+" ao Utilizador "+this.getUserName());
             return concelho;
         }

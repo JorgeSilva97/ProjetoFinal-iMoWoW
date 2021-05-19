@@ -1,6 +1,7 @@
 package pt.ufp.lpi.models;
 
 import org.junit.jupiter.api.Test;
+import pt.ufp.lpi.models.enumerado.Avalicao;
 import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 
@@ -26,7 +27,7 @@ class VendaTest {
     void calcularVenda()
     {
         Concelho gaia = new Concelho();
-        gaia.setPrecoMedio(200);
+        gaia.setPrecoMedioVenda(200);
 
         Imovel casaDaRocha = new Imovel();
         casaDaRocha.setMetrosQuadrados(500);
@@ -57,5 +58,40 @@ class VendaTest {
         assertNotEquals(100000, venda2.calcularVenda());
         assertEquals(51731.3984375, venda2.calcularVenda());
 
+    }
+
+    @Test
+    void avaliacaoNegocioVenda()
+    {
+        Concelho gaia = new Concelho();
+        gaia.setPrecoMedioVenda(200);
+
+        Imovel casaDaRocha = new Imovel();
+        casaDaRocha.setMetrosQuadrados(500);
+        casaDaRocha.setPiscina(true);
+        casaDaRocha.setGaragem(true);
+        casaDaRocha.setJardim(true);
+        casaDaRocha.setEstado(EstadoImovel.novo);
+        casaDaRocha.setConcelho(gaia);
+        Venda venda1 = new Venda();
+        venda1.setImovel(casaDaRocha);
+        venda1.setPrecoTotal(660000);
+
+        Imovel casaDaPedra = new Imovel();
+        casaDaPedra.setMetrosQuadrados(500);
+        casaDaPedra.setElevador(true);
+        casaDaPedra.setJardim(true);
+        casaDaPedra.setEstado(EstadoImovel.porRecuperar);
+        casaDaPedra.setConcelho(gaia);
+        Venda venda2 = new Venda();
+        venda2.setImovel(casaDaPedra);
+        venda2.setPrecoTotal(10000);
+        casaDaPedra.setTopologia(Topologia.T1);
+        casaDaRocha.setTopologia(Topologia.T2_1);
+
+        assertEquals(Avalicao.MuitoMau, venda1.avaliacaoNegocioVenda());
+        assertNotEquals(Avalicao.MuitoBom, venda1.avaliacaoNegocioVenda());
+        assertEquals(Avalicao.MuitoBom, venda2.avaliacaoNegocioVenda());
+        assertNotEquals(Avalicao.Mau, venda2.avaliacaoNegocioVenda());
     }
 }

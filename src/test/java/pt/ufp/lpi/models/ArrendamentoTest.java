@@ -19,4 +19,10 @@ class ArrendamentoTest {
         assertEquals(4, arrendamento.precoMetroQuadrado());
         assertNotEquals(3, arrendamento.precoMetroQuadrado());
     }
+
+    @Test
+    void calculaArrendamento()
+    {
+
+    }
 }

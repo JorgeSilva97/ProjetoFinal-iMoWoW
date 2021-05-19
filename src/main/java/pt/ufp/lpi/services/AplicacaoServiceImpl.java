@@ -3,6 +3,7 @@ package pt.ufp.lpi.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pt.ufp.lpi.models.*;
+import pt.ufp.lpi.models.enumerado.Avalicao;
 import pt.ufp.lpi.repositories.*;
 
 import java.time.LocalDateTime;
@@ -88,8 +89,8 @@ public class AplicacaoServiceImpl implements AplicacaoService
         return Optional.empty();
     }
 
-    @Override
-    public Optional<Integer> getAvalicaoNegocio (Long idVenda)
+   @Override
+    public Optional<Avalicao> getAvalicaoNegocio (Long idVenda)
     {
         Optional<Venda> optionalVenda = vendaRepository.findById(idVenda);
         if (optionalVenda.isPresent())

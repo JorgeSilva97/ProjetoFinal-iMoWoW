@@ -1,6 +1,7 @@
 package pt.ufp.lpi.models;
 
 import lombok.*;
+import pt.ufp.lpi.models.enumerado.Avalicao;
 import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 
@@ -52,7 +53,7 @@ public class Venda
      */
     public float calcularVenda()
     {
-        float valorConcelhoMetroQuadrado = this.getImovel().getConcelho().getPrecoMedio();
+        float valorConcelhoMetroQuadrado = this.getImovel().getConcelho().getPrecoMedioVenda();
         float metrosQuadrados = this.getImovel().getMetrosQuadrados();
         float valor = valorConcelhoMetroQuadrado * metrosQuadrados;
 
@@ -101,7 +102,7 @@ public class Venda
      *         4 - bom negocio
      *         5 - excelente negocio
      */
-    public int avaliacaoNegocioVenda()
+    public Avalicao avaliacaoNegocioVenda()
     {
         float avaliacao = this.calcularVenda();
         float avaliacaoMaisDezPorcento = (float)(avaliacao * 1.10);
@@ -112,19 +113,19 @@ public class Venda
         {
             if ((getPrecoTotal()>=avaliacaoMenosCincoPorcento) &&
                     (avaliacaoMaisCincoPorcento>=getPrecoTotal()))
-                return 3;
+                return Avalicao.Suficiente;
             else if ((getPrecoTotal()>avaliacaoMaisCincoPorcento) &&
                     (avaliacaoMaisDezPorcento>=getPrecoTotal()))
-                return 4;
+                return Avalicao.Bom;
             else
-                return 5;
+                return Avalicao.MuitoBom;
         }
         else
         {
             if (getPrecoTotal()<=avaliacaoMenosDozePorcento)
-                return 1;
+                return Avalicao.Mau;
             else
-                return 2;
+                return Avalicao.MuitoMau;
         }
     }
 
