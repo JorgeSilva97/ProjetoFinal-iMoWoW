@@ -27,23 +27,27 @@ public class Concelho
     @OneToMany(mappedBy = "concelho", cascade = CascadeType.ALL)
     private List<HistoricoArrendamento> historicoArrendamentos = new ArrayList<>();
 
+
     public HistoricoVenda adicionaHistoricoVenda(HistoricoVenda historicoVenda)
     {
-        if (!historicoVendas.contains(historicoVenda))
+        if (!this.historicoVendas.contains(historicoVenda))
         {
-            this.historicoVendas.add(historicoVenda);
+            historicoVenda.setConcelho(this);
+            historicoVendas.add(historicoVenda);
             System.out.println("Adicionou histórico de venda ao concelho "+this.getNome());
+            return historicoVenda;
         }
         return null;
     }
-
 
     public HistoricoArrendamento adicionaHistoricoArrendamento(HistoricoArrendamento historicoArrendamento)
     {
         if (!historicoArrendamentos.contains(historicoArrendamento))
         {
+            historicoArrendamento.setConcelho(this);
             this.historicoArrendamentos.add(historicoArrendamento);
             System.out.println("Adicionou histórico de arrrendamento ao concelho "+this.getNome());
+            return historicoArrendamento;
         }
         return null;
     }

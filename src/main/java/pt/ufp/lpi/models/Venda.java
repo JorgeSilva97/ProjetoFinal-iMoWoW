@@ -20,14 +20,18 @@ public class Venda
     @OneToOne
     private Imovel imovel;
     private float precoTotal;
+
+    //--------------------------------------
     private float PercentagemGaragem = 1.05F; //se tiver garagem 5%
     private float PercentagemPiscina = 1.07F; //se tiver piscina 7%
     private float PercentagemJardim = 1.13F; //se tiver jardim 13%
     private float PercentagemElevador = 1.05F; //se tiver elevador 5%
+    //-------------------------------------------------
     private float PercentagemEstadoRenovado = 1.13F; //mais 13%
     private float PercentagemEstadoNovo = 1.25F; //mais 25%
     private float PercentagemEstadoPorRecuperar = 0.40F; //menos 60%
     private float PercentagemEstadoUsado = 0.90F; //menos 10%
+    //-------------------------------------------------
     private float PercentagemT1 = 1.09F;
     private float PercentagemT1Mais1 = 1.10F;
     private float PercentagemT2 = 1.18F;
@@ -35,7 +39,7 @@ public class Venda
     private float PercentagemT3 = 1.27F;
     private float PercentagemT3Mais1 = 1.28F;
     private float PercentagemT4 = 1.36F;
-
+    //--------------------------------------
 
 
     /**
@@ -105,27 +109,30 @@ public class Venda
     public Avalicao avaliacaoNegocioVenda()
     {
         float avaliacao = this.calcularVenda();
+        float precoVenda = this.getPrecoTotal();
         float avaliacaoMaisDezPorcento = (float)(avaliacao * 1.10);
         float avaliacaoMaisCincoPorcento = (float)(avaliacao * 1.05);
         float avaliacaoMenosCincoPorcento = (float)(avaliacao * 0.95);
-        float avaliacaoMenosDozePorcento = (float)(avaliacao * 0.88);
-        if (avaliacao >= this.getPrecoTotal())
+        float avaliacaoMenosDezPorcento = (float)(avaliacao * 0.9);
+        if (avaliacao < precoVenda)
         {
-            if ((getPrecoTotal()>=avaliacaoMenosCincoPorcento) &&
-                    (avaliacaoMaisCincoPorcento>=getPrecoTotal()))
-                return Avalicao.Suficiente;
-            else if ((getPrecoTotal()>avaliacaoMaisCincoPorcento) &&
-                    (avaliacaoMaisDezPorcento>=getPrecoTotal()))
-                return Avalicao.Bom;
+            if (avaliacaoMaisDezPorcento<precoVenda)
+                return Avalicao.MuitoMau;
+            else if ((avaliacaoMaisDezPorcento>precoVenda) &&
+                    (precoVenda>avaliacaoMaisCincoPorcento))
+                return Avalicao.Mau;
             else
                 return Avalicao.MuitoBom;
         }
         else
         {
-            if (getPrecoTotal()<=avaliacaoMenosDozePorcento)
-                return Avalicao.Mau;
+            if (precoVenda>=avaliacaoMenosCincoPorcento)
+                return Avalicao.Suficiente;
+            else if ((avaliacaoMenosCincoPorcento>precoVenda) &&
+                    (precoVenda>avaliacaoMenosDezPorcento))
+                return Avalicao.Bom;
             else
-                return Avalicao.MuitoMau;
+                return Avalicao.MuitoBom;
         }
     }
 

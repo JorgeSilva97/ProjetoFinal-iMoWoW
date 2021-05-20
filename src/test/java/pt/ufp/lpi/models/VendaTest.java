@@ -75,7 +75,7 @@ class VendaTest {
         casaDaRocha.setConcelho(gaia);
         Venda venda1 = new Venda();
         venda1.setImovel(casaDaRocha);
-        venda1.setPrecoTotal(660000);
+        venda1.setPrecoTotal(200000);
 
         Imovel casaDaPedra = new Imovel();
         casaDaPedra.setMetrosQuadrados(500);
@@ -85,13 +85,13 @@ class VendaTest {
         casaDaPedra.setConcelho(gaia);
         Venda venda2 = new Venda();
         venda2.setImovel(casaDaPedra);
-        venda2.setPrecoTotal(10000);
+        venda2.setPrecoTotal(48000);
         casaDaPedra.setTopologia(Topologia.T1);
         casaDaRocha.setTopologia(Topologia.T2_1);
 
-        assertEquals(Avalicao.MuitoMau, venda1.avaliacaoNegocioVenda());
+        assertEquals(Avalicao.Mau, venda1.avaliacaoNegocioVenda());
         assertNotEquals(Avalicao.MuitoBom, venda1.avaliacaoNegocioVenda());
-        assertEquals(Avalicao.MuitoBom, venda2.avaliacaoNegocioVenda());
+        assertEquals(Avalicao.Bom, venda2.avaliacaoNegocioVenda());
         assertNotEquals(Avalicao.Mau, venda2.avaliacaoNegocioVenda());
     }
 }

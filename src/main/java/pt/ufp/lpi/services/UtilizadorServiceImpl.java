@@ -24,7 +24,6 @@ public class UtilizadorServiceImpl implements UtilizadorService
     private final ArrendamentoRepository arrendamentoRepository;
 
 
-
     @Override
     public List<Concelho> findAllConcelhos() {
         List<Concelho> concelhos = new ArrayList<>();
@@ -70,7 +69,7 @@ public class UtilizadorServiceImpl implements UtilizadorService
                     .metrosQuadrados(metros)
                     .topologia(topologia)
                     .build();
-            utilizador.adicionaImovel(imovel);
+           // utilizador.adicionaImovel(imovel);
             return Optional.of(imovelRepository.save(imovel));
         }
         return Optional.empty();
@@ -109,15 +108,15 @@ public class UtilizadorServiceImpl implements UtilizadorService
     }
 
     @Override
-    public Optional<Float> consultaPrecoMetroQuadrado(Long idConcelho)
+    public float consultaPrecoMetroQuadrado(Long idConcelho)
     {
         Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
         if (optionalConcelho.isPresent())
         {
             Concelho concelho = optionalConcelho.get();
-            return Optional.of(concelho.getPrecoMedioVenda());
+            return concelho.getPrecoMedioVenda();
         }
-        return Optional.empty();
+        return 0;
     }
 
 
