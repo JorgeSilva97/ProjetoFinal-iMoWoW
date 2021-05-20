@@ -23,8 +23,10 @@ public class Concelho
     @ManyToOne
     private Distrito distrito;
     @OneToMany(mappedBy = "concelho", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<HistoricoVenda> historicoVendas = new ArrayList<>();
     @OneToMany(mappedBy = "concelho", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<HistoricoArrendamento> historicoArrendamentos = new ArrayList<>();
 
 

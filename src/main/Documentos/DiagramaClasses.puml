@@ -6,38 +6,95 @@ package ProjetoLPI{
 
 class Utilizador
 {
-    - email:String
-    - user_name:String
-    - password:String
+    - id:Long
+    - userName: String
+    - email: String
+    - password: String
     - orcamento_limite: float
+    + adicionaConcelho(Concelho c): Concelho
+    + adicionaImovel(Imovel i): Imovel
 }
 
-class Imovel{
-    - preco_total:float
-    - metros_quadrados:float
-    - topologia:Topologia
+class Imovel
+{
+    - id: Long
+    - topologia: Topologia
+    - estado: EstadoImovel
+    - data_anuncio: LocalDateTime
     - ano_construcao: int
-    - data_anuncio: Date
-    - piscina:boolean
+    - metros_quadrados: float
+    - piscina: boolean
     - jardim: boolean
-    - garagem:boolean
+    - garagem: boolean
+    - elevador: boolean
 }
 
 class Venda{
-    # calculaPrecoMetroQuadrado(preco:float, metros_quadrados:float):float
+    - id: Long
+    - precoTotal: float
+    - PercentagemGaragem: float = 1.05F
+    - PercentagemPiscina: float = 1.07F
+    - PercentagemJardim_: float = 1.13F
+    - PercentagemElevador: float = 1.05F
+    - PercentagemEstadoRenovado: float = 1.13F
+    - PercentagemEstadoNovo: float = 1.25F
+    - PercentagemEstadoPorRecuperar: float = 0.40F
+    - PercentagemEstadoUsado: float = 0.90F
+    - PercentagemT1: float = 1.09F
+    - PercentagemT1Mais1: float = 1.10F
+    - PercentagemT2: float = 1.18F
+    - PercentagemT2Mais1: float = 1.20F
+    - PercentagemT3: float = 1.27F
+    - PercentagemT3Mais1: float = 1.28F
+    - PercentagemT4: float = 1.36F
+    + precoMetroQuadrado(preco:float, metros_quadrados:float): float
+    + calcularVenda(): void
+    + avaliacaoNegocioVenda(): Avalicao
 }
 
 class Arrendamento{
+    - id: Long
     - precoArrendamento: float
-    # calculaPrecoMetroQuadrado(preco:float, metros_quadrados:float):float
+    - PercentagemT1: float = 1.045F
+    - PercentagemT1Mais1: float = 1.05F
+    - PercentagemT2: float = 1.09F
+    - PercentagemT2Mais1: float = 1.10F
+    - PercentagemT3: float = 1.15F
+    - PercentagemT3Mais1: float = 1.17F
+    - PercentagemT4: float = 1.22F
+    + precoMetroQuadrado(preco:float, metros_quadrados:float): float
+    + calcularArrendamento(): void
+    + avaliacaoNegocioArrendamento(): Avalicao
+}
+
+class HistoricoArrendamento
+{
+    - id: Long
+    - data: LocalDateTime
+    - precoAntigo: float
+}
+
+class HistoricoVenda
+{
+    - id: Long
+    - data: LocalDateTime
+    - precoAntigo: float
 }
 
 class Concelho{
-    - nome_concelho:String
+    - id: Long
+    - nome: String
+    - precoMedioVenda: float
+    - precoMedioArrendamento: float
+    + adicionaHistoricoVenda(HistoricoVenda hv): HistoricoVenda
+    + adicionaHistoricoArrendamento(HistoricoArrendamento hv): HistoricoArrendamento
 }
 
-class Distrito{
-    - nome_distrito:String
+class Distrito
+{
+    - id: Long
+    - nome: String
+    + adicionaConcelho(Concelho c): Concelho
 }
 
 enum Topologia{
@@ -49,14 +106,33 @@ enum Topologia{
     T4,
 }
 
+enum Avalicao
+{
+    MuitoBom,
+    Bom,
+    Suficiente,
+    Mau,
+    MuitoMau
+}
+
+enum EstadoImovel
+{
+    novo,
+    renovado,
+    usado,
+    porRecuperar,
+}
+
 
 
 Imovel "1" --- "0..1" Venda
 Imovel "1" --- "0..1" Arrendamento
-Utilizador "1" --- "1..*" Imovel
-Utilizador "1" --- "1..*" Concelho
-Distrito "1" --- "*" Concelho
 Imovel "1" --- "1" Concelho
+Utilizador "1" --- "1..*" Imovel
+Utilizador "1" --- "0..*" Concelho
+Distrito "1" --- "*" Concelho
+Concelho "1" --- "0..*" HistoricoVenda
+Concelho "1" --- "0..*" HistoricoArrendamento
 
 }
 

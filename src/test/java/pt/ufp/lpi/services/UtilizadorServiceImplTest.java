@@ -24,8 +24,6 @@ class UtilizadorServiceImplTest
     @MockBean
     private UtilizadorRepository utilizadorRepository;
     @MockBean
-    private DistritoRepository distritoRepository;
-    @MockBean
     private ConcelhoRepository concelhoRepository;
     @MockBean
     private ImovelRepository imovelRepository;
@@ -91,13 +89,11 @@ class UtilizadorServiceImplTest
                 .topologia(Topologia.T1)
                 .estado(EstadoImovel.novo)
                 .build();
-        //jorge.getImoveis().add(imovel);
-        /*when(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
-                imovel.getAnoConstrução(), imovel.getMetrosQuadrados(), imovel.isPiscina(), imovel.isJardim(),
-                imovel.isGaragem(), imovel.isElevador())).thenReturn(Optional.of(new Imovel()));*/
+
         when(utilizadorRepository.findById(1L)).thenReturn(Optional.of(jorge));
-       // when(concelhoRepository.findById(1L)).thenReturn(Optional.of(gaia));
+        when(concelhoRepository.findById(1L)).thenReturn(Optional.of(gaia));
         when(imovelRepository.save(imovel)).thenReturn(imovel);
+
         assertTrue(utilizadorService.criaImovel(1L, 1L, Topologia.T1, EstadoImovel.novo,
                 imovel.getAnoConstrução(), imovel.getMetrosQuadrados(), imovel.isPiscina(), imovel.isJardim(),
                 imovel.isGaragem(), imovel.isElevador()).isPresent());
@@ -136,9 +132,8 @@ class UtilizadorServiceImplTest
                 .precoTotal(200000)
                 .imovel(imovel)
                 .build();
-       // when(utilizadorService.criaVenda(1L, venda.getPrecoTotal())).thenReturn(Optional.of(new Venda()));
-        when(utilizadorRepository.findById(1L)).thenReturn(Optional.of(jorge));
-        when(imovelRepository.save(imovel)).thenReturn(imovel);
+        when(imovelRepository.findById(1L)).thenReturn(Optional.of(imovel));
+        when(vendaRepository.save(venda)).thenReturn(venda);
         assertTrue(utilizadorService.criaVenda(1L, venda.getPrecoTotal()).isPresent());
         assertTrue(utilizadorService.criaVenda(2L, venda.getPrecoTotal()).isEmpty());
     }
@@ -172,8 +167,8 @@ class UtilizadorServiceImplTest
                 .precoArrendamento(600)
                 .imovel(imovel)
                 .build();
-        when(utilizadorService.criaArrendamento(1L, arrendamento.getPrecoArrendamento()))
-                .thenReturn(Optional.of(new Arrendamento()));
+        when(imovelRepository.findById(1L)).thenReturn(Optional.of(imovel));
+        when(arrendamentoRepository.save(arrendamento)).thenReturn(arrendamento);
         assertTrue(utilizadorService.criaArrendamento(1L, arrendamento.getPrecoArrendamento()).isPresent());
         assertTrue(utilizadorService.criaArrendamento(2L, arrendamento.getPrecoArrendamento()).isEmpty());
     }
@@ -191,9 +186,9 @@ class UtilizadorServiceImplTest
                 .distrito(porto)
                 .precoMedioVenda(200)
                 .build();
-        when(utilizadorService.consultaPrecoMetroQuadrado(1L)).thenReturn(Optional.of(gaia.getPrecoMedioVenda()));
-        assertEquals(200, utilizadorService.consultaPrecoMetroQuadrado(1L));
-        assertNotEquals(400, utilizadorService.consultaPrecoMetroQuadrado(1L));
+        when(concelhoRepository.findById(1L)).thenReturn(Optional.of(gaia));
+        assertEquals(200.0, utilizadorService.consultaPrecoMetroQuadrado(1L));
+        assertNotEquals(400.0, utilizadorService.consultaPrecoMetroQuadrado(1L));
 
 
     }

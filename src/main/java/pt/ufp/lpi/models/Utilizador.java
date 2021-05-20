@@ -20,13 +20,16 @@ public class Utilizador
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
+    private String email;
     private String password;
     private float orcamentoLimite;
     @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Concelho> concelhosPreferenciais = new ArrayList<>();
     @JsonIgnore
     @OneToMany(mappedBy = "utilizador", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Imovel> imoveis = new ArrayList<>();
 
 

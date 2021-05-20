@@ -18,6 +18,7 @@ public class Distrito
     private Long id;
     private String nome;
     @OneToMany(mappedBy = "distrito", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Concelho> concelhos = new ArrayList<>();
 
     public Concelho adicionaConcelho(Concelho concelho)

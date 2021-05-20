@@ -69,7 +69,7 @@ public class UtilizadorServiceImpl implements UtilizadorService
                     .metrosQuadrados(metros)
                     .topologia(topologia)
                     .build();
-           // utilizador.adicionaImovel(imovel);
+            utilizador.adicionaImovel(imovel);
             return Optional.of(imovelRepository.save(imovel));
         }
         return Optional.empty();
