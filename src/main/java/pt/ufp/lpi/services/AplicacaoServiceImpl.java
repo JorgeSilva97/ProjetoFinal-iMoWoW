@@ -23,7 +23,7 @@ public class AplicacaoServiceImpl implements AplicacaoService
 
 
     @Override
-    public List<HistoricoVenda> findAllHistoricos()
+    public List<HistoricoVenda> findAllHistoricosVenda()
     {
         List <HistoricoVenda> historicoVendas = new ArrayList<>();
         historicoVendaRepository.findAll().forEach(historicoVendas::add);
@@ -31,27 +31,37 @@ public class AplicacaoServiceImpl implements AplicacaoService
     }
 
     @Override
-    public Optional<HistoricoVenda> criaHistoricoVenda(Long idConcelho, float precoAtual)
+    public List<HistoricoArrendamento> findAllHistoricosArrendamento()
+    {
+        List <HistoricoArrendamento> historicoArrendamentos = new ArrayList<>();
+        historicoArrendamentoRepository.findAll().forEach(historicoArrendamentos::add);
+        return historicoArrendamentos;
+    }
+
+    @Override
+    public Optional<HistoricoVenda> criaHistoricoVenda(Long idConcelho, float precoAtual, float precoAntigo)
     {
         Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
-        if (optionalConcelho.isEmpty())
+        if (optionalConcelho.isPresent())
         {
             Concelho concelho = optionalConcelho.get();
             HistoricoVenda historicoVenda = HistoricoVenda.builder()
                     .concelho(concelho)
                     .data(LocalDateTime.now())
-                    .precoAntigo(precoAtual)
+                    .precoAntigo(precoAntigo)
                     .build();
+            concelho.setPrecoMedioVenda(precoAtual);
+            concelho.adicionaHistoricoVenda(historicoVenda);
             return Optional.of(historicoVendaRepository.save(historicoVenda));
         }
         return Optional.empty();
     }
 
     @Override
-    public Optional<HistoricoArrendamento> criaHistoricoArrendamento(Long idConcelho, float precoAtual)
+    public Optional<HistoricoArrendamento> criaHistoricoArrendamento(Long idConcelho, float precoAtual, float precoAntigo)
     {
         Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
-        if (optionalConcelho.isEmpty())
+        if (optionalConcelho.isPresent())
         {
             Concelho concelho = optionalConcelho.get();
             HistoricoArrendamento historicoArrendamento= HistoricoArrendamento.builder()
@@ -59,6 +69,8 @@ public class AplicacaoServiceImpl implements AplicacaoService
                     .data(LocalDateTime.now())
                     .precoAntigo(precoAtual)
                     .build();
+            concelho.adicionaHistoricoArrendamento(historicoArrendamento);
+            concelho.setPrecoMedioArrendamento(precoAtual);
             return Optional.of(historicoArrendamentoRepository.save(historicoArrendamento));
         }
         return Optional.empty();
@@ -90,7 +102,7 @@ public class AplicacaoServiceImpl implements AplicacaoService
     }
 
    @Override
-    public Optional<Avalicao> getAvalicaoNegocio (Long idVenda)
+    public Optional<Avalicao> getAvalicaoNegocioVenda(Long idVenda)
     {
         Optional<Venda> optionalVenda = vendaRepository.findById(idVenda);
         if (optionalVenda.isPresent())

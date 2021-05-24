@@ -1,5 +1,6 @@
 package pt.ufp.lpi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -22,9 +23,11 @@ public class Concelho
     private float precoMedioArrendamento;
     @ManyToOne
     private Distrito distrito;
+    @JsonIgnore
     @OneToMany(mappedBy = "concelho", cascade = CascadeType.ALL)
     @Builder.Default
     private List<HistoricoVenda> historicoVendas = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "concelho", cascade = CascadeType.ALL)
     @Builder.Default
     private List<HistoricoArrendamento> historicoArrendamentos = new ArrayList<>();

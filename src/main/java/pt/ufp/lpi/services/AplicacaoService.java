@@ -9,10 +9,11 @@ import java.util.Optional;
 
 public interface AplicacaoService
 {
-    List<HistoricoVenda> findAllHistoricos();
-    Optional<HistoricoVenda> criaHistoricoVenda(Long idConcelho, float precoAtual);
-    Optional<HistoricoArrendamento> criaHistoricoArrendamento(Long idConcelho, float precoAtual);
+    List<HistoricoVenda> findAllHistoricosVenda();
+    List<HistoricoArrendamento> findAllHistoricosArrendamento();
+    Optional<HistoricoVenda> criaHistoricoVenda(Long idConcelho, float precoAtual, float precoAntigo);
+    Optional<HistoricoArrendamento> criaHistoricoArrendamento(Long idConcelho, float precoAtual, float precoAntigo);
     Optional<Float> getValorFuturoDeArrendamento(Long idArrendamento);
     Optional<Float> getValorFuturoDaVenda(Long idVenda);
-    Optional<Avalicao> getAvalicaoNegocio (Long idVenda);
+    Optional<Avalicao> getAvalicaoNegocioVenda(Long idVenda);
 }

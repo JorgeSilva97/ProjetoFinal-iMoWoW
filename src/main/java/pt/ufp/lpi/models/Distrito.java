@@ -1,5 +1,6 @@
 package pt.ufp.lpi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Distrito
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @JsonIgnore
     @OneToMany(mappedBy = "distrito", cascade = CascadeType.ALL)
     @Builder.Default
     private List<Concelho> concelhos = new ArrayList<>();

@@ -16,13 +16,10 @@ public class HistoricoArrendamento
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @EqualsAndHashCode.Exclude
     @JsonFormat(pattern = "yyyy-MM",shape = JsonFormat.Shape.STRING)
     private LocalDateTime data;
     private float precoAntigo;
     @ManyToOne
     private Concelho concelho;
-
-
-
-
 }
