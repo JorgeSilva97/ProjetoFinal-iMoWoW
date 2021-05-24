@@ -78,27 +78,27 @@ public class AplicacaoServiceImpl implements AplicacaoService
 
 
     @Override
-    public Optional<Float> getValorFuturoDeArrendamento(Long idArrendamento)
+    public float getValorFuturoDeArrendamento(Long idArrendamento)
     {
         Optional<Arrendamento> optionalArrendamento = arrendamentoRepository.findById(idArrendamento);
         if (optionalArrendamento.isPresent())
         {
             Arrendamento arrendamento = optionalArrendamento.get();
-            return Optional.of(arrendamento.calculaArrendamento());
+            return arrendamento.calculaArrendamento();
         }
-        return Optional.empty();
+        return 0;
     }
 
     @Override
-    public Optional<Float> getValorFuturoDaVenda (Long idVenda)
+    public float getValorFuturoDaVenda (Long idVenda)
     {
         Optional<Venda> optionalVenda = vendaRepository.findById(idVenda);
         if (optionalVenda.isPresent())
         {
             Venda venda = optionalVenda.get();
-            return Optional.of(venda.calcularVenda());
+            return venda.calcularVenda();
         }
-        return Optional.empty();
+        return 0;
     }
 
    @Override
@@ -109,6 +109,18 @@ public class AplicacaoServiceImpl implements AplicacaoService
         {
             Venda venda = optionalVenda.get();
             return Optional.of(venda.avaliacaoNegocioVenda());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Avalicao> getAvalicaoNegocioArrendamento(Long idArrendamento)
+    {
+        Optional<Arrendamento> optionalArrendamento = arrendamentoRepository.findById(idArrendamento);
+        if (optionalArrendamento.isPresent())
+        {
+            Arrendamento arrendamento = optionalArrendamento.get();
+            return Optional.of(arrendamento.avaliacaoNegocioArrendamento());
         }
         return Optional.empty();
     }

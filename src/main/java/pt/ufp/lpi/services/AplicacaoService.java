@@ -13,7 +13,8 @@ public interface AplicacaoService
     List<HistoricoArrendamento> findAllHistoricosArrendamento();
     Optional<HistoricoVenda> criaHistoricoVenda(Long idConcelho, float precoAtual, float precoAntigo);
     Optional<HistoricoArrendamento> criaHistoricoArrendamento(Long idConcelho, float precoAtual, float precoAntigo);
-    Optional<Float> getValorFuturoDeArrendamento(Long idArrendamento);
-    Optional<Float> getValorFuturoDaVenda(Long idVenda);
+    float getValorFuturoDeArrendamento(Long idArrendamento);
+    float getValorFuturoDaVenda(Long idVenda);
     Optional<Avalicao> getAvalicaoNegocioVenda(Long idVenda);
+    Optional<Avalicao> getAvalicaoNegocioArrendamento(Long idArrendamento);
 }

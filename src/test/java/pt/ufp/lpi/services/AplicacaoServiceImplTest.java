@@ -113,4 +113,8 @@ class AplicacaoServiceImplTest
     @Test
     void getAvalicaoNegocioVenda() {
     }
+
+    @Test
+    void getAvalicaoNegocioArrendamento() {
+    }
 }
