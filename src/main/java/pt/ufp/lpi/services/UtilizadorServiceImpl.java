@@ -35,6 +35,21 @@ public class UtilizadorServiceImpl implements UtilizadorService
     public Optional<Concelho> findConcelhoById(Long id) { return concelhoRepository.findById(id); }
 
     @Override
+    public Optional<Utilizador> adicionaConcelho(Long idUtilizador, Long idConcelho)
+    {
+        Optional<Utilizador> optionalUtilizador = utilizadorRepository.findById(idUtilizador);
+        Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
+        if (optionalUtilizador.isPresent() && optionalConcelho.isPresent())
+        {
+            Utilizador utilizador = optionalUtilizador.get();
+            Concelho concelho = optionalConcelho.get();
+            utilizador.adicionaConcelho(concelho);
+            return Optional.of(utilizadorRepository.save(utilizador));
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public List<Imovel> findAllImoveis() {
         List<Imovel> imoveis = new ArrayList<>();
         imovelRepository.findAll().forEach(imoveis::add);
@@ -45,14 +60,14 @@ public class UtilizadorServiceImpl implements UtilizadorService
     public Optional<Imovel> findImoveloById(Long id) { return imovelRepository.findById(id); }
 
     @Override
-    public Optional<Imovel> criaImovel(Long idUtilizador,Long idConcelho, Topologia topologia,
+    public Optional<Imovel> criaImovel(Long idUtilizador, Long idConcelho, Topologia topologia,
                                        EstadoImovel estadoImovel, int ano, float metros,
                                        boolean piscina, boolean jardim, boolean garagem,
                                        boolean elevador)
     {
         Optional<Utilizador> optionalUtilizador = utilizadorRepository.findById(idUtilizador);
         Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
-        if (optionalUtilizador.isPresent() && optionalConcelho.isPresent() )
+        if (optionalUtilizador.isPresent() && optionalConcelho.isPresent())
         {
             Utilizador utilizador = optionalUtilizador.get();
             Concelho concelho = optionalConcelho.get();

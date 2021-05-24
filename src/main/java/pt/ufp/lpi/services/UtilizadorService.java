@@ -1,13 +1,9 @@
 package pt.ufp.lpi.services;
 
-import pt.ufp.lpi.models.Arrendamento;
-import pt.ufp.lpi.models.Concelho;
-import pt.ufp.lpi.models.Imovel;
-import pt.ufp.lpi.models.Venda;
+import pt.ufp.lpi.models.*;
 import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +11,7 @@ public interface UtilizadorService
 {
     List<Concelho> findAllConcelhos();
     Optional<Concelho> findConcelhoById (Long id);
+    Optional<Utilizador> adicionaConcelho(Long idUtilizador, Long idConcelho);
     //------------------------------------------------------------
     List<Imovel> findAllImoveis();
     Optional<Imovel> findImoveloById (Long id);

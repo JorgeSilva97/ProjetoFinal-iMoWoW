@@ -63,6 +63,27 @@ class UtilizadorServiceImplTest
     }
 
     @Test
+    void adicionaConcelho()
+    {
+        Distrito porto = Distrito.builder()
+                .nome("porto")
+                .build();
+        Concelho gaia = Concelho.builder()
+                .nome("gaia")
+                .distrito(porto)
+                .build();
+        Utilizador jorge = Utilizador.builder()
+                .userName("jorge")
+                .build();
+
+        when(utilizadorRepository.findById(1L)).thenReturn(Optional.of(jorge));
+        when(concelhoRepository.findById(1L)).thenReturn(Optional.of(gaia));
+        when(utilizadorRepository.save(jorge)).thenReturn(jorge);
+
+        assertTrue(utilizadorService.adicionaConcelho(1L, 1L).isPresent());
+    }
+
+    @Test
     void criaImovel()
     {
         Distrito porto = Distrito.builder()
