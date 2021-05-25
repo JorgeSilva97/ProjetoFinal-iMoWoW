@@ -22,23 +22,23 @@ public class Venda
     private float precoTotal;
 
     //--------------------------------------
-    private float PercentagemGaragem = 1.05F; //se tiver garagem 5%
-    private float PercentagemPiscina = 1.07F; //se tiver piscina 7%
-    private float PercentagemJardim = 1.13F; //se tiver jardim 13%
-    private float PercentagemElevador = 1.05F; //se tiver elevador 5%
+    private final float PercentagemGaragem = 1.05F; //se tiver garagem 5%
+    private final float PercentagemPiscina = 1.07F; //se tiver piscina 7%
+    private final float PercentagemJardim = 1.13F; //se tiver jardim 13%
+    private final float PercentagemElevador = 1.05F; //se tiver elevador 5%
     //-------------------------------------------------
-    private float PercentagemEstadoRenovado = 1.13F; //mais 13%
-    private float PercentagemEstadoNovo = 1.25F; //mais 25%
-    private float PercentagemEstadoPorRecuperar = 0.40F; //menos 60%
-    private float PercentagemEstadoUsado = 0.90F; //menos 10%
+    private final float PercentagemEstadoRenovado = 1.13F; //mais 13%
+    private final float PercentagemEstadoNovo = 1.25F; //mais 25%
+    private final float PercentagemEstadoPorRecuperar = 0.40F; //menos 60%
+    private final float PercentagemEstadoUsado = 0.90F; //menos 10%
     //-------------------------------------------------
-    private float PercentagemT1 = 1.09F;
-    private float PercentagemT1Mais1 = 1.10F;
-    private float PercentagemT2 = 1.18F;
-    private float PercentagemT2Mais1 = 1.20F;
-    private float PercentagemT3 = 1.27F;
-    private float PercentagemT3Mais1 = 1.28F;
-    private float PercentagemT4 = 1.36F;
+    private final float PercentagemT1 = 1.09F;
+    private final float PercentagemT1Mais1 = 1.10F;
+    private final float PercentagemT2 = 1.18F;
+    private final float PercentagemT2Mais1 = 1.20F;
+    private final float PercentagemT3 = 1.27F;
+    private final float PercentagemT3Mais1 = 1.28F;
+    private final float PercentagemT4 = 1.36F;
     //--------------------------------------
 
 
