@@ -67,7 +67,7 @@ public class AplicacaoServiceImpl implements AplicacaoService
             HistoricoArrendamento historicoArrendamento= HistoricoArrendamento.builder()
                     .concelho(concelho)
                     .data(LocalDateTime.now())
-                    .precoAntigo(precoAtual)
+                    .precoAntigo(precoAntigo)
                     .build();
             concelho.adicionaHistoricoArrendamento(historicoArrendamento);
             concelho.setPrecoMedioArrendamento(precoAtual);
