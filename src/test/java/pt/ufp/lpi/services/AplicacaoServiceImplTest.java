@@ -148,7 +148,7 @@ class AplicacaoServiceImplTest
         Concelho gaia = Concelho.builder()
                 .nome("gaia")
                 .distrito(porto)
-                .precoMedioVenda(300)
+                .precoMedioVenda(700)
                 .build();
         Utilizador jorge = Utilizador.builder()
                 .userName("jorge")
@@ -173,7 +173,8 @@ class AplicacaoServiceImplTest
         when(vendaRepository.findById(1L)).thenReturn(Optional.of(venda));
 
         assertNotEquals(0, aplicacaoService.getValorFuturoDaVenda(1L));
-        assertEquals(100000, aplicacaoService.getValorFuturoDaVenda(1L));
+        assertEquals(115317.921875, aplicacaoService.getValorFuturoDaVenda(1L));
+        assertNotEquals(100000, aplicacaoService.getValorFuturoDaVenda(1L));
     }
 
     @Test
