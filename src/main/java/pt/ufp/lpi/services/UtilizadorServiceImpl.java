@@ -91,6 +91,11 @@ public class UtilizadorServiceImpl implements UtilizadorService
     }
 
     @Override
+    public Optional<Imovel> criaImovel(Imovel imovel) {
+        return null;//criaImovel(imovel.getUtilizador().getId(),imo);
+    }
+
+    @Override
     public Optional<Venda> criaVenda(Long idImovel, float precoTotal)
     {
         Optional<Imovel> optionalImovel = imovelRepository.findById(idImovel);

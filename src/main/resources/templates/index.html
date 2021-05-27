@@ -75,9 +75,9 @@
         <center><input type="text" size="4" class="form-control" placeholder=""></center>
       </div>
       <div class="input-group mb-3 justify-content-center">
-        <span class="input-group-text" id="estado">Estado do Imóvel</span>
+        <span class="input-group-text" id="estadoSpan">Estado do Imóvel</span>
         <center>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example" id="estado">
                 <option value="1">Usado</option>
                 <option value="2">Novo</option>
                 <option value="3">Renovado</option>
@@ -153,11 +153,38 @@
       
       <script type="text/javascript">
         let venda=document.getElementById("venda");
-        botao.addEventListener("click",()=>{
+        venda.addEventListener("click",()=>
+        {
+          const imovel={
+            userId:1,
+            concelhoId:1,
+    topologia:parseInt(document.getElementById("topologia").value),
+    piscina:document.getElementById("piscina").value==="1"?false:true
+            /*estadoImovel
+            anoConstrucao
+            metrosQuadrados
+            piscina
+            jardim
+            garagem
+            elevador*/
+          }
+
+          fetch("http://localhost:8080/imovel",{
+            method:"post",
+            body:JSON.stringify(imovel),
+            headers:{"Content-Type":"application/json"}
+          }).then(response=>{
+            if(response.ok){
+              return response.json();
+            }
+            throw new Error("Could not create a new imovel");            
+          }).then((json)=>{
+            //
+          })
 
         });
-        let venda=document.getElementById("venda");
-        botao.addEventListener("click",()=>{
+        let arrendamento=document.getElementById("arrendamento");
+        arrendamento.addEventListener("click",()=>{
 
         });
       </script>

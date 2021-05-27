@@ -19,6 +19,7 @@ public interface UtilizadorService
                                 EstadoImovel estadoImovel, int ano, float metros,
                                 boolean piscina, boolean jardim, boolean garagem,
                                 boolean elevador);
+    Optional<Imovel> criaImovel(Imovel imovel);
     Optional<Venda> criaVenda(Long idImovel, float precoTotal);
     Optional<Arrendamento> criaArrendamento(Long idImovel, float precoArrendamento);
     //------------------------------------------------------------
