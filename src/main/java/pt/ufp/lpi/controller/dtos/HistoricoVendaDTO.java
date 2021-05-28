@@ -1,4 +1,4 @@
-package pt.ufp.lpi.controller.dto;
+package pt.ufp.lpi.controller.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -7,7 +7,7 @@ import pt.ufp.lpi.models.Concelho;
 import java.time.LocalDateTime;
 
 @Data
-public class HistoricoArrendamentoDTO
+public class HistoricoVendaDTO
 {
     @JsonFormat(pattern = "yyyy-MM",shape = JsonFormat.Shape.STRING)
     private LocalDateTime data;

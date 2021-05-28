@@ -21,7 +21,9 @@ public interface UtilizadorService
                                 boolean elevador);
     Optional<Imovel> criaImovel(Imovel imovel);
     Optional<Venda> criaVenda(Long idImovel, float precoTotal);
+    Optional<Venda> criaVenda(Venda venda);
     Optional<Arrendamento> criaArrendamento(Long idImovel, float precoArrendamento);
+    Optional<Arrendamento> criaArrendamento(Arrendamento arrendamento);
     //------------------------------------------------------------
     float consultaPrecoMetroQuadrado(Long idConcelho);
     //------------------------------------------------------------

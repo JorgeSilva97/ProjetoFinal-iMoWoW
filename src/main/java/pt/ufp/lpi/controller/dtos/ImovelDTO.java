@@ -1,9 +1,6 @@
-package pt.ufp.lpi.controller.dto;
+package pt.ufp.lpi.controller.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 
@@ -12,6 +9,7 @@ import pt.ufp.lpi.models.enumerado.Topologia;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImovelDTO {
+
     private Long userId;
     private Long concelhoId;
     private Topologia topologia;

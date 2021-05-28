@@ -1,4 +1,4 @@
-package pt.ufp.lpi.controller.dto;
+package pt.ufp.lpi.controller.dtos;
 
 import lombok.Data;
 import pt.ufp.lpi.models.Concelho;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class UtilizadorResponseDTO
+public class UtilizadorDTO
 {
 
     private String userName;

@@ -92,7 +92,9 @@ public class UtilizadorServiceImpl implements UtilizadorService
 
     @Override
     public Optional<Imovel> criaImovel(Imovel imovel) {
-        return null;//criaImovel(imovel.getUtilizador().getId(),imo);
+        return criaImovel(imovel.getUtilizador().getId(),imovel.getConcelho().getId(),imovel.getTopologia(),
+                imovel.getEstado(),imovel.getAnoConstrução(),imovel.getMetrosQuadrados(),imovel.isPiscina(),
+                imovel.isJardim(),imovel.isGaragem(),imovel.isElevador());
     }
 
     @Override
@@ -112,6 +114,11 @@ public class UtilizadorServiceImpl implements UtilizadorService
     }
 
     @Override
+    public Optional<Venda> criaVenda(Venda venda) {
+        return criaVenda(venda.getImovel().getId(), venda.getPrecoTotal());
+    }
+
+    @Override
     public Optional<Arrendamento> criaArrendamento(Long idImovel, float precoArrendamento)
     {
         Optional<Imovel> optionalImovel = imovelRepository.findById(idImovel);
@@ -125,6 +132,11 @@ public class UtilizadorServiceImpl implements UtilizadorService
             return Optional.of(arrendamentoRepository.save(arrendamento));
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<Arrendamento> criaArrendamento(Arrendamento arrendamento) {
+        return criaArrendamento(arrendamento.getImovel().getId(), arrendamento.getPrecoArrendamento());
     }
 
     @Override

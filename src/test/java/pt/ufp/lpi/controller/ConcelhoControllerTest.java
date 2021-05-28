@@ -45,7 +45,7 @@ class ConcelhoControllerTest
 
         when(utilizadorService.findAllConcelhos()).thenReturn(concelhos);
 
-        String httpResponseAsString = mockMvc.perform(get("/utilizador")).andDo(print()).andExpect(
+        String httpResponseAsString = mockMvc.perform(get("/concelho")).andDo(print()).andExpect(
                 status().isOk()).andReturn().getResponse().getContentAsString();
         assertNotNull(httpResponseAsString);
     }
@@ -61,7 +61,7 @@ class ConcelhoControllerTest
 
         when(utilizadorService.findConcelhoById(1L)).thenReturn(Optional.of(gaia));
 
-        String httpResponseAsString = mockMvc.perform(get("/utilizador/1")).andExpect(
+        String httpResponseAsString = mockMvc.perform(get("/concelho/1")).andExpect(
                 status().isOk()).andReturn().getResponse().getContentAsString();
         assertNotNull(httpResponseAsString);
 

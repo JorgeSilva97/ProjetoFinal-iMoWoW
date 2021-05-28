@@ -1,4 +1,4 @@
-package pt.ufp.lpi.controller.dto;
+package pt.ufp.lpi.controller.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConcelhoResponseDTO
+public class ConcelhoDTO
 {
     private String nome;
     private float precoMedioVenda;
