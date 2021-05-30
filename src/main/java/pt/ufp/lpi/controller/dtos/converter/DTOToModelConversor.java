@@ -1,26 +1,23 @@
 package pt.ufp.lpi.controller.dtos.converter;
 
+import pt.ufp.lpi.controller.dtos.ArrendamentoDTO;
 import pt.ufp.lpi.controller.dtos.ConcelhoDTO;
 import pt.ufp.lpi.controller.dtos.ImovelDTO;
-import pt.ufp.lpi.models.Concelho;
-import pt.ufp.lpi.models.Imovel;
+import pt.ufp.lpi.controller.dtos.VendaDTO;
+import pt.ufp.lpi.models.*;
 
-public class DTOToModelConversor {
-
+public class DTOToModelConversor
+{
     private static DTOToModelConversor instance;
 
-    private DTOToModelConversor(){
+    private DTOToModelConversor(){ }
 
-    }
-
-    public static DTOToModelConversor getInstance(){
-        if(instance==null){
+    public static DTOToModelConversor getInstance()
+    {
+        if(instance==null)
             instance=new DTOToModelConversor();
-        }
-
         return instance;
     }
-
 
     public ImovelDTO converterImovelParaDTO(Imovel imovel)
     {
@@ -38,10 +35,13 @@ public class DTOToModelConversor {
                 .build();
     }
 
-    public Imovel converterDTOParaImovel(ImovelDTO imovelDTO){
+    public Imovel converterDTOParaImovel(ImovelDTO imovelDTO)
+    {
+        Concelho concelho1 = Concelho.builder().id(imovelDTO.getConcelhoId()).build();
+        Utilizador user = Utilizador.builder().id(imovelDTO.getUserId()).build();
         return Imovel.builder()
-               // .concelho.setId(imovelDTO.getConcelhoId())
-               // .utilizador.setId(imovelDTO.getConcelhoId())
+                .concelho(concelho1)
+                .utilizador(user)
                 .estado(imovelDTO.getEstadoImovel())
                 .metrosQuadrados(imovelDTO.getMetrosQuadrados())
                 .anoConstrução(imovelDTO.getAnoConstrução())
@@ -74,6 +74,40 @@ public class DTOToModelConversor {
                 .precoMedioVenda(concelhoDTO.getPrecoMedioVenda())
                 //.historicoArrendamentos(concelhoDTO.getHistoricoArrendamentos())
                 //.historicoVendas(concelhoDTO.getHistoricoVendas())
+                .build();
+    }
+
+    public VendaDTO converterVendaParaDTO(Venda venda)
+    {
+        return VendaDTO.builder()
+                .imovelId(venda.getImovel().getId())
+                .precoTotal(venda.getPrecoTotal())
+                .build();
+    }
+
+    public Venda converterDTOParaVenda(VendaDTO vendaDTO)
+    {
+        Imovel i = Imovel.builder().id(vendaDTO.getImovelId()).build();
+        return Venda.builder()
+                .imovel(i)
+                .precoTotal(vendaDTO.getPrecoTotal())
+                .build();
+    }
+
+    public ArrendamentoDTO converterArrendamentoParaDTO(Arrendamento arrendamento)
+    {
+        return ArrendamentoDTO.builder()
+                .imovelId(arrendamento.getId())
+                .precoArrendamento(arrendamento.getPrecoArrendamento())
+                .build();
+    }
+
+    public Arrendamento converterDTOParaArrendamento(ArrendamentoDTO arrendamentoDTO)
+    {
+        Imovel i = Imovel.builder().id(arrendamentoDTO.getImovelId()).build();
+        return Arrendamento.builder()
+                .imovel(i)
+                .precoArrendamento(arrendamentoDTO.getPrecoArrendamento())
                 .build();
     }
 

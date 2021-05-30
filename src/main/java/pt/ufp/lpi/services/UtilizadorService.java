@@ -15,6 +15,7 @@ public interface UtilizadorService
     //------------------------------------------------------------
     List<Imovel> findAllImoveis();
     Optional<Imovel> findImoveloById (Long id);
+    List<Imovel> findImoveisByUser (Long userId);
     Optional<Imovel> criaImovel(Long idUtilizador,Long idConcelho, Topologia topologia,
                                 EstadoImovel estadoImovel, int ano, float metros,
                                 boolean piscina, boolean jardim, boolean garagem,

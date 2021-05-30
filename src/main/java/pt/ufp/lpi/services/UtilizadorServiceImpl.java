@@ -50,7 +50,8 @@ public class UtilizadorServiceImpl implements UtilizadorService
     }
 
     @Override
-    public List<Imovel> findAllImoveis() {
+    public List<Imovel> findAllImoveis()
+    {
         List<Imovel> imoveis = new ArrayList<>();
         imovelRepository.findAll().forEach(imoveis::add);
         return imoveis;
@@ -58,6 +59,21 @@ public class UtilizadorServiceImpl implements UtilizadorService
 
     @Override
     public Optional<Imovel> findImoveloById(Long id) { return imovelRepository.findById(id); }
+
+    @Override
+    public List<Imovel> findImoveisByUser(Long userId)
+    {
+        List<Imovel> imoveis = new ArrayList<>();
+        Optional<Utilizador> optionalUtilizador = utilizadorRepository.findById(userId);
+        if (optionalUtilizador.isPresent())
+        {
+            Utilizador utilizador = optionalUtilizador.get();
+            for (Imovel i : utilizador.getImoveis())
+                imoveis.add(i);
+            return imoveis;
+        }
+        return null;
+    }
 
     @Override
     public Optional<Imovel> criaImovel(Long idUtilizador, Long idConcelho, Topologia topologia,

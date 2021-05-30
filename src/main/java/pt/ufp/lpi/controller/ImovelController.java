@@ -30,7 +30,7 @@ public class ImovelController
         return ResponseEntity.ok(responseDTOS);
     }
 
-    @GetMapping()
+    @GetMapping("/{id}")
     public ResponseEntity<ImovelDTO> getImovelById(@PathVariable Long id)
     {
         Optional<Imovel> optionalImovel = utilizadorService.findImoveloById(id);

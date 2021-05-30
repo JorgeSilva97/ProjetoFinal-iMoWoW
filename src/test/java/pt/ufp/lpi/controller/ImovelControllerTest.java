@@ -2,7 +2,6 @@ package pt.ufp.lpi.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,7 +12,7 @@ import pt.ufp.lpi.models.enumerado.Topologia;
 import pt.ufp.lpi.services.UtilizadorService;
 
 import java.util.List;
-
+import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -46,9 +45,9 @@ class ImovelControllerTest
                 .garagem(false)
                 .topologia(Topologia.T2_1)
                 .build();
-        //List<Imovel> imoveis = Arrays.asList(imovel1, imovel2);
+        List<Imovel> imoveis = Arrays.asList(imovel1, imovel2);
 
-        //when(utilizadorService.findAllImoveis()).thenReturn(imoveis);
+        when(utilizadorService.findAllImoveis()).thenReturn(imoveis);
 
         String httpResponseAsString = mockMvc.perform(get("/imovel")).andDo(print()).andExpect(
                 status().isOk()).andReturn().getResponse().getContentAsString();

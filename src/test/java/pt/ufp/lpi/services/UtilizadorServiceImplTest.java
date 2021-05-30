@@ -48,21 +48,6 @@ class UtilizadorServiceImplTest
     }
 
     @Test
-    void findAllImoveis()
-    {
-        when(imovelRepository.findAll()).thenReturn(new ArrayList<>());
-        assertNotNull(utilizadorService.findAllImoveis());
-    }
-
-    @Test
-    void findImoveloById()
-    {
-        when(imovelRepository.findById(1L)).thenReturn(Optional.of(new Imovel()));
-        assertTrue(utilizadorService.findImoveloById(1L).isPresent());
-        assertTrue(utilizadorService.findImoveloById(2L).isEmpty());
-    }
-
-    @Test
     void adicionaConcelho()
     {
         Distrito porto = Distrito.builder()
@@ -81,6 +66,58 @@ class UtilizadorServiceImplTest
         when(utilizadorRepository.save(jorge)).thenReturn(jorge);
 
         assertTrue(utilizadorService.adicionaConcelho(1L, 1L).isPresent());
+    }
+
+    @Test
+    void findAllImoveis()
+    {
+        when(imovelRepository.findAll()).thenReturn(new ArrayList<>());
+        assertNotNull(utilizadorService.findAllImoveis());
+    }
+
+    @Test
+    void findImoveloById()
+    {
+        when(imovelRepository.findById(1L)).thenReturn(Optional.of(new Imovel()));
+        assertTrue(utilizadorService.findImoveloById(1L).isPresent());
+        assertTrue(utilizadorService.findImoveloById(2L).isEmpty());
+    }
+
+    @Test
+    void findImoveisByUser()
+    {
+        Utilizador jorge = Utilizador.builder()
+                .userName("jorge")
+                .build();
+        Imovel imovel1 = Imovel.builder()
+                .anoConstrução(200)
+                .metrosQuadrados(100)
+                .piscina(true)
+                .jardim(true)
+                .garagem(false)
+                .elevador(false)
+                .utilizador(jorge)
+                .topologia(Topologia.T1)
+                .estado(EstadoImovel.novo)
+                .build();
+        Imovel imovel2 = Imovel.builder()
+                .anoConstrução(2400)
+                .metrosQuadrados(1030)
+                .piscina(true)
+                .jardim(true)
+                .garagem(false)
+                .elevador(false)
+                .utilizador(jorge)
+                .topologia(Topologia.T1_1)
+                .estado(EstadoImovel.usado)
+                .build();
+        jorge.adicionaImovel(imovel1);
+        jorge.adicionaImovel(imovel2);
+
+        when(utilizadorRepository.findById(1L)).thenReturn(Optional.of(jorge));
+
+        assertNotNull(utilizadorService.findImoveisByUser(1L));
+
     }
 
     @Test
