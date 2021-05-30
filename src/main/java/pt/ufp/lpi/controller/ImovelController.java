@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import pt.ufp.lpi.controller.dtos.ImovelDTO;
 import pt.ufp.lpi.controller.dtos.converter.DTOToModelConversor;
 import pt.ufp.lpi.models.Imovel;
-import pt.ufp.lpi.models.Utilizador;
 import pt.ufp.lpi.services.UtilizadorService;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class ImovelController
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<Iterable<ImovelDTO>> getImoveisByUser(@PathVariable Long userId)
     {
         List<ImovelDTO> responseDTOS = new ArrayList<>();

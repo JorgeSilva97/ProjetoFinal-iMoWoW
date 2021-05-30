@@ -1,9 +1,6 @@
 package pt.ufp.lpi.controller.dtos.converter;
 
-import pt.ufp.lpi.controller.dtos.ArrendamentoDTO;
-import pt.ufp.lpi.controller.dtos.ConcelhoDTO;
-import pt.ufp.lpi.controller.dtos.ImovelDTO;
-import pt.ufp.lpi.controller.dtos.VendaDTO;
+import pt.ufp.lpi.controller.dtos.*;
 import pt.ufp.lpi.models.*;
 
 public class DTOToModelConversor
@@ -109,6 +106,14 @@ public class DTOToModelConversor
                 .imovel(i)
                 .precoArrendamento(arrendamentoDTO.getPrecoArrendamento())
                 .build();
+    }
+
+    public ValorVendaDTO converterValorVendaParaDTO(Venda venda)
+    {
+        return ValorVendaDTO.builder()
+                .precoTotal(venda.getPrecoTotal())
+                .build();
+
     }
 
 }

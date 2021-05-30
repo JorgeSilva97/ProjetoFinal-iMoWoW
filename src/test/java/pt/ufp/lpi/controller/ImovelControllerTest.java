@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import pt.ufp.lpi.controller.dtos.ImovelDTO;
 import pt.ufp.lpi.models.Concelho;
 import pt.ufp.lpi.models.Imovel;
 import pt.ufp.lpi.models.Utilizador;
@@ -20,6 +22,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -67,9 +70,7 @@ class ImovelControllerTest
                 .topologia(Topologia.T2_1)
                 .build();
         List<Imovel> imoveis = Arrays.asList(imovel1, imovel2);
-
         when(utilizadorService.findAllImoveis()).thenReturn(imoveis);
-
         String httpResponseAsString = mockMvc.perform(get("/imovel")).andDo(print()).andExpect(
                 status().isOk()).andReturn().getResponse().getContentAsString();
         assertNotNull(httpResponseAsString);
@@ -95,7 +96,6 @@ class ImovelControllerTest
                 .garagem(false)
                 .topologia(Topologia.T1_1)
                 .build();
-
         when(utilizadorService.findImoveloById(1L)).thenReturn(Optional.of(imovel));
         String httpResponseAsString = mockMvc.perform(get("/imovel/1")).andExpect(
                 status().isOk()).andReturn().getResponse().getContentAsString();
@@ -105,15 +105,51 @@ class ImovelControllerTest
 
     }
 
-    @Test
+   /* @Test
     void getImoveisByUser() throws Exception
     {
 
-    }
+    }*/
 
     @Test
     void createImovel() throws Exception
     {
+        Concelho maia = Concelho.builder()
+                .nome("maia")
+                .precoMedioVenda(350)
+                .precoMedioArrendamento(16)
+                .build();
+        Utilizador jorge = Utilizador.builder()
+                .userName("jorge")
+                .build();
+        Imovel novoImovel = Imovel.builder()
+                .utilizador(jorge)
+                .concelho(maia)
+                .elevador(true)
+                .piscina(true)
+                .jardim(true)
+                .garagem(false)
+                .topologia(Topologia.T1_1)
+                .build();
+        when(utilizadorService.criaImovel(novoImovel)).thenReturn(Optional.of(novoImovel));
+        String imovelAsJsonString = new ObjectMapper().writeValueAsString(novoImovel);
+        mockMvc.perform(post("/imovel").content(imovelAsJsonString).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        Imovel imovelExistente = Imovel.builder()
+                .utilizador(jorge)
+                .concelho(maia)
+                .elevador(true)
+                .piscina(false)
+                .jardim(true)
+                .garagem(false)
+                .topologia(Topologia.T1)
+                .build();
+        String imovelExistenteAsJsonString = new ObjectMapper().writeValueAsString(imovelExistente);
+        mockMvc.perform(post("/imovel").content(imovelExistenteAsJsonString).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+
+
 
     }
 }
