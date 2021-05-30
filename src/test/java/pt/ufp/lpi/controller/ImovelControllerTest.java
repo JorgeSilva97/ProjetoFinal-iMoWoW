@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import pt.ufp.lpi.models.Concelho;
 import pt.ufp.lpi.models.Imovel;
+import pt.ufp.lpi.models.Utilizador;
 import pt.ufp.lpi.models.enumerado.Topologia;
 import pt.ufp.lpi.services.UtilizadorService;
 
 import java.util.List;
 import java.util.Arrays;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -31,7 +35,22 @@ class ImovelControllerTest
     @Test
     void getAllImoveis() throws Exception
     {
+        Concelho gaia = Concelho.builder()
+                .nome("gaia")
+                .precoMedioVenda(400)
+                .precoMedioArrendamento(15)
+                .build();
+        Concelho maia = Concelho.builder()
+                .nome("maia")
+                .precoMedioVenda(350)
+                .precoMedioArrendamento(16)
+                .build();
+        Utilizador jorge = Utilizador.builder()
+                .userName("jorge")
+                .build();
         Imovel imovel1 = Imovel.builder()
+                .utilizador(jorge)
+                .concelho(gaia)
                 .elevador(true)
                 .piscina(true)
                 .jardim(true)
@@ -39,6 +58,8 @@ class ImovelControllerTest
                 .topologia(Topologia.T1_1)
                 .build();
         Imovel imovel2 = Imovel.builder()
+                .utilizador(jorge)
+                .concelho(maia)
                 .elevador(false)
                 .piscina(true)
                 .jardim(true)
@@ -55,13 +76,43 @@ class ImovelControllerTest
     }
 
     @Test
-    void getImovelById()
+    void getImovelById() throws Exception
+    {
+        Concelho maia = Concelho.builder()
+                .nome("maia")
+                .precoMedioVenda(350)
+                .precoMedioArrendamento(16)
+                .build();
+        Utilizador jorge = Utilizador.builder()
+                .userName("jorge")
+                .build();
+        Imovel imovel = Imovel.builder()
+                .utilizador(jorge)
+                .concelho(maia)
+                .elevador(true)
+                .piscina(true)
+                .jardim(true)
+                .garagem(false)
+                .topologia(Topologia.T1_1)
+                .build();
+
+        when(utilizadorService.findImoveloById(1L)).thenReturn(Optional.of(imovel));
+        String httpResponseAsString = mockMvc.perform(get("/imovel/1")).andExpect(
+                status().isOk()).andReturn().getResponse().getContentAsString();
+        assertNotNull(httpResponseAsString);
+
+        mockMvc.perform(get("/utilizador/2")).andExpect(status().isNotFound());
+
+    }
+
+    @Test
+    void getImoveisByUser() throws Exception
     {
 
     }
 
     @Test
-    void createImovel()
+    void createImovel() throws Exception
     {
 
     }

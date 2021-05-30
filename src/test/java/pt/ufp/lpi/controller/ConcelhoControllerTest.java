@@ -51,13 +51,13 @@ class ConcelhoControllerTest
     }
 
     @Test
-    void getConcelhoById() throws Exception {
+    void getConcelhoById() throws Exception
+    {
         Concelho gaia = Concelho.builder()
                 .nome("gaia")
                 .precoMedioVenda(400)
                 .precoMedioArrendamento(15)
                 .build();
-        String concelhoAsJsonString = new ObjectMapper().writeValueAsString(gaia);
 
         when(utilizadorService.findConcelhoById(1L)).thenReturn(Optional.of(gaia));
 
