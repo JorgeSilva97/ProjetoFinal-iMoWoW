@@ -62,7 +62,21 @@ let venda=document.getElementById("venda");
                             return response.json();
                         throw new Error("Could not create a new venda");
                     }).then((json)=>{
-                        //
+                      fetch("http://localhost:8080/venda/valor",
+                      {
+                        method:"get",
+                        body:JSON.stringify({vendaId:json.id}),
+                        headers:{"Content-Type":"application/json"}
+                      }).then(response=>
+                        {
+                          if(response.ok)
+                            return response.json();
+                        throw new Error("Could not insert a price on venda");
+                      }).then((json)=>{
+                        let valor = document.getElementById("avaliacaoEuros");
+                        valor.value=JSON.stringify(json);
+                      }).catch((err)=>alert(err));
+                      
                     })
                 }).catch(alert)
         });
