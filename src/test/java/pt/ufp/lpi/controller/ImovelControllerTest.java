@@ -13,6 +13,7 @@ import pt.ufp.lpi.controller.dtos.converter.DTOToModelConversor;
 import pt.ufp.lpi.models.Concelho;
 import pt.ufp.lpi.models.Imovel;
 import pt.ufp.lpi.models.Utilizador;
+import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 import pt.ufp.lpi.services.UtilizadorService;
 
@@ -32,9 +33,11 @@ class ImovelControllerTest
 {
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
     @MockBean
     private UtilizadorService utilizadorService;
-    private ObjectMapper objectMapper;
+
     private DTOToModelConversor conversor=DTOToModelConversor.getInstance();
 
     @Test
@@ -116,48 +119,41 @@ class ImovelControllerTest
     @Test
     void createImovel() throws Exception
     {
-        /*Concelho maia = Concelho.builder()
-                .nome("maia")
-                .precoMedioVenda(350)
-                .precoMedioArrendamento(16)
-                .build();
-        Utilizador jorge = Utilizador.builder()
-                .userName("jorge")
-                .build();
-        Imovel novoImovel = Imovel.builder()
-                .utilizador(jorge)
-                .concelho(maia)
-                .elevador(true)
-                .piscina(true)
-                .jardim(true)
-                .garagem(false)
-                .topologia(Topologia.T1_1)
-                .build();*/
 
         ImovelDTO novoImovel=ImovelDTO.builder()
                 .userId(1L)
                 .concelhoId(1L)
-                //
+                .metrosQuadrados(100)
+                .anoConstrução(2000)
+                .piscina(true)
+                .jardim(true)
+                .garagem(false)
+                .elevador(false)
+                .estadoImovel(EstadoImovel.usado)
+                .topologia(Topologia.T2)
                 .build();
-        when(utilizadorService.criaImovel(conversor.converterDTOParaImovel(novoImovel))).thenReturn(Optional.of(conversor.converterDTOParaImovel(novoImovel)));
+
+        when(utilizadorService.criaImovel(conversor.converterDTOParaImovel(novoImovel))).
+                thenReturn(Optional.of(conversor.converterDTOParaImovel(novoImovel)));
         String imovelAsJsonString = new ObjectMapper().writeValueAsString(novoImovel);
         mockMvc.perform(post("/imovel").content(imovelAsJsonString).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        /*Imovel imovelExistente = Imovel.builder()
-                .utilizador(jorge)
-                .concelho(maia)
-                .elevador(true)
-                .piscina(false)
+        ImovelDTO imovelExistente=ImovelDTO.builder()
+                .userId(1L)
+                .concelhoId(1L)
+                .metrosQuadrados(200)
+                .anoConstrução(4000)
+                .piscina(true)
                 .jardim(true)
                 .garagem(false)
-                .topologia(Topologia.T1)
+                .elevador(false)
+                .estadoImovel(EstadoImovel.usado)
+                .topologia(Topologia.T2)
                 .build();
+
         String imovelExistenteAsJsonString = new ObjectMapper().writeValueAsString(imovelExistente);
         mockMvc.perform(post("/imovel").content(imovelExistenteAsJsonString).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());*/
-
-
-
+                .andExpect(status().isBadRequest());
     }
 }

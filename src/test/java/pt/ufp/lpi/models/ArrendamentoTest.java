@@ -1,7 +1,7 @@
 package pt.ufp.lpi.models;
 
 import org.junit.jupiter.api.Test;
-import pt.ufp.lpi.models.enumerado.Avalicao;
+import pt.ufp.lpi.models.enumerado.Avaliacao;
 import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 
@@ -73,7 +73,7 @@ class ArrendamentoTest {
                 .precoArrendamento(520)
                 .build();
 
-        assertEquals(Avalicao.Suficiente, arrendamento1.avaliacaoNegocioArrendamento());
-        assertEquals(Avalicao.MuitoBom, arrendamento2.avaliacaoNegocioArrendamento());
+        assertEquals(Avaliacao.Suficiente, arrendamento1.avaliacaoNegocioArrendamento());
+        assertEquals(Avaliacao.MuitoBom, arrendamento2.avaliacaoNegocioArrendamento());
     }
 }

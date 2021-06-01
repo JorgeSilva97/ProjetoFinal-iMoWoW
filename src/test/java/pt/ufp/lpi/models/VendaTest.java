@@ -1,7 +1,7 @@
 package pt.ufp.lpi.models;
 
 import org.junit.jupiter.api.Test;
-import pt.ufp.lpi.models.enumerado.Avalicao;
+import pt.ufp.lpi.models.enumerado.Avaliacao;
 import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 
@@ -89,9 +89,9 @@ class VendaTest {
         casaDaPedra.setTopologia(Topologia.T1);
         casaDaRocha.setTopologia(Topologia.T2_1);
 
-        assertEquals(Avalicao.Mau, venda1.avaliacaoNegocioVenda());
-        assertNotEquals(Avalicao.MuitoBom, venda1.avaliacaoNegocioVenda());
-        assertEquals(Avalicao.Bom, venda2.avaliacaoNegocioVenda());
-        assertNotEquals(Avalicao.Mau, venda2.avaliacaoNegocioVenda());
+        assertEquals(Avaliacao.Mau, venda1.avaliacaoNegocioVenda());
+        assertNotEquals(Avaliacao.MuitoBom, venda1.avaliacaoNegocioVenda());
+        assertEquals(Avaliacao.Bom, venda2.avaliacaoNegocioVenda());
+        assertNotEquals(Avaliacao.Mau, venda2.avaliacaoNegocioVenda());
     }
 }

@@ -3,7 +3,7 @@ package pt.ufp.lpi.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pt.ufp.lpi.models.*;
-import pt.ufp.lpi.models.enumerado.Avalicao;
+import pt.ufp.lpi.models.enumerado.Avaliacao;
 import pt.ufp.lpi.repositories.*;
 
 import java.time.LocalDateTime;
@@ -102,7 +102,7 @@ public class AplicacaoServiceImpl implements AplicacaoService
     }
 
    @Override
-    public Optional<Avalicao> getAvalicaoNegocioVenda(Long idVenda)
+    public Optional<Avaliacao> getAvalicaoNegocioVenda(Long idVenda)
     {
         Optional<Venda> optionalVenda = vendaRepository.findById(idVenda);
         if (optionalVenda.isPresent())
@@ -114,7 +114,7 @@ public class AplicacaoServiceImpl implements AplicacaoService
     }
 
     @Override
-    public Optional<Avalicao> getAvalicaoNegocioArrendamento(Long idArrendamento)
+    public Optional<Avaliacao> getAvalicaoNegocioArrendamento(Long idArrendamento)
     {
         Optional<Arrendamento> optionalArrendamento = arrendamentoRepository.findById(idArrendamento);
         if (optionalArrendamento.isPresent())

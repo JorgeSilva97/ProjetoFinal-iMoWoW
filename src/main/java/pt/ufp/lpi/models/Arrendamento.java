@@ -1,7 +1,7 @@
 package pt.ufp.lpi.models;
 
 import lombok.*;
-import pt.ufp.lpi.models.enumerado.Avalicao;
+import pt.ufp.lpi.models.enumerado.Avaliacao;
 import pt.ufp.lpi.models.enumerado.EstadoImovel;
 import pt.ufp.lpi.models.enumerado.Topologia;
 
@@ -83,7 +83,7 @@ public class Arrendamento
      *         4 - bom negocio
      *         5 - excelente negocio
      */
-    public Avalicao avaliacaoNegocioArrendamento()
+    public Avaliacao avaliacaoNegocioArrendamento()
     {
         float avaliacao = this.calculaArrendamento();
         float precoArrendamento = this.getPrecoArrendamento();
@@ -94,22 +94,22 @@ public class Arrendamento
         if (avaliacao < precoArrendamento)
         {
             if (avaliacaoMaisDezPorcento<precoArrendamento)
-                return Avalicao.MuitoMau;
+                return Avaliacao.MuitoMau;
             else if ((avaliacaoMaisDezPorcento>precoArrendamento) &&
                     (precoArrendamento>avaliacaoMaisCincoPorcento))
-                return Avalicao.Mau;
+                return Avaliacao.Mau;
             else
-                return Avalicao.Suficiente;
+                return Avaliacao.Suficiente;
         }
         else
         {
             if (precoArrendamento>=avaliacaoMenosCincoPorcento)
-                return Avalicao.Suficiente;
+                return Avaliacao.Suficiente;
             else if ((avaliacaoMenosCincoPorcento>precoArrendamento) &&
                     (precoArrendamento>avaliacaoMenosDezPorcento))
-                return Avalicao.Bom;
+                return Avaliacao.Bom;
             else
-                return Avalicao.MuitoBom;
+                return Avaliacao.MuitoBom;
         }
     }
 

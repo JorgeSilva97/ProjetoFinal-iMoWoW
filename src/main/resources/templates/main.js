@@ -51,8 +51,8 @@ let venda=document.getElementById("venda");
                 throw new Error("Could not create a new imovel");   
           }).then((json)=>
           {
-              fetch("http://localhost:8080/venda", 
-              {
+                fetch("http://localhost:8080/venda", 
+                {
                   method:"post",
                   body:JSON.stringify({imovelId:json.id,preco:document.getElementById("precoPedido")}),
                   headers:{"Content-Type":"application/json"}

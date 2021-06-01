@@ -1,6 +1,6 @@
 package pt.ufp.lpi.models.enumerado;
 
-public enum Avalicao
+public enum Avaliacao
 {
     MuitoBom,
     Bom,

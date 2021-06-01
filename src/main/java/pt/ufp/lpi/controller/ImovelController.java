@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/imovel")
+@CrossOrigin("*")
 public class ImovelController
 {
     private final UtilizadorService utilizadorService;

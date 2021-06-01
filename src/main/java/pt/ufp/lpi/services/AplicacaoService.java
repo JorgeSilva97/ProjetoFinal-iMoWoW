@@ -2,7 +2,7 @@ package pt.ufp.lpi.services;
 
 import pt.ufp.lpi.models.HistoricoArrendamento;
 import pt.ufp.lpi.models.HistoricoVenda;
-import pt.ufp.lpi.models.enumerado.Avalicao;
+import pt.ufp.lpi.models.enumerado.Avaliacao;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +15,6 @@ public interface AplicacaoService
     Optional<HistoricoArrendamento> criaHistoricoArrendamento(Long idConcelho, float precoAtual, float precoAntigo);
     float getValorFuturoDeArrendamento(Long idArrendamento);
     float getValorFuturoDaVenda(Long idVenda);
-    Optional<Avalicao> getAvalicaoNegocioVenda(Long idVenda);
-    Optional<Avalicao> getAvalicaoNegocioArrendamento(Long idArrendamento);
+    Optional<Avaliacao> getAvalicaoNegocioVenda(Long idVenda);
+    Optional<Avaliacao> getAvalicaoNegocioArrendamento(Long idArrendamento);
 }
