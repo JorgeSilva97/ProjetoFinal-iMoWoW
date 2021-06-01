@@ -4,11 +4,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import pt.ufp.lpi.controller.dtos.ImovelDTO;
-import pt.ufp.lpi.controller.dtos.ValorVendaDTO;
 import pt.ufp.lpi.controller.dtos.VendaDTO;
 import pt.ufp.lpi.controller.dtos.converter.DTOToModelConversor;
 import pt.ufp.lpi.models.Venda;
+import pt.ufp.lpi.models.enumerado.Avalicao;
 import pt.ufp.lpi.services.AplicacaoService;
 import pt.ufp.lpi.services.UtilizadorService;
 
@@ -29,20 +28,29 @@ public class VendaController
     }
 
     @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<VendaDTO> createVenda(@RequestBody VendaDTO vendaCreateDTO)
+    public ResponseEntity<VendaDTO> createVenda(@RequestBody VendaDTO vendaDTO)
     {
-        Optional<Venda> optionalVenda = utilizadorService.criaVenda(conversor.converterDTOParaVenda(vendaCreateDTO));
+        Optional<Venda> optionalVenda = utilizadorService.criaVenda(conversor.converterDTOParaVenda(vendaDTO));
         if (optionalVenda.isPresent())
             return ResponseEntity.ok(conversor.converterVendaParaDTO(optionalVenda.get()));
         return ResponseEntity.badRequest().build();
     }
-/*
+
     @GetMapping("/valor/{id}")
-    public ResponseEntity<VendaDTO> getValorVenda(@PathVariable Long vendaId)
+    public ResponseEntity<Float> getValorVenda(@PathVariable("id") Long vendaId)
     {
-        Optional<Float> valor = Optional.of(aplicacaoService.getValorFuturoDaVenda(vendaId));
-        return valor.map(venda -> {
-          //  ValorVendaDTO valorVendaDTO = conversor.converterValorVendaParaDTO(venda)
-        });
-    }*/
+        Float valor=aplicacaoService.getValorFuturoDaVenda(vendaId);
+        if(valor!=0)
+            return ResponseEntity.ok(valor);
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/avaliacao/{id}")
+    public ResponseEntity<String> getAvaliacaoVenda(@PathVariable("id") Long vendaId)
+    {
+        Optional<Avalicao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioVenda(vendaId);
+        if (avalicaoOptional.isPresent())
+            return ResponseEntity.ok(avalicaoOptional.get().name());
+        return ResponseEntity.notFound().build();
+    }
 }

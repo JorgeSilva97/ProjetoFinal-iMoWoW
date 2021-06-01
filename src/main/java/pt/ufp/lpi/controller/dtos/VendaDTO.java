@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VendaDTO
 {
+    private Long id;
     private Long imovelId;
     private float precoTotal;
 }

@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ConcelhoDTO
 {
+    private Long id;
     private String nome;
     private float precoMedioVenda;
     private float precoMedioArrendamento;

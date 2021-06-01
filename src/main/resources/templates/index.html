@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <title>Página Inicial</title>
+    <title>Avaliação do Imóvel</title>
   </head>
   <body>
 
@@ -24,6 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     -->
 
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
     <nav class="navbar navbar-dark bg-dark">     
         <div class="container-fluid">
@@ -35,10 +36,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">  
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="#">Avaliação</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#">Consulta Histórico de Preços</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,138 +57,130 @@
         </div>
       </nav>
 
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-      <br><br><br>
+
+      <br>
+      <div class="input-group mb-3 justify-content-center">    
+          <span class="input-group-text" >ID Utilizador</span>
+          <center><input type="text" id="nomeUtilizador" size="8" class="form-control"></center>
+      </div>
+
+  
       <h1> <center>Imóvel</center> </h1>
-      <br><br>
       <center><small>Insira neste formulário informações sobre o seu possível negócio a concretizar</small></center>
       <br>
 
+      <div class="input-group mb-3 justify-content-center">
+        <span class="input-group-text">Concelho</span>
+        <center>
+            <select class="form-select" aria-label="Default select example" id="concelho">
+            </select>
+        </center>
+      </div>
 
-
-
+      <div class="input-group mb-3 justify-content-center"> 
+        <span class="input-group-text" id="metros">Área (㎡)</span>
+        <center><input type="text" size="4" class="form-control" placeholder=""></center>
+      </div>
       <div class="input-group mb-3 justify-content-center">    
         <span class="input-group-text" >Ano de Construção</span>
         <center><input type="text" id="ano" size="4" class="form-control"></center>
       </div>
-      <div class="input-group mb-3 justify-content-center"> 
-        <span class="input-group-text" id="metros">Metros Quadrados</span>
-        <center><input type="text" size="4" class="form-control" placeholder=""></center>
-      </div>
       <div class="input-group mb-3 justify-content-center">
-        <span class="input-group-text" id="estadoSpan">Estado do Imóvel</span>
+        <span class="input-group-text">Estado do Imóvel</span>
         <center>
             <select class="form-select" aria-label="Default select example" id="estado">
-                <option value="1">Usado</option>
-                <option value="2">Novo</option>
-                <option value="3">Renovado</option>
-                <option value="4">Por recuperar</option>
+                <option value="0">Novo</option>
+                <option value="1">Renovado</option>
+                <option value="2">Usado</option>
+                <option value="3">Por Recuperar</option>
             </select>
         </center>
       </div>
       <div class="input-group mb-3 justify-content-center">
-        <span class="input-group-text" id="topologia">Topologia</span>
+        <span class="input-group-text">Topologia</span>
         <center>
-            <select class="form-select" aria-label="Default select example">
-            <option value="1">T1</option>
-            <option value="2">T1+1</option>
-            <option value="3">T2</option>
-            <option value="4">T2+1</option>
-            <option value="5">T3</option>
-            <option value="6">T3+1</option>
-            <option value="7">T4</option>
+            <select class="form-select" aria-label="Default select example" id="topologia">
+            <option value="0">T1</option>
+            <option value="1">T1+1</option>
+            <option value="2">T2</option>
+            <option value="3">T2+1</option>
+            <option value="4">T3</option>
+            <option value="5">T3+1</option>
+            <option value="6">T4</option>
             </select>
         </center>
       </div>
+      
+    
       <div class="input-group mb-3 justify-content-center">
-        <span class="input-group-text" id="piscina">Piscina</span>
+       
+        <span class="input-group-text">Piscina</span>
         <center>
-            <select class="form-select" aria-label="Default select example"> 
-            <option value="1">Não</option>
-            <option value="2">Sim</option>
+            <select class="form-select" aria-label="Default select example" id="piscina"> 
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
             </select>
         </center>
+
+        <span class="input-group-text" >Jardim</span>
+        <center>
+            <select class="form-select" aria-label="Default select example" id="jardim">
+                <option value="0">Não</option>
+                <option value="1">Sim</option>
+            </select>
+          </center>
+
+        <span class="input-group-text" >Garagem</span>
+        <center>
+        <select class="form-select" aria-label="Default select example" id="garagem">
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
+        </select>
+        </center>
+       
+        <span class="input-group-text">Elevador</span>
+        <center>
+        <select class="form-select" aria-label="Default select example" id="elevador">
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
+         </select>
+        </center>
+        
       </div>
-      <div class="input-group mb-3 justify-content-center">
-        <span class="input-group-text" id="jardim">Jardim</span>
-        <center>
-            <select class="form-select" aria-label="Default select example">
-                <option value="1">Não</option>
-                <option value="2">Sim</option>
-            </select>
-        </center>
-      </div>
-      <div class="input-group mb-3 justify-content-center">
-        <span class="input-group-text" id="garagem">Garagem</span>
-        <center>
-            <select class="form-select" aria-label="Default select example">
-                <option value="1">Não</option>
-                <option value="2">Sim</option>
-            </select>
-        </center>
-      </div>
-      <div class="input-group mb-3 justify-content-center">
-        <span class="input-group-text" id="basic-addon1">Elevador</span>
-        <center>
-            <select class="form-select" aria-label="Default select example">
-                <option value="1">Não</option>
-                <option value="2">Sim</option>
-            </select>
-        </center>
+     
+      <div class="input-group mb-3 justify-content-center">  
+        <span class="input-group-text" >Preço Pedido (€)</span>
+        <center><input type="text" id="precoPedido" size="7" class="form-control"></center>
       </div>
     
     
-    <br>
-    <center><small>Indique aqui qual é o seu tipo de negócio:</small></center>
-    <br>
+      
+    <center><small>Indique aqui qual é o seu tipo de negócio</small></center>
     <div class="d-grid gap-2 d-md-block">
         <center>
             <button type="button" id="venda" class="btn btn-dark btn-lg">Para Venda</button>
             <button type="button" id="arrendamento" class="btn btn-dark btn-lg">Para Arrendamento</button>
         </center>
     </div>
+    <br>
+    <br>
+    <center><small>Aqui pode consultar os dados sobre a avaliação</small></center>
+    <div class="input-group mb-3 justify-content-center">  
+      <span class="input-group-text" >Avalição (€)</span>
+      <center><input type="text" id="avaliacaoEuros" size="8" class="form-control"></center>
+      <span class="input-group-text" >Oportunidade de Negócio</span>
+      <center><input type="text" id="avaliacao" size="8" class="form-control"></center>
+    </div>
+    
    
       
       
       
       
-      <script type="text/javascript">
-        let venda=document.getElementById("venda");
-        venda.addEventListener("click",()=>
-        {
-          const imovel={
-            userId:1,
-            concelhoId:1,
-    topologia:parseInt(document.getElementById("topologia").value),
-    piscina:document.getElementById("piscina").value==="1"?false:true
-            /*estadoImovel
-            anoConstrucao
-            metrosQuadrados
-            piscina
-            jardim
-            garagem
-            elevador*/
-          }
-
-          fetch("http://localhost:8080/imovel",{
-            method:"post",
-            body:JSON.stringify(imovel),
-            headers:{"Content-Type":"application/json"}
-          }).then(response=>{
-            if(response.ok){
-              return response.json();
-            }
-            throw new Error("Could not create a new imovel");            
-          }).then((json)=>{
-            //
-          })
-
-        });
-        let arrendamento=document.getElementById("arrendamento");
-        arrendamento.addEventListener("click",()=>{
-
-        });
-      </script>
+      <script type="text/javascript" src="./main.js" />
+        
       
   </body>
 </html>

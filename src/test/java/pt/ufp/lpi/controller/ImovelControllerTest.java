@@ -9,6 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import pt.ufp.lpi.controller.dtos.ImovelDTO;
+import pt.ufp.lpi.controller.dtos.converter.DTOToModelConversor;
 import pt.ufp.lpi.models.Concelho;
 import pt.ufp.lpi.models.Imovel;
 import pt.ufp.lpi.models.Utilizador;
@@ -34,6 +35,7 @@ class ImovelControllerTest
     @MockBean
     private UtilizadorService utilizadorService;
     private ObjectMapper objectMapper;
+    private DTOToModelConversor conversor=DTOToModelConversor.getInstance();
 
     @Test
     void getAllImoveis() throws Exception
@@ -114,7 +116,7 @@ class ImovelControllerTest
     @Test
     void createImovel() throws Exception
     {
-        Concelho maia = Concelho.builder()
+        /*Concelho maia = Concelho.builder()
                 .nome("maia")
                 .precoMedioVenda(350)
                 .precoMedioArrendamento(16)
@@ -130,13 +132,19 @@ class ImovelControllerTest
                 .jardim(true)
                 .garagem(false)
                 .topologia(Topologia.T1_1)
+                .build();*/
+
+        ImovelDTO novoImovel=ImovelDTO.builder()
+                .userId(1L)
+                .concelhoId(1L)
+                //
                 .build();
-        when(utilizadorService.criaImovel(novoImovel)).thenReturn(Optional.of(novoImovel));
+        when(utilizadorService.criaImovel(conversor.converterDTOParaImovel(novoImovel))).thenReturn(Optional.of(conversor.converterDTOParaImovel(novoImovel)));
         String imovelAsJsonString = new ObjectMapper().writeValueAsString(novoImovel);
         mockMvc.perform(post("/imovel").content(imovelAsJsonString).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        Imovel imovelExistente = Imovel.builder()
+        /*Imovel imovelExistente = Imovel.builder()
                 .utilizador(jorge)
                 .concelho(maia)
                 .elevador(true)
@@ -147,7 +155,7 @@ class ImovelControllerTest
                 .build();
         String imovelExistenteAsJsonString = new ObjectMapper().writeValueAsString(imovelExistente);
         mockMvc.perform(post("/imovel").content(imovelExistenteAsJsonString).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest());*/
 
 
 

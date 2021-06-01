@@ -47,7 +47,7 @@ public class DTOToModelConversor
                 .topologia(imovelDTO.getTopologia())
                 .garagem(imovelDTO.isGaragem())
                 .jardim(imovelDTO.isJardim())
-                .elevador(imovelDTO.isGaragem())
+                .elevador(imovelDTO.isElevador())
                 .piscina(imovelDTO.isPiscina())
                 .build();
     }
@@ -55,6 +55,7 @@ public class DTOToModelConversor
     public ConcelhoDTO converterConcelhoParaDTO(Concelho concelho)
     {
         return ConcelhoDTO.builder()
+                .id(concelho.getId())
                 .distrito(concelho.getDistrito())
                 .nome(concelho.getNome())
                 .historicoArrendamentos(concelho.getHistoricoArrendamentos().stream().map(historicoArrendamento ->
@@ -95,6 +96,7 @@ public class DTOToModelConversor
     public VendaDTO converterVendaParaDTO(Venda venda)
     {
         return VendaDTO.builder()
+                .id(venda.getId())
                 .imovelId(venda.getImovel().getId())
                 .precoTotal(venda.getPrecoTotal())
                 .build();
@@ -123,13 +125,6 @@ public class DTOToModelConversor
         return Arrendamento.builder()
                 .imovel(i)
                 .precoArrendamento(arrendamentoDTO.getPrecoArrendamento())
-                .build();
-    }
-
-    public ValorVendaDTO converterValorVendaParaDTO(Venda venda)
-    {
-        return ValorVendaDTO.builder()
-                .precoTotal(venda.getPrecoTotal())
                 .build();
     }
 

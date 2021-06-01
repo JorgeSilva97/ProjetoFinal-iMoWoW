@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/concelho")
+@CrossOrigin("*")
 public class ConcelhoController
 {
     private final UtilizadorService utilizadorService;
