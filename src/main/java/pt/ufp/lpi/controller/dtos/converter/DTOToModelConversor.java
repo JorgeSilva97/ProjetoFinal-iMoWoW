@@ -3,6 +3,8 @@ package pt.ufp.lpi.controller.dtos.converter;
 import pt.ufp.lpi.controller.dtos.*;
 import pt.ufp.lpi.models.*;
 
+import java.util.stream.Collectors;
+
 public class DTOToModelConversor
 {
     private static DTOToModelConversor instance;
@@ -55,8 +57,24 @@ public class DTOToModelConversor
         return ConcelhoDTO.builder()
                 .distrito(concelho.getDistrito())
                 .nome(concelho.getNome())
-                //.historicoArrendamentos(concelho.getHistoricoArrendamentos())
-                //.historicoVendas(concelho.getHistoricoVendas())
+                .historicoArrendamentos(concelho.getHistoricoArrendamentos().stream().map(historicoArrendamento ->
+                {
+                    HistoricoArrendamentoDTO historicoArrendamentoDTO = HistoricoArrendamentoDTO.builder()
+                            .concelho(historicoArrendamento.getConcelho())
+                            .data(historicoArrendamento.getData())
+                            .precoAntigo(historicoArrendamento.getPrecoAntigo())
+                            .build();
+                    return historicoArrendamentoDTO;
+                }).collect(Collectors.toList()))
+                .historicoVendas(concelho.getHistoricoVendas().stream().map(historicoVenda ->
+                {
+                    HistoricoVendaDTO historicoVendaDTO = HistoricoVendaDTO.builder()
+                            .concelho(historicoVenda.getConcelho())
+                            .data(historicoVenda.getData())
+                            .precoAntigo(historicoVenda.getPrecoAntigo())
+                            .build();
+                    return historicoVendaDTO;
+                }).collect(Collectors.toList()))
                 .precoMedioArrendamento(concelho.getPrecoMedioArrendamento())
                 .precoMedioVenda(concelho.getPrecoMedioVenda())
                 .build();
@@ -113,7 +131,6 @@ public class DTOToModelConversor
         return ValorVendaDTO.builder()
                 .precoTotal(venda.getPrecoTotal())
                 .build();
-
     }
 
 }
