@@ -39,6 +39,36 @@ public class AplicacaoServiceImpl implements AplicacaoService
     }
 
     @Override
+    public List<HistoricoVenda> findHistoricosVendaByConcelho(Long concelhoId)
+    {
+        List<HistoricoVenda> historicosVenda = new ArrayList<>();
+        Optional<Concelho> optionalConcelho = concelhoRepository.findById(concelhoId);
+        if (optionalConcelho.isPresent())
+        {
+            Concelho concelho = optionalConcelho.get();
+            for (HistoricoVenda h : concelho.getHistoricoVendas())
+                historicosVenda.add(h);
+            return historicosVenda;
+        }
+        return null;
+    }
+
+    @Override
+    public List<HistoricoArrendamento> findHistoricosArrendamentoByConcelho(Long concelhoId)
+    {
+        List<HistoricoArrendamento> historicosArrendamento = new ArrayList<>();
+        Optional<Concelho> optionalConcelho = concelhoRepository.findById(concelhoId);
+        if (optionalConcelho.isPresent())
+        {
+            Concelho concelho = optionalConcelho.get();
+            for (HistoricoArrendamento ha : concelho.getHistoricoArrendamentos())
+                historicosArrendamento.add(ha);
+            return historicosArrendamento;
+        }
+        return null;
+    }
+
+    @Override
     public Optional<HistoricoVenda> criaHistoricoVenda(Long idConcelho, float precoAtual, float precoAntigo)
     {
         Optional<Concelho> optionalConcelho = concelhoRepository.findById(idConcelho);
@@ -75,6 +105,8 @@ public class AplicacaoServiceImpl implements AplicacaoService
         }
         return Optional.empty();
     }
+
+
 
 
     @Override

@@ -75,6 +75,52 @@ class AplicacaoServiceImplTest
     }
 
     @Test
+    void findHistoricosVendaByConcelho()
+    {
+        Concelho gaia = Concelho.builder().nome("gaia").precoMedioVenda(400).precoMedioArrendamento(60).build();
+        HistoricoVenda historicoVenda1 = HistoricoVenda.builder()
+                .data(LocalDateTime.now())
+                .precoAntigo(380)
+                .concelho(gaia)
+                .build();
+        HistoricoVenda historicoVenda2 = HistoricoVenda.builder()
+                .data(LocalDateTime.now())
+                .precoAntigo(350)
+                .concelho(gaia)
+                .build();
+        gaia.adicionaHistoricoVenda(historicoVenda1);
+        gaia.adicionaHistoricoVenda(historicoVenda2);
+
+        when(concelhoRepository.findById(1L)).thenReturn(Optional.of(gaia));
+
+        assertNotNull(aplicacaoService.findHistoricosVendaByConcelho(1L));
+
+    }
+
+    @Test
+    void findHistoricosArrendamentoByConcelho()
+    {
+        Concelho gaia = Concelho.builder().nome("gaia").precoMedioVenda(400).precoMedioArrendamento(60).build();
+        HistoricoArrendamento historicoArrendamento1 = HistoricoArrendamento.builder()
+                .data(LocalDateTime.now())
+                .precoAntigo(380)
+                .concelho(gaia)
+                .build();
+        HistoricoArrendamento historicoArrendamento2 = HistoricoArrendamento.builder()
+                .data(LocalDateTime.now())
+                .precoAntigo(370)
+                .concelho(gaia)
+                .build();
+        gaia.adicionaHistoricoArrendamento(historicoArrendamento1);
+        gaia.adicionaHistoricoArrendamento(historicoArrendamento2);
+
+        when(concelhoRepository.findById(1L)).thenReturn(Optional.of(gaia));
+
+        assertNotNull(aplicacaoService.findHistoricosArrendamentoByConcelho(1L));
+    }
+
+
+    @Test
     void criaHistoricoArrendamento()
     {
         Distrito porto = Distrito.builder()

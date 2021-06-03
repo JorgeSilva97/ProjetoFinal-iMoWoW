@@ -11,6 +11,8 @@ public interface AplicacaoService
 {
     List<HistoricoVenda> findAllHistoricosVenda();
     List<HistoricoArrendamento> findAllHistoricosArrendamento();
+    List<HistoricoVenda> findHistoricosVendaByConcelho(Long concelhoId);
+    List<HistoricoArrendamento> findHistoricosArrendamentoByConcelho(Long concelhoId);
     Optional<HistoricoVenda> criaHistoricoVenda(Long idConcelho, float precoAtual, float precoAntigo);
     Optional<HistoricoArrendamento> criaHistoricoArrendamento(Long idConcelho, float precoAtual, float precoAntigo);
     float getValorFuturoDeArrendamento(Long idArrendamento);
