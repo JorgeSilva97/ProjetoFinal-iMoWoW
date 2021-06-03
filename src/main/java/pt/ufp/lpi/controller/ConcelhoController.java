@@ -33,6 +33,16 @@ public class ConcelhoController
         return ResponseEntity.ok(responseDTOS);
     }
 
+    @GetMapping("historicos/preco/{id}")
+    public ResponseEntity<ConcelhoDTO> getInformacaoConcelhos(@PathVariable Long concelhoId)
+    {
+        Optional<Concelho> optionalConcelho = utilizadorService.findConcelhoById(concelhoId);
+        if (optionalConcelho.isPresent())
+            return ResponseEntity.ok(conversor.converterConcelhoParaDTO(optionalConcelho.get()));
+        return ResponseEntity.notFound().build();
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<ConcelhoDTO> getConcelhoById(@PathVariable Long id)
     {

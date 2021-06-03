@@ -19,7 +19,6 @@ public class ConcelhoDTO
     private String nome;
     private float precoMedioVenda;
     private float precoMedioArrendamento;
-    private Distrito distrito;
     private List<HistoricoVendaDTO> historicoVendas = new ArrayList<>();
     private List<HistoricoArrendamentoDTO> historicoArrendamentos = new ArrayList<>();
 

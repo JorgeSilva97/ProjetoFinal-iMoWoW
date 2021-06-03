@@ -23,6 +23,21 @@ document.addEventListener("DOMContentLoaded",(event)=>{
   }).catch(alert)
 });
 
+let informacao = document.getElementById("consultar");
+informacao.addEventListener("click", ()=>
+{
+  fetch("http://localhost:8080/concelho/historicos/preco/",{}).then((response)=>
+  {
+    if(response.ok)
+          return response.json()
+      throw new Error("erro");
+  }).then((historicos)=>{
+    //const historicosSelect
+
+  })
+
+});
+
 
 let consultaConcelhos=document.getElementById("consultaConcelhosPage");
 consultaConcelhos.addEventListener("click",()=>

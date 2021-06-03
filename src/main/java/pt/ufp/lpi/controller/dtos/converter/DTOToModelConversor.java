@@ -57,7 +57,7 @@ public class DTOToModelConversor
     {
         return ConcelhoDTO.builder()
                 .id(concelho.getId())
-                .distrito(concelho.getDistrito())
+                //.distrito(concelho.getDistrito())
                 .nome(concelho.getNome())
                 .historicoArrendamentos(concelho.getHistoricoArrendamentos().stream().map(historicoArrendamento ->
                 {
@@ -85,7 +85,7 @@ public class DTOToModelConversor
     public Concelho converterDTOParaConcelho(ConcelhoDTO concelhoDTO)
     {
         return Concelho.builder()
-                .distrito(concelhoDTO.getDistrito())
+              //  .distrito(concelhoDTO.getDistrito())
                 .nome(concelhoDTO.getNome())
                 .precoMedioArrendamento(concelhoDTO.getPrecoMedioArrendamento())
                 .precoMedioVenda(concelhoDTO.getPrecoMedioVenda())
