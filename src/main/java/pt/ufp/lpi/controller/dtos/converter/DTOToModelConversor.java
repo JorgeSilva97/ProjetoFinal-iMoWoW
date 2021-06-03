@@ -21,7 +21,7 @@ public class DTOToModelConversor
     public ImovelDTO converterImovelParaDTO(Imovel imovel)
     {
         return ImovelDTO.builder()
-                .id(imovel.getId())
+               // .id(imovel.getId())
                 .concelhoId(imovel.getConcelho().getId())
                 .userId(imovel.getUtilizador().getId())
                 .anoConstrução(imovel.getAnoConstrução())
@@ -114,19 +114,14 @@ public class DTOToModelConversor
 
     public AvaliacaoVendaDTO converterVendaParaAvaliacaoVendaDTO(Venda venda)
     {
-        return AvaliacaoVendaDTO.builder()
-                .id(venda.getId())
-                .valorAvaliacao((long) venda.calcularVenda())
+        return AvaliacaoVendaDTO.builder().vendaId(venda.getId())
                 .avaliacao(venda.avaliacaoNegocioVenda())
+                .valorAvaliacao(venda.calcularVenda())
+                .vendaId(venda.getId())
                 .build();
     }
 
-    public Venda converterDTOParaAvaliacaoVendaDTO(AvaliacaoVendaDTO avaliacaoVendaDTO)
-    {
-        return Venda.builder()
-                .id(avaliacaoVendaDTO.getId())
-                .build();
-    }
+
 
     public ArrendamentoDTO converterArrendamentoParaDTO(Arrendamento arrendamento)
     {

@@ -52,9 +52,9 @@ public class ImovelController
     }
 
     @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ImovelDTO> createImovel(@RequestBody ImovelDTO imovelCreateDTO)
+    public ResponseEntity<ImovelDTO> createImovel(@RequestBody ImovelDTO imovelDTO)
     {
-        Optional<Imovel> optionalImovel=utilizadorService.criaImovel(conversor.converterDTOParaImovel(imovelCreateDTO));
+        Optional<Imovel> optionalImovel=utilizadorService.criaImovel(conversor.converterDTOParaImovel(imovelDTO));
         if(optionalImovel.isPresent())
             return ResponseEntity.ok(conversor.converterImovelParaDTO(optionalImovel.get()));
         return ResponseEntity.badRequest().build();

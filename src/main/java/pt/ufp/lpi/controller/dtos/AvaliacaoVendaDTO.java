@@ -12,7 +12,7 @@ import pt.ufp.lpi.models.enumerado.Avaliacao;
 @AllArgsConstructor
 public class AvaliacaoVendaDTO
 {
-    private Long id;
-    private Long valorAvaliacao;
+    private Long vendaId;
+    private Float valorAvaliacao;
     private Avaliacao avaliacao;
 }
