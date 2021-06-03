@@ -32,10 +32,18 @@ informacao.addEventListener("click", ()=>
           return response.json()
       throw new Error("erro");
   }).then((historicos)=>{
-    //const historicosSelect
-
-  })
-
+    const historicosSelect=document.getElementById("historivoVenda");
+    const historicosOptions=historicos.map((historico)=>
+    {
+      let opcao = document.createElement("option");
+      opcao.value=historico.id;
+      opcao.text=historico.nome;
+    });
+    historicosOptions.forEach((opcao)=>
+    {
+      historicosSelect.appendChild(opcao);
+    })
+  }).catch(alert)
 });
 
 
