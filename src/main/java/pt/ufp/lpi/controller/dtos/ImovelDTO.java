@@ -10,6 +10,7 @@ import pt.ufp.lpi.models.enumerado.Topologia;
 @AllArgsConstructor
 public class ImovelDTO {
 
+    private Long id;
     private Long userId;
     private Long concelhoId;
     private Topologia topologia;

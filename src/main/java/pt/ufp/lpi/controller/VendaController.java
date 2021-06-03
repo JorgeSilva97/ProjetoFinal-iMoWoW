@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import pt.ufp.lpi.controller.dtos.AvaliacaoVendaDTO;
 import pt.ufp.lpi.controller.dtos.VendaDTO;
 import pt.ufp.lpi.controller.dtos.converter.DTOToModelConversor;
 import pt.ufp.lpi.models.Venda;
@@ -26,6 +27,20 @@ public class VendaController
     public VendaController(UtilizadorService utilizadorService, AplicacaoService aplicacaoService) {
         this.utilizadorService = utilizadorService;
         this.aplicacaoService = aplicacaoService;
+    }
+
+
+    @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AvaliacaoVendaDTO> avaliacaoVenda(@RequestBody AvaliacaoVendaDTO avaliacaoVendaDTO)
+    {
+
+        Optional<Venda> optionalVenda = utilizadorService.criaVenda(conversor.converterDTOParaAvaliacaoVendaDTO(avaliacaoVendaDTO));
+        Float valor = aplicacaoService.getValorFuturoDaVenda(avaliacaoVendaDTO.getId());
+        Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioVenda(avaliacaoVendaDTO.getId());
+        if (optionalVenda.isPresent() && valor!=0 && avalicaoOptional.isPresent())
+            return ResponseEntity.of(conversor.converterVendaParaAvaliacaoVendaDTO(optionalVenda.get()));
+        return ResponseEntity.badRequest().build();
+
     }
 
     @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
