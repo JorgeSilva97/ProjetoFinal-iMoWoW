@@ -44,21 +44,11 @@ public class VendaController
             Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioVenda(venda.getId());
             if (avalicaoOptional.isPresent() && valor!=0)
             {
-                Avaliacao avaliacao = avalicaoOptional.get();
-                return ResponseEntity.of(conversor.converterVendaParaAvaliacaoVendaDTO(optionalVenda.get()));
+                return ResponseEntity.ok(conversor.converterVendaParaAvaliacaoVendaDTO(optionalVenda.get()));
             }
         }
         return ResponseEntity.badRequest().build();
-        /*
-        Optional<Venda> optionalVenda = utilizadorService.criaVenda(conversor.converterDTOParaAvaliacaoVendaDTO(avaliacaoVendaDTO));
-        Float valor = aplicacaoService.getValorFuturoDaVenda(avaliacaoVendaDTO.getId());
-        Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioVenda(avaliacaoVendaDTO.getId());
-        if (optionalVenda.isPresent() && valor!=0 && avalicaoOptional.isPresent())
-            return ResponseEntity.of(conversor.converterVendaParaAvaliacaoVendaDTO(optionalVenda.get()));
-        return ResponseEntity.badRequest().build();
-         */
-
-    }
+       }
 
     @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<VendaDTO> createVenda(@RequestBody VendaDTO vendaDTO)

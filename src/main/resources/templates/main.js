@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded",(event)=>{
 });
 
 
-let home=document.getElementById("home");
-home.addEventListener("click",()=>
+let consultaConcelhos=document.getElementById("consultaConcelhosPage");
+consultaConcelhos.addEventListener("click",()=>
 {
-  window.location.assign
+  window.location.assign("./concelhos.html")
 
 });
 
