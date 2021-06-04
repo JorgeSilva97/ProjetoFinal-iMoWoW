@@ -31,7 +31,7 @@ public class VendaController
     }
 
     @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AvaliacaoVendaDTO> avaliacaoVenda(@RequestBody VendaDTO vendaDTO, @RequestBody ImovelDTO imovelDTO)
+    public ResponseEntity<AvaliacaoVendaDTO> avaliacaoVenda(@RequestBody VendaDTO vendaDTO, ImovelDTO imovelDTO)
     {
         Optional<Imovel> optionalImovel = utilizadorService.criaImovel(conversor.converterDTOParaImovel(imovelDTO));
         Optional<Venda> optionalVenda = utilizadorService.criaVenda(conversor.converterDTOParaVenda(vendaDTO));
@@ -43,20 +43,11 @@ public class VendaController
             Float valor = aplicacaoService.getValorFuturoDaVenda(venda.getId());
             Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioVenda(venda.getId());
             if (avalicaoOptional.isPresent() && valor!=0)
-                return ResponseEntity.ok(conversor.converterVendaParaAvaliacaoVendaDTO(optionalVenda.get()));
+                return ResponseEntity.ok(conversor.converterVendaParaAvaliacaoVendaDTO(venda));
         }
         return ResponseEntity.badRequest().build();
        }
-/*
-    @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<VendaDTO> createVenda(@RequestBody VendaDTO vendaDTO)
-    {
-        Optional<Venda> optionalVenda = utilizadorService.criaVenda(conversor.converterDTOParaVenda(vendaDTO));
-        if (optionalVenda.isPresent())
-            return ResponseEntity.ok(conversor.converterVendaParaDTO(optionalVenda.get()));
-        return ResponseEntity.badRequest().build();
-    }
-*/
+
     @GetMapping("/valor/{id}")
     public ResponseEntity<Float> getValorVenda(@PathVariable("id") Long vendaId)
     {

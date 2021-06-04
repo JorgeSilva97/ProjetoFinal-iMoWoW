@@ -5,8 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pt.ufp.lpi.controller.dtos.ArrendamentoDTO;
+import pt.ufp.lpi.controller.dtos.AvaliacaoArrendamentoDTO;
+import pt.ufp.lpi.controller.dtos.ImovelDTO;
+import pt.ufp.lpi.controller.dtos.VendaDTO;
 import pt.ufp.lpi.controller.dtos.converter.DTOToModelConversor;
 import pt.ufp.lpi.models.Arrendamento;
+import pt.ufp.lpi.models.Imovel;
 import pt.ufp.lpi.models.enumerado.Avaliacao;
 import pt.ufp.lpi.services.AplicacaoService;
 import pt.ufp.lpi.services.UtilizadorService;
@@ -27,6 +31,28 @@ public class ArrendamentoController
         this.utilizadorService = utilizadorService;
         this.aplicacaoService = aplicacaoService;
     }
+
+    @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AvaliacaoArrendamentoDTO> avalicaoArrendamento(@RequestBody ArrendamentoDTO arrendamentoDTO, ImovelDTO imovelDTO)
+    {
+        Optional<Imovel> optionalImovel = utilizadorService.criaImovel(conversor.converterDTOParaImovel(imovelDTO));
+        Optional<Arrendamento> optionalArrendamento = utilizadorService.criaArrendamento(conversor.converterDTOParaArrendamento(arrendamentoDTO));
+        if (optionalArrendamento.isPresent() && optionalImovel.isPresent())
+        {
+            Arrendamento arrendamento = optionalArrendamento.get();
+            Imovel imovel = optionalImovel.get();
+            arrendamento.setImovel(imovel);
+            Float valor = aplicacaoService.getValorFuturoDeArrendamento(arrendamento.getId());
+            Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioArrendamento(arrendamento.getId());
+            if (avalicaoOptional.isPresent() && valor!=0)
+                return ResponseEntity.ok(conversor.converterArrendamentoParaAvaliacaoArrendamentoDTO(arrendamento));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+
+
+
 
     @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrendamentoDTO> createArrendamento(@RequestBody ArrendamentoDTO arrendamentoDTO)

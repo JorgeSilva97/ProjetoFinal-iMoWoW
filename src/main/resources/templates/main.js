@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded",(event)=>{
   }).catch(alert)
 });
 
+//ao carregar "consultar" insere informação sobre preco e seu histórico
 let informacao = document.getElementById("consultar");
 informacao.addEventListener("click", ()=>
 {
@@ -46,7 +47,7 @@ informacao.addEventListener("click", ()=>
   }).catch(alert)
 });
 
-
+//redirecinar para a pagina de concelho
 let consultaConcelhos=document.getElementById("consultaConcelhosPage");
 consultaConcelhos.addEventListener("click",()=>
 {
@@ -60,6 +61,7 @@ let venda=document.getElementById("venda");
       {
         const imovel = 
         {
+          //imovelId ???
           userId:parseInt(document.getElementById("utilizador").value),
           concelhoId:parseInt(document.getElementById("concelho").value),
           metrosQuadrados:parseFloat(document.getElementById("metros").value),
@@ -71,53 +73,29 @@ let venda=document.getElementById("venda");
           garagem:document.getElementById("garagem").value==="0"?false:true,
           elevador:document.getElementById("elevador").value==="0"?false:true,
         }
+        const venda = {preco:parseFloat(document.getElementById("precoPedido").value)}
 
-        fetch("http://localhost:8080/imovel",
+        fetch("http://localhost:8080/venda",
         {
           method:"post",
-          body:JSON.stringify(imovel),
+          body:JSON.stringify(imovel, venda),
           headers:{"Content-Type":"application/json"}
         }).then(response=>
           {
               if(response.ok)
                   return response.json();
               throw new Error("Could not create a new imovel");   
-        }).then((json)=>
-        {
-              fetch("http://localhost:8080/venda", 
-              {
-                method:"post",
-                body:JSON.stringify({imovelId:json.id,preco:document.getElementById("precoPedido")}),
-                headers:{"Content-Type":"application/json"}
-              }).then(response=>
-                  {
-                      if(response.ok)
-                          return response.json();
-                      throw new Error("Could not create a new venda");
-              }).then((json)=>{
-                    fetch("http://localhost:8080/venda/valor",
-                    {
-                      method:"get",
-                      body:JSON.stringify({vendaId:json.id}),
-                      headers:{"Content-Type":"application/json"}
-                    }).then(response=>
-                      {
-                        if(response.ok)
-                          return response.json();
-                      throw new Error("Could not insert a price on venda");
-                    }).then((json)=>{
-                      let valor = document.getElementById("avaliacaoEuros");
-                      valor.value=JSON.stringify(json);
-                    }).catch((err)=>alert(err));
-                    
-                  })
-              }).catch(alert)
+        }).then((json)=>{
+          //
+        }).catch(alert);
       });
 
-      //ao carregar no "para arrendamento", cria imóvel, cria arrendamento e retorna a valor do negócio e avaliação
-      let arrendamento=document.getElementById("arrendamento");
-      arrendamento.addEventListener("click",()=>
+//ao carregar no "para arrendamento", cria imóvel, cria arrendamento e retorna a valor do negócio e avaliação
+let arrendamento=document.getElementById("arrendamento");
+    arrendamento.addEventListener("click",()=>
       {
+        const arrendamento = {preco:parseFloat(document.getElementById("precoPedido").value)}
+
         const imovel = 
         {
           userId:parseInt(document.getElementById("utilizador").value),
@@ -131,9 +109,10 @@ let venda=document.getElementById("venda");
           garagem:document.getElementById("garagem").value==="0"?false:true,
           elevador:document.getElementById("elevador").value==="0"?false:true,
         }
-        fetch("http://localhost:8080/imovel",{
+        fetch("http://localhost:8080/arrendamento",
+        {
           method:"post",
-          body:JSON.stringify(imovel),
+          body:JSON.stringify(imovel, arrendamento),
           headers:{"Content-Type":"application/json"}
         }).then(response=>{
           if(response.ok){
@@ -142,5 +121,5 @@ let venda=document.getElementById("venda");
           throw new Error("Could not create a new imovel");            
         }).then((json)=>{
           //
-        })
+        })catch(alert);
       });

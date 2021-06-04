@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import pt.ufp.lpi.models.Concelho;
-import pt.ufp.lpi.models.Distrito;
-import pt.ufp.lpi.models.Imovel;
-import pt.ufp.lpi.models.Utilizador;
+import pt.ufp.lpi.models.*;
 import pt.ufp.lpi.repositories.ConcelhoRepository;
 import pt.ufp.lpi.repositories.DistritoRepository;
 import pt.ufp.lpi.repositories.ImovelRepository;
@@ -37,12 +34,63 @@ public class Inicializacao implements ApplicationListener<ContextRefreshedEvent>
 
         Distrito porto = new Distrito();
         porto.setNome("Porto");
-        Concelho gaia = new Concelho();
-        gaia.setNome("Gaia");
-        Concelho matosinhos = new Concelho();
-        matosinhos.setNome("Matosinhos");
-        Concelho maia = new Concelho();
-        maia.setNome("Maia");
+        Concelho gaia = Concelho.builder()
+                .precoMedioArrendamento(60)
+                .precoMedioVenda(200)
+                .nome("gaia")
+                .distrito(porto)
+                .build();
+        HistoricoArrendamento ha1 = HistoricoArrendamento.builder()
+                .concelho(gaia)
+                .data(LocalDateTime.now())
+                .precoAntigo(50)
+                .build();
+        HistoricoVenda hv1 = HistoricoVenda.builder()
+                .concelho(gaia)
+                .precoAntigo(190)
+                .data(LocalDateTime.now())
+                .build();
+        gaia.adicionaHistoricoArrendamento(ha1);
+        gaia.adicionaHistoricoVenda(hv1);
+
+        Concelho maia = Concelho.builder()
+                .precoMedioArrendamento(70)
+                .precoMedioVenda(170)
+                .nome("maia")
+                .distrito(porto)
+                .build();
+        HistoricoArrendamento ha2 = HistoricoArrendamento.builder()
+                .concelho(maia)
+                .data(LocalDateTime.now())
+                .precoAntigo(68)
+                .build();
+        HistoricoVenda hv2 = HistoricoVenda.builder()
+                .concelho(gaia)
+                .precoAntigo(190)
+                .data(LocalDateTime.now())
+                .build();
+        maia.adicionaHistoricoVenda(hv2);
+        maia.adicionaHistoricoArrendamento(ha2);
+
+        Concelho matosinhos = Concelho.builder()
+                .precoMedioArrendamento(90)
+                .precoMedioVenda(280)
+                .nome("matosinhos")
+                .distrito(porto)
+                .build();
+        HistoricoArrendamento ha3 = HistoricoArrendamento.builder()
+                .concelho(matosinhos)
+                .data(LocalDateTime.now())
+                .precoAntigo(84)
+                .build();
+        HistoricoVenda hv3 = HistoricoVenda.builder()
+                .concelho(matosinhos)
+                .precoAntigo(268)
+                .data(LocalDateTime.now())
+                .build();
+        matosinhos.adicionaHistoricoVenda(hv3);
+        matosinhos.adicionaHistoricoArrendamento(ha3);
+
         porto.adicionaConcelho(gaia);
         porto.adicionaConcelho(matosinhos);
         porto.adicionaConcelho(maia);
