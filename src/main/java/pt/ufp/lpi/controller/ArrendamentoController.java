@@ -54,7 +54,7 @@ public class ArrendamentoController
 
 
 
-    @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  /*  @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrendamentoDTO> createArrendamento(@RequestBody ArrendamentoDTO arrendamentoDTO)
     {
         Optional<Arrendamento> optionalArrendamento = utilizadorService.
@@ -62,7 +62,7 @@ public class ArrendamentoController
         if (optionalArrendamento.isPresent())
             return ResponseEntity.ok(conversor.converterArrendamentoParaDTO(optionalArrendamento.get()));
         return ResponseEntity.badRequest().build();
-    }
+    }*/
 
     @GetMapping("/valor/{id}")
     public ResponseEntity<Float> getValorArrendamento(@PathVariable("id") Long arrendamentoId)

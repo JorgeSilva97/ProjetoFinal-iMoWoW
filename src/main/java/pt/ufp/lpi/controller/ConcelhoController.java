@@ -34,7 +34,7 @@ public class ConcelhoController
     }
 
     @GetMapping("historicos/preco/{id}")
-    public ResponseEntity<ConcelhoDTO> getInformacaoConcelhos(@PathVariable Long concelhoId)
+    public ResponseEntity<ConcelhoDTO> getInformacaoConcelhos(@PathVariable("id") Long concelhoId)
     {
         Optional<Concelho> optionalConcelho = utilizadorService.findConcelhoById(concelhoId);
         if (optionalConcelho.isPresent())

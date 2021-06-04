@@ -101,7 +101,8 @@ public class UtilizadorServiceImpl implements UtilizadorService
                     .topologia(topologia)
                     .build();
             utilizador.adicionaImovel(imovel);
-            return Optional.of(imovelRepository.save(imovel));
+            Imovel newImovel=imovelRepository.save(imovel);
+            return Optional.of(newImovel);
         }
         return Optional.empty();
     }

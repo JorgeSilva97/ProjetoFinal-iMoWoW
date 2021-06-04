@@ -97,15 +97,36 @@ public class DTOToModelConversor
     public VendaDTO converterVendaParaDTO(Venda venda)
     {
         return VendaDTO.builder()
-                .id(venda.getId())
-                .imovelId(venda.getImovel().getId())
+                .concelhoId(venda.getImovel().getConcelho().getId())
+                .anoConstrução(venda.getImovel().getAnoConstrução())
+                .estadoImovel(venda.getImovel().getEstado())
+                .elevador(venda.getImovel().isElevador())
+                .jardim(venda.getImovel().isJardim())
+                .garagem(venda.getImovel().isGaragem())
+                .piscina(venda.getImovel().isPiscina())
+                .metrosQuadrados(venda.getImovel().getMetrosQuadrados())
+                .topologia(venda.getImovel().getTopologia())
+                .userId(venda.getImovel().getUtilizador().getId())
                 .precoTotal(venda.getPrecoTotal())
                 .build();
     }
 
     public Venda converterDTOParaVenda(VendaDTO vendaDTO)
     {
-        Imovel i = Imovel.builder().id(vendaDTO.getImovelId()).build();
+        Concelho c = Concelho.builder().id(vendaDTO.getConcelhoId()).build();
+        Imovel i = Imovel.builder()
+                .id(vendaDTO.getImovelId())
+                .utilizador(Utilizador.builder().id(vendaDTO.getUserId()).build())
+                .anoConstrução(vendaDTO.getAnoConstrução())
+                .estado(vendaDTO.getEstadoImovel())
+                .elevador(vendaDTO.isElevador())
+                .jardim(vendaDTO.isJardim())
+                .garagem(vendaDTO.isGaragem())
+                .piscina(vendaDTO.isPiscina())
+                .metrosQuadrados(vendaDTO.getMetrosQuadrados())
+                .topologia(vendaDTO.getTopologia())
+                .concelho(c)
+                .build();
         return Venda.builder()
                 .imovel(i)
                 .precoTotal(vendaDTO.getPrecoTotal())

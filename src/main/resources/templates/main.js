@@ -27,18 +27,25 @@ document.addEventListener("DOMContentLoaded",(event)=>{
 let informacao = document.getElementById("consultar");
 informacao.addEventListener("click", ()=>
 {
-  fetch("http://localhost:8080/concelho/historicos/preco/",{}).then((response)=>
+  const concelhoId=document.getElementById("concelho").value;
+
+  fetch("http://localhost:8080/concelho/historicos/preco/"+concelhoId,{}).then((response)=>
   {
     if(response.ok)
           return response.json()
       throw new Error("erro");
-  }).then((historicos)=>{
-    const historicosSelect=document.getElementById("historivoVenda");
-    const historicosOptions=historicos.map((historico)=>
+  }).then((concelho)=>{
+
+    document.getElementById("precoVenda").value = concelho.precoMedioVenda
+    document.getElementById("precoArrandamento").value = concelho.precoMedioArrendamento
+
+    const historicosSelect=document.getElementById("historicoVenda");
+    const historicosOptions=concelho.historicoVendas.map((historico)=>
     {
       let opcao = document.createElement("option");
       opcao.value=historico.id;
-      opcao.text=historico.nome;
+      opcao.text=historico.precoAntigo;
+      return opcao
     });
     historicosOptions.forEach((opcao)=>
     {
@@ -47,21 +54,15 @@ informacao.addEventListener("click", ()=>
   }).catch(alert)
 });
 
-//redirecinar para a pagina de concelho
-let consultaConcelhos=document.getElementById("consultaConcelhosPage");
-consultaConcelhos.addEventListener("click",()=>
-{
-  window.location.assign("./concelhos.html")
 
-});
 
 //ao carregar no "para venda", cria imóvel, cria venda e retorna a valor do negócio e avaliação
 let venda=document.getElementById("venda");
       venda.addEventListener("click",()=>
       {
-        const imovel = 
+        const venda = 
         {
-          //imovelId ???
+          
           userId:parseInt(document.getElementById("utilizador").value),
           concelhoId:parseInt(document.getElementById("concelho").value),
           metrosQuadrados:parseFloat(document.getElementById("metros").value),
@@ -72,13 +73,13 @@ let venda=document.getElementById("venda");
           jardim:document.getElementById("jardim").value==="0"?false:true,
           garagem:document.getElementById("garagem").value==="0"?false:true,
           elevador:document.getElementById("elevador").value==="0"?false:true,
+          preco:parseFloat(document.getElementById("precoPedido").value)
         }
-        const venda = {preco:parseFloat(document.getElementById("precoPedido").value)}
-
+  
         fetch("http://localhost:8080/venda",
         {
           method:"post",
-          body:JSON.stringify(imovel, venda),
+          body:JSON.stringify(venda),
           headers:{"Content-Type":"application/json"}
         }).then(response=>
           {
@@ -86,7 +87,8 @@ let venda=document.getElementById("venda");
                   return response.json();
               throw new Error("Could not create a new imovel");   
         }).then((json)=>{
-          //
+            document.getElementById("avaliacaoEuros").value = json.valorAvaliacao;
+            document.getElementById("avaliacao").value = json.avaliacao;
         }).catch(alert);
       });
 
@@ -121,5 +123,5 @@ let arrendamento=document.getElementById("arrendamento");
           throw new Error("Could not create a new imovel");            
         }).then((json)=>{
           //
-        })catch(alert);
+        }).catch(alert);
       });

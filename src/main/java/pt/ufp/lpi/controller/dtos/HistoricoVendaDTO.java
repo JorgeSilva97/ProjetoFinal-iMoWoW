@@ -18,5 +18,6 @@ public class HistoricoVendaDTO
     @JsonFormat(pattern = "yyyy-MM",shape = JsonFormat.Shape.STRING)
     private LocalDateTime data;
     private float precoAntigo;
+    //id concelho
     private Concelho concelho;
 }

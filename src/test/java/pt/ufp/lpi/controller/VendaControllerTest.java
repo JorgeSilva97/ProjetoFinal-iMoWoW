@@ -33,7 +33,7 @@ class VendaControllerTest
     private AplicacaoService aplicacaoService;
     private final DTOToModelConversor conversor = DTOToModelConversor.getInstance();
 
-    @Test
+   /* @Test
     void createVenda() throws Exception
     {
         VendaDTO venda = VendaDTO.builder()
@@ -83,6 +83,6 @@ class VendaControllerTest
 
         assertEquals(Avaliacao.Bom.name(), response);
         assertNotEquals(Avaliacao.Mau.name(), response);
-    }
+    }*/
 
 }

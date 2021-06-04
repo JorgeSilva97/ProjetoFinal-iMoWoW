@@ -31,20 +31,38 @@ public class VendaController
     }
 
     @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AvaliacaoVendaDTO> avaliacaoVenda(@RequestBody VendaDTO vendaDTO, ImovelDTO imovelDTO)
+    public ResponseEntity<AvaliacaoVendaDTO> avaliacaoVenda(@RequestBody VendaDTO vendaDTO)
     {
+        ImovelDTO imovelDTO = ImovelDTO.builder()
+                .concelhoId(vendaDTO.getConcelhoId())
+                .anoConstrução(vendaDTO.getAnoConstrução())
+                .estadoImovel(vendaDTO.getEstadoImovel())
+                .elevador(vendaDTO.isElevador())
+                .jardim(vendaDTO.isJardim())
+                .garagem(vendaDTO.isGaragem())
+                .piscina(vendaDTO.isPiscina())
+                .metrosQuadrados(vendaDTO.getMetrosQuadrados())
+                .topologia(vendaDTO.getTopologia())
+                .userId(vendaDTO.getUserId())
+                .build();
+
         Optional<Imovel> optionalImovel = utilizadorService.criaImovel(conversor.converterDTOParaImovel(imovelDTO));
-        Optional<Venda> optionalVenda = utilizadorService.criaVenda(conversor.converterDTOParaVenda(vendaDTO));
-        if (optionalVenda.isPresent() && optionalImovel.isPresent())
+        if(optionalImovel.isPresent())
         {
-            Venda venda = optionalVenda.get();
-            Imovel imovel = optionalImovel.get();
-            venda.setImovel(imovel);
-            Float valor = aplicacaoService.getValorFuturoDaVenda(venda.getId());
-            Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioVenda(venda.getId());
-            if (avalicaoOptional.isPresent() && valor!=0)
-                return ResponseEntity.ok(conversor.converterVendaParaAvaliacaoVendaDTO(venda));
+            vendaDTO.setImovelId(optionalImovel.get().getId());
+            Optional<Venda> optionalVenda = utilizadorService.criaVenda(conversor.converterDTOParaVenda(vendaDTO));
+            if (optionalVenda.isPresent() )
+            {
+                Venda venda = optionalVenda.get();
+                Imovel imovel = optionalImovel.get();
+                venda.setImovel(imovel);
+                Float valor = aplicacaoService.getValorFuturoDaVenda(venda.getId());
+                Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioVenda(venda.getId());
+                if (avalicaoOptional.isPresent() && valor!=0)
+                    return ResponseEntity.ok(conversor.converterVendaParaAvaliacaoVendaDTO(venda));
+            }
         }
+
         return ResponseEntity.badRequest().build();
        }
 
