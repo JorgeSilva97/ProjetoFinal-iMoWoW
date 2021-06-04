@@ -13,6 +13,6 @@ import pt.ufp.lpi.models.enumerado.Avaliacao;
 public class AvaliacaoArrendamentoDTO
 {
     private Long arrendamentoId;
-    private Float valorAvaliacao;
-    private Avaliacao avaliacao;
+    private Float valorAvaliacaoArr;
+    private Avaliacao avaliacaoArr;
 }

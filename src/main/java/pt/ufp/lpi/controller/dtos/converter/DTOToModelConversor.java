@@ -140,8 +140,8 @@ public class DTOToModelConversor
     public AvaliacaoArrendamentoDTO converterArrendamentoParaAvaliacaoArrendamentoDTO(Arrendamento arrendamento)
     {
         return AvaliacaoArrendamentoDTO.builder()
-                .avaliacao(arrendamento.avaliacaoNegocioArrendamento())
-                .valorAvaliacao(arrendamento.calculaArrendamento())
+                .avaliacaoArr(arrendamento.avaliacaoNegocioArrendamento())
+                .valorAvaliacaoArr(arrendamento.calculaArrendamento())
                 .arrendamentoId(arrendamento.getId())
                 .build();
     }

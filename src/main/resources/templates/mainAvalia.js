@@ -23,45 +23,13 @@ document.addEventListener("DOMContentLoaded",(event)=>{
   }).catch(alert)
 });
 
-//ao carregar "consultar" insere informação sobre preco e seu histórico
-let informacao = document.getElementById("consultar");
-informacao.addEventListener("click", ()=>
-{
-  const concelhoId=document.getElementById("concelho").value;
-
-  fetch("http://localhost:8080/concelho/historicos/preco/"+concelhoId,{}).then((response)=>
-  {
-    if(response.ok)
-          return response.json()
-      throw new Error("erro");
-  }).then((concelho)=>{
-
-    document.getElementById("precoVenda").value = concelho.precoMedioVenda
-    document.getElementById("precoArrandamento").value = concelho.precoMedioArrendamento
-
-    const historicosSelect=document.getElementById("historicoVenda");
-    const historicosOptions=concelho.historicoVendas.map((historico)=>
-    {
-      let opcao = document.createElement("option");
-      opcao.value=historico.id;
-      opcao.text=historico.precoAntigo;
-      return opcao
-    });
-    historicosOptions.forEach((opcao)=>
-    {
-      historicosSelect.appendChild(opcao);
-    })
-  }).catch(alert)
-});
-
-
-
 //ao carregar no "para venda", cria imóvel, cria venda e retorna a valor do negócio e avaliação
 let venda=document.getElementById("venda");
       venda.addEventListener("click",()=>
       {
         const venda = 
-        {  
+        {
+          
           userId:parseInt(document.getElementById("utilizador").value),
           concelhoId:parseInt(document.getElementById("concelho").value),
           metrosQuadrados:parseFloat(document.getElementById("metros").value),
@@ -84,7 +52,7 @@ let venda=document.getElementById("venda");
           {
               if(response.ok)
                   return response.json();
-              throw new Error("Could not create a new arrendamento");   
+              throw new Error("Could not create a new imovel");   
         }).then((json)=>{
             document.getElementById("avaliacaoEuros").value = json.valorAvaliacao;
             document.getElementById("avaliacao").value = json.avaliacao;
@@ -109,18 +77,19 @@ let arrendamento=document.getElementById("arrendamento");
           elevador:document.getElementById("elevador").value==="0"?false:true,
           preco:parseFloat(document.getElementById("precoPedido").value)
         }
-        fetch("http://localhost:8080/venda",
+        fetch("http://localhost:8080/arrendamento",
         {
           method:"post",
-          body:JSON.stringify(venda),
+          body:JSON.stringify(arrendamento),
           headers:{"Content-Type":"application/json"}
         }).then(response=>
           {
             if(response.ok)
                   return response.json();
-              throw new Error("Could not create a new venda");
+              throw new Error("Could not create a new arrendamento");
           }).then((json)=>{
-            document.getElementById("avaliacaoEuros").value = json.valorAvaliacao;
-            document.getElementById("avaliacao").value = json.avaliacao;
+            document.getElementById("avaliacaoEuros").value = json.valorAvaliacaoArr;
+            document.getElementById("avaliacao").value = json.avaliacaoArr;
           }).catch(alert)
       });
+      

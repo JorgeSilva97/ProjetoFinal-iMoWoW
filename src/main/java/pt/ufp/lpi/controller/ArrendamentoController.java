@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import pt.ufp.lpi.controller.dtos.ArrendamentoDTO;
 import pt.ufp.lpi.controller.dtos.AvaliacaoArrendamentoDTO;
 import pt.ufp.lpi.controller.dtos.ImovelDTO;
-import pt.ufp.lpi.controller.dtos.VendaDTO;
 import pt.ufp.lpi.controller.dtos.converter.DTOToModelConversor;
 import pt.ufp.lpi.models.Arrendamento;
 import pt.ufp.lpi.models.Imovel;
@@ -66,35 +65,4 @@ public class ArrendamentoController
         return ResponseEntity.badRequest().build();
     }
 
-
-
-
-
-  /*  @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrendamentoDTO> createArrendamento(@RequestBody ArrendamentoDTO arrendamentoDTO)
-    {
-        Optional<Arrendamento> optionalArrendamento = utilizadorService.
-                criaArrendamento(conversor.converterDTOParaArrendamento(arrendamentoDTO));
-        if (optionalArrendamento.isPresent())
-            return ResponseEntity.ok(conversor.converterArrendamentoParaDTO(optionalArrendamento.get()));
-        return ResponseEntity.badRequest().build();
-    }*/
-
-    @GetMapping("/valor/{id}")
-    public ResponseEntity<Float> getValorArrendamento(@PathVariable("id") Long arrendamentoId)
-    {
-        Float valor = aplicacaoService.getValorFuturoDeArrendamento(arrendamentoId);
-        if(valor!=0)
-            return ResponseEntity.ok(valor);
-        return ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/avaliacao/{id}")
-    public ResponseEntity<String> getAvaliacaoArrendamento(@PathVariable("id") Long arrendamentoId)
-    {
-        Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioArrendamento(arrendamentoId);
-        if (avalicaoOptional.isPresent())
-            return ResponseEntity.ok(avalicaoOptional.get().name());
-        return ResponseEntity.notFound().build();
-    }
 }
