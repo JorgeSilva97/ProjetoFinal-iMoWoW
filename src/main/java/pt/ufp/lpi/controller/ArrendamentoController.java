@@ -33,19 +33,35 @@ public class ArrendamentoController
     }
 
     @PostMapping(value = "",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AvaliacaoArrendamentoDTO> avalicaoArrendamento(@RequestBody ArrendamentoDTO arrendamentoDTO, ImovelDTO imovelDTO)
+    public ResponseEntity<AvaliacaoArrendamentoDTO> avalicaoArrendamento(@RequestBody ArrendamentoDTO arrendamentoDTO)
     {
+        ImovelDTO imovelDTO = ImovelDTO.builder()
+                .concelhoId(arrendamentoDTO.getConcelhoId())
+                .anoConstrução(arrendamentoDTO.getAnoConstrução())
+                .estadoImovel(arrendamentoDTO.getEstadoImovel())
+                .elevador(arrendamentoDTO.isElevador())
+                .jardim(arrendamentoDTO.isJardim())
+                .garagem(arrendamentoDTO.isGaragem())
+                .piscina(arrendamentoDTO.isPiscina())
+                .metrosQuadrados(arrendamentoDTO.getMetrosQuadrados())
+                .topologia(arrendamentoDTO.getTopologia())
+                .userId(arrendamentoDTO.getUserId())
+                .build();
         Optional<Imovel> optionalImovel = utilizadorService.criaImovel(conversor.converterDTOParaImovel(imovelDTO));
-        Optional<Arrendamento> optionalArrendamento = utilizadorService.criaArrendamento(conversor.converterDTOParaArrendamento(arrendamentoDTO));
-        if (optionalArrendamento.isPresent() && optionalImovel.isPresent())
+        if (optionalImovel.isPresent())
         {
-            Arrendamento arrendamento = optionalArrendamento.get();
-            Imovel imovel = optionalImovel.get();
-            arrendamento.setImovel(imovel);
-            Float valor = aplicacaoService.getValorFuturoDeArrendamento(arrendamento.getId());
-            Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioArrendamento(arrendamento.getId());
-            if (avalicaoOptional.isPresent() && valor!=0)
-                return ResponseEntity.ok(conversor.converterArrendamentoParaAvaliacaoArrendamentoDTO(arrendamento));
+            arrendamentoDTO.setImovelId(optionalImovel.get().getId());
+            Optional<Arrendamento> optionalArrendamento = utilizadorService.criaArrendamento(conversor.converterDTOParaArrendamento(arrendamentoDTO));
+            if (optionalArrendamento.isPresent())
+            {
+                Arrendamento arrendamento = optionalArrendamento.get();
+                Imovel imovel = optionalImovel.get();
+                arrendamento.setImovel(imovel);
+                Float valor = aplicacaoService.getValorFuturoDeArrendamento(arrendamento.getId());
+                Optional<Avaliacao> avalicaoOptional = aplicacaoService.getAvalicaoNegocioArrendamento(arrendamento.getId());
+                if (avalicaoOptional.isPresent() && valor != 0)
+                    return ResponseEntity.ok(conversor.converterArrendamentoParaAvaliacaoArrendamentoDTO(arrendamento));
+            }
         }
         return ResponseEntity.badRequest().build();
     }
