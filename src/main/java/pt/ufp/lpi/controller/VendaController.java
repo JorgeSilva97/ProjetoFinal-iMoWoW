@@ -51,7 +51,7 @@ public class VendaController
         {
             vendaDTO.setImovelId(optionalImovel.get().getId());
             Optional<Venda> optionalVenda = utilizadorService.criaVenda(conversor.converterDTOParaVenda(vendaDTO));
-            if (optionalVenda.isPresent() )
+            if (optionalVenda.isPresent())
             {
                 Venda venda = optionalVenda.get();
                 Imovel imovel = optionalImovel.get();

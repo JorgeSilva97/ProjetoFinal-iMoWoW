@@ -40,7 +40,7 @@ let venda=document.getElementById("venda");
           jardim:document.getElementById("jardim").value==="0"?false:true,
           garagem:document.getElementById("garagem").value==="0"?false:true,
           elevador:document.getElementById("elevador").value==="0"?false:true,
-          preco:parseFloat(document.getElementById("precoPedido").value)
+          precoTotal:parseFloat(document.getElementById("precoPedido").value)
         }
   
         fetch("http://localhost:8080/venda",
@@ -75,7 +75,7 @@ let arrendamento=document.getElementById("arrendamento");
           jardim:document.getElementById("jardim").value==="0"?false:true,
           garagem:document.getElementById("garagem").value==="0"?false:true,
           elevador:document.getElementById("elevador").value==="0"?false:true,
-          preco:parseFloat(document.getElementById("precoPedido").value)
+          precoArrendamento:parseFloat(document.getElementById("precoPedido").value)
         }
         fetch("http://localhost:8080/arrendamento",
         {

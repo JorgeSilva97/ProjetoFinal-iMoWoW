@@ -35,57 +35,57 @@ public class Inicializacao implements ApplicationListener<ContextRefreshedEvent>
         Distrito porto = new Distrito();
         porto.setNome("Porto");
         Concelho gaia = Concelho.builder()
-                .precoMedioArrendamento(60)
-                .precoMedioVenda(200)
-                .nome("gaia")
+                .precoMedioArrendamento(8)
+                .precoMedioVenda(1676)
+                .nome("Gaia")
                 .distrito(porto)
                 .build();
         HistoricoArrendamento ha1 = HistoricoArrendamento.builder()
                 .concelho(gaia)
                 .data(LocalDateTime.now())
-                .precoAntigo(50)
+                .precoAntigo(7.8f)
                 .build();
         HistoricoVenda hv1 = HistoricoVenda.builder()
                 .concelho(gaia)
-                .precoAntigo(190)
+                .precoAntigo(1700)
                 .data(LocalDateTime.now())
                 .build();
         gaia.adicionaHistoricoArrendamento(ha1);
         gaia.adicionaHistoricoVenda(hv1);
 
         Concelho maia = Concelho.builder()
-                .precoMedioArrendamento(70)
-                .precoMedioVenda(170)
-                .nome("maia")
+                .precoMedioArrendamento(7)
+                .precoMedioVenda(1398)
+                .nome("Maia")
                 .distrito(porto)
                 .build();
         HistoricoArrendamento ha2 = HistoricoArrendamento.builder()
                 .concelho(maia)
                 .data(LocalDateTime.now())
-                .precoAntigo(68)
+                .precoAntigo(7.5f)
                 .build();
         HistoricoVenda hv2 = HistoricoVenda.builder()
                 .concelho(gaia)
-                .precoAntigo(190)
+                .precoAntigo(1420)
                 .data(LocalDateTime.now())
                 .build();
         maia.adicionaHistoricoVenda(hv2);
         maia.adicionaHistoricoArrendamento(ha2);
 
         Concelho matosinhos = Concelho.builder()
-                .precoMedioArrendamento(90)
-                .precoMedioVenda(280)
-                .nome("matosinhos")
+                .precoMedioArrendamento(9.5f)
+                .precoMedioVenda(2351)
+                .nome("Matosinhos")
                 .distrito(porto)
                 .build();
         HistoricoArrendamento ha3 = HistoricoArrendamento.builder()
                 .concelho(matosinhos)
                 .data(LocalDateTime.now())
-                .precoAntigo(84)
+                .precoAntigo(8.4f)
                 .build();
         HistoricoVenda hv3 = HistoricoVenda.builder()
                 .concelho(matosinhos)
-                .precoAntigo(268)
+                .precoAntigo(2367)
                 .data(LocalDateTime.now())
                 .build();
         matosinhos.adicionaHistoricoVenda(hv3);

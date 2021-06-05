@@ -57,7 +57,6 @@ public class DTOToModelConversor
     {
         return ConcelhoDTO.builder()
                 .id(concelho.getId())
-                //.distrito(concelho.getDistrito())
                 .nome(concelho.getNome())
                 .historicoArrendamentos(concelho.getHistoricoArrendamentos().stream().map(historicoArrendamento ->
                 {
@@ -130,18 +129,20 @@ public class DTOToModelConversor
 
     public AvaliacaoVendaDTO converterVendaParaAvaliacaoVendaDTO(Venda venda)
     {
+        System.out.print(venda.getPrecoTotal());
         return AvaliacaoVendaDTO.builder().vendaId(venda.getId())
-                .avaliacao(venda.avaliacaoNegocioVenda())
                 .valorAvaliacao(venda.calcularVenda())
+                .avaliacao(venda.avaliacaoNegocioVenda())
                 .vendaId(venda.getId())
                 .build();
+
     }
 
     public AvaliacaoArrendamentoDTO converterArrendamentoParaAvaliacaoArrendamentoDTO(Arrendamento arrendamento)
     {
         return AvaliacaoArrendamentoDTO.builder()
-                .avaliacaoArr(arrendamento.avaliacaoNegocioArrendamento())
                 .valorAvaliacaoArr(arrendamento.calculaArrendamento())
+                .avaliacaoArr(arrendamento.avaliacaoNegocioArrendamento())
                 .arrendamentoId(arrendamento.getId())
                 .build();
     }
