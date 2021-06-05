@@ -2,7 +2,6 @@
 <html lang="en">
     
     <head>
-        
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +9,9 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-              <link rel="stylesheet" href="style.css">
+    
+        <link rel="stylesheet" href="stylehome.css">
+
         <title>Informações sobre Concelhos</title>
     </head>
     <body>
@@ -34,7 +35,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="home.html" color="white">iMoWoW</a>
+          <a class="navbar-brand" href="#" color="white">iMoWoW</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -47,7 +48,7 @@
                   </button>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Dados sobre Concelhos</a>
+                <a class="nav-link active" aria-current="page" href="concelhos.html">Dados sobre Concelhos</a>
                 <button id="consultaConcelhosPage" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -58,64 +59,23 @@
       </nav>
 <!-------------------------------------------------------------------------------------------------------------------------------------------------------->
 
+<br><br><br>
+<h1><center>Bem Vindo, ao iMoWoW!</center></h1>
 <br>
+<center><b>Aqui pode obter um apoio à sua decisão em relação ao seu imóvel, quer esteja interessado a comprar, vendar ou apenas arrendar.</b></center>
+<center>Pode também obter informações atuais sobre o preço por metro quadrado de um imóvel em cada concelho, assim como, os preços praticados em meses anteriores.</center>
+<font size="-1"><center></center></font>
+<br><br>
+<center><b>Comece agora!</b></center>
 <br>
-<h1>
-    <center>Concelhos</center>
-</h1>
-<br>
-<center><small>Escolha o concelho que quer consultar</small></center>
-<div class="input-group mb-3 justify-content-center">
-    <span class="input-group-text">Concelho</span>
-    <center>
-        <select class="form-select" aria-label="Default select example" id="concelho">
-        </select>
-    </center>
+<center>
+<div class="btn-group">
+  <a href="avalia.html" class="btn btn-dark" aria-current="page">Obtenha a sua avalição</a>
 </div>
-<br>
-<div class="d-grid gap-2 d-md-block">
-    <center>
-        <button type="button" id="consultar" class="btn btn-dark btn-lg">Consultar</button>
-    </center>
+<div class="btn-group">
+  <a href="concelhos.html" class="btn btn-dark" aria-current="page">Consultar dados de concelhos</a>
 </div>
-<br>
-<br>
-<div class="input-group mb-3 justify-content-center">
-    <span class="input-group-text" >Preço por Metro Quadrado de Venda (€/㎡)</span>
-    <center><input type="text" id="precoVenda" size="7" class="form-control" placeholder=""></center>
-</div>
-<div class="input-group mb-3 justify-content-center">
-    <span class="input-group-text" >Preço por Metro Quadrado de Arrendamento (€/㎡)</span>
-    <center><input type="text" id="precoArrandamento" size="7" class="form-control" placeholder=""></center>
-</div>
-
-<center><small><b>Ordem apresentada é do valor mais antigo até ao valor mais recente</b> (*)</small></center>
-<div class="input-group mb-3 justify-content-center">
-    <span class="input-group-text">Histórico Preço de Venda (€)</span>
-    <center>
-        <select class="form-select" aria-label="Default select example" id="historicoVenda">
-        </select>
-    </center>
-</div>
-
-<div class="input-group mb-3 justify-content-center">
-    <span class="input-group-text">Histórico Preço de Arrendamento (€)</span>
-    <center>
-        <select class="form-select" aria-label="Default select example" id="historicoArrendamento">
-        </select>
-    </center>
-</div>
-
-
-<br><br><br><br><br><br><br><br><br>
-<center><small>(*)Valor atualizado de mês a mês</small></center>
-
-<script type="text/javascript" src="./mainConcelho.js"/>
-
-<!--
-</body>
-</html>
-
+</center>
 
 
 

@@ -29,8 +29,8 @@ let venda=document.getElementById("venda");
       {
         const venda = 
         {
-          
-          userId:parseInt(document.getElementById("utilizador").value),
+          userId:1,
+          //userId:parseInt(document.getElementById("utilizador").value),
           concelhoId:parseInt(document.getElementById("concelho").value),
           metrosQuadrados:parseFloat(document.getElementById("metros").value),
           anoConstrucao:parseInt(document.getElementById("ano").value),
@@ -65,7 +65,8 @@ let arrendamento=document.getElementById("arrendamento");
       {
         const arrendamento = 
         {  
-          userId:parseInt(document.getElementById("utilizador").value),
+          userId:1,
+          //userId:parseInt(document.getElementById("utilizador").value),
           concelhoId:parseInt(document.getElementById("concelho").value),
           metrosQuadrados:parseFloat(document.getElementById("metros").value),
           anoConstrucao:parseInt(document.getElementById("ano").value),

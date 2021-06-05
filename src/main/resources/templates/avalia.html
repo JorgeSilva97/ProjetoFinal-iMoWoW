@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
+          <link rel="stylesheet" href="style.css">
     <title>Avaliação do Imóvel</title>
 </head>
 <body>
@@ -31,7 +31,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#" color="white">iMoWoW</a>
+      <a class="navbar-brand" href="home.html" color="white">iMoWoW</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -59,16 +59,18 @@
 
 
 <br>
+<br>
+<!---
 <div class="input-group mb-3 justify-content-center">
     <span class="input-group-text">ID Utilizador</span>
     <center><input type="text" id="utilizador" size="8" class="form-control"></center>
 </div>
 <br>
-
+-->
 <h1>
     <center>Imóvel</center>
 </h1>
-
+<br>
 <center><small>Insira neste formulário informações sobre o seu possível negócio a concretizar</small></center>
 
 <div class="input-group mb-3 justify-content-center">
@@ -98,7 +100,7 @@
         </select>
     </center>
 </div>
-<div class="input-group mb-3 justify-content-center">
+    <div class="input-group mb-3 justify-content-center">
     <span class="input-group-text">Topologia</span>
     <center>
         <select class="form-select" aria-label="Default select example" id="topologia">
@@ -155,20 +157,20 @@
     <center><input type="text" id="precoPedido" size="7" class="form-control"></center>
 </div>
 
-
-<center><small>Indique aqui qual é o seu tipo de negócio</small></center>
+<br>
+<!--<font color="#ffffff"><center><small>Indique aqui qual é o seu tipo de negócio</small></center></font>-->
+<center><small><b>Indique aqui qual é o seu tipo de negócio</b></small></center>
 <div class="d-grid gap-2 d-md-block">
     <center>
         <button type="button" id="venda" class="btn btn-dark btn-lg">Para Venda</button>
         <button type="button" id="arrendamento" class="btn btn-dark btn-lg">Para Arrendamento</button>
     </center>
 </div>
-<br>
-<br>
-<center><small>Aqui pode consultar os dados sobre a avaliação</small></center>
+<br><br><br>
+<center><small><b>Aqui pode consultar os dados sobre a avaliação</b></small></center>
 <div class="input-group mb-3 justify-content-center">
     <span class="input-group-text">Avalição (€)</span>
-    <center><input type="text" id="avaliacaoEuros" size="8" class="form-control"></center>
+    <center><input type="text" id="avaliacaoEuros" size="10" class="form-control"></center>
     <span class="input-group-text">Oportunidade de Negócio</span>
     <center><input type="text" id="avaliacao" size="8" class="form-control"></center>
 </div>
