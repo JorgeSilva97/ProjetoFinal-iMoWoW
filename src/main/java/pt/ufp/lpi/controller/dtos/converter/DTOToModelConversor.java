@@ -129,7 +129,6 @@ public class DTOToModelConversor
 
     public AvaliacaoVendaDTO converterVendaParaAvaliacaoVendaDTO(Venda venda)
     {
-        System.out.print(venda.getPrecoTotal());
         return AvaliacaoVendaDTO.builder().vendaId(venda.getId())
                 .valorAvaliacao(venda.calcularVenda())
                 .avaliacao(venda.avaliacaoNegocioVenda())
