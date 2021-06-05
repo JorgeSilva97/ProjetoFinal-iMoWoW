@@ -50,8 +50,20 @@ public class Inicializacao implements ApplicationListener<ContextRefreshedEvent>
                 .precoAntigo(1700)
                 .data(LocalDateTime.now())
                 .build();
+        HistoricoArrendamento ha4 = HistoricoArrendamento.builder()
+                .concelho(gaia)
+                .data(LocalDateTime.now())
+                .precoAntigo(8f)
+                .build();
+        HistoricoVenda hv4 = HistoricoVenda.builder()
+                .concelho(gaia)
+                .precoAntigo(1712)
+                .data(LocalDateTime.now())
+                .build();
         gaia.adicionaHistoricoArrendamento(ha1);
         gaia.adicionaHistoricoVenda(hv1);
+        gaia.adicionaHistoricoArrendamento(ha4);
+        gaia.adicionaHistoricoVenda(hv4);
 
         Concelho maia = Concelho.builder()
                 .precoMedioArrendamento(7)
