@@ -1,7 +1,7 @@
 
 @startuml projeto
 
-package ProjetoLPI{
+package iMoWoW{
 
 
 class Utilizador

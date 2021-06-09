@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+actor "Utilizador" as user
+actor "Aplicação" as app
+rectangle Sistema {
+
+  usecase "Consultar informações sobre o preço por\nmetro quadrado de cada concelho" as UC1
+  usecase "Inserir informações num formulário sobre\no possivel negócio de venda a concretizar" as UC2
+  usecase "Inserir informações num formulário sobre\no possivel negócio de arrendamento a concretizar" as UC3
+  usecase "Consultar informções da avaliação do negócio" as UC4
+
+  usecase "Efetuar avaliação do preço do negócio de venda" as UC5
+  usecase "Efetuar avaliação do preço do negócio de arrendamento" as UC6
+  usecase "Efetuar avaliação do negócio de venda" as UC7
+  usecase "Efetuar avaliação do negócio de arrendamento" as UC8
+  usecase "Guardar histórico do preço por metro\nquadrado de cada concelho para negócio\nde venda e arrendamento" as UC9
+
+}
+
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+app --> UC5
+app --> UC6
+app --> UC7
+app --> UC8
+app --> UC9
+
+@enduml
