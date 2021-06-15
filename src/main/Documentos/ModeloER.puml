@@ -1,0 +1,105 @@
+@startuml
+
+entity Utilizador {
+  id LONG
+  userName VARCHAR(30)
+  email VARCHAR(30)
+  password VARCHAR(30)
+  orcamentoLimite FLOAT
+}
+
+entity Imovel {
+    id LONG
+    ano_construcao INT
+    data_anuncio DATE
+    elevador BOOLEAN
+    piscina BOOLEAN
+    garagem BOOLEAN
+    jardim  BOOLEAN
+    estado INT
+    topologia INT
+    metros_quadrados FLOAT
+    concelho_id LONG
+    utilizador_id LONG
+}
+
+entity Venda {
+    id LONG
+    preco_total FLOAT
+    percentagem_garagem FLOAT
+    percentagem_piscina FLOAT
+    percentagem_jardim FLOAT
+    percentagem_elevador FLOAT
+    percentagem_estado_renovado FLOAT
+    percentagem_estado_novo FLOAT
+    percentagem_estado_por_recuperar FLOAT
+    percentagem_estado_usado FLOAT
+    percentagemT1 FLOAT
+    percentagemT1Mais1 FLOAT
+    percentagemT2 FLOAT
+    percentagemT2Mais1 FLOAT
+    percentagemT3 FLOAT
+    percentagemT3Mais1 FLOAT
+    percentagemT4 FLOAT
+    imovel_id LONG
+}
+
+entity Arrendamento {
+    id LONG
+    preco_arrendamento FLOAT
+    percentagemT1 FLOAT
+    percentagemT1Mais1 FLOAT
+    percentagemT2 FLOAT
+    percentagemT2Mais1 FLOAT
+    percentagemT3 FLOAT
+    percentagemT3Mais1 FLOAT
+    percentagemT4 FLOAT
+    imovel_id LONG
+}
+
+entity Concelho {
+    id LONG
+    nome VARCHAR(30)
+    preco_medio_arrendamento FLOAT
+    preco_medio_venda FLOAT
+    distrito_id LONG
+}
+
+entity Distrito {
+    id LONG
+    nome VARCHAR(30)
+}
+
+entity HistoricoArrendamento {
+    id LONG
+    data DATE
+    preco_antigo FLOAT
+    concelho_id LONG
+}
+
+entity HistoricoVenda {
+    id LONG
+    data DATE
+    preco_antigo FLOAT
+    concelho_id LONG
+}
+
+entity UtilizadorConcelhosPreferenciais{
+    concelho_id LONG
+    utilizador_id LONG
+}
+
+
+
+
+
+
+Venda |o--|| Imovel
+Arrendamento |o--|| Imovel
+Imovel }|--|| Utilizador
+Concelho }|--|| Utilizador
+Distrito }|--|| Concelho
+HistoricoVenda |o--|| Concelho
+HistoricoArrendamento |o--|| Concelho
+UtilizadorConcelhosPreferenciais }o--o| Utilizador
+@enduml
